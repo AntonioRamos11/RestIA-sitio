@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RestIA · Punto de venta para restaurantes en Windows y Android</title>
+  <meta name="description" content="Mesas, pedidos, cocina, caja, inventario y un panel de administración completo en tu computadora con Windows o en tablets y teléfonos Android, aunque se caiga el internet. Y tu negocio en vivo desde el celular.">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:title" content="RestIA · Tu restaurante, desde donde estés">
+  <meta property="og:description" content="Punto de venta para Windows y Android: mesas, cocina, caja, inventario, reportes y panel de administración.">
+  <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/estilos.css?v=265f15f5ae">
+</head>
+<body>
+  <header class="barra">
+    <div class="contenedor">
+      <a class="marca" href="/" aria-label="RestIA, inicio">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0891b2"/><path d="M10 23V9h6.2c3 0 5 1.8 5 4.4 0 2-1.1 3.4-2.9 4l3.4 5.6h-3.3l-3-5.2H13V23zm3-7.7h3c1.4 0 2.2-.7 2.2-1.9s-.8-1.9-2.2-1.9h-3z" fill="#fff"/></svg>
+        RestIA
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="#la-app">La app</a>
+        <a href="#panel">Administración</a>
+        <a href="#funciones">Funciones</a>
+        <a href="/documentacion">Documentación</a>
+        <a href="/preguntas">Preguntas</a>
+        <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
+        <a class="boton principal" href="#contacto">Pide una demostración</a>
+      </nav>
+      <a class="boton-menu" href="#menu" aria-label="Abrir menú" aria-controls="menu">Menú</a>
+      <div class="menu-movil" id="menu">
+        <a class="velo" href="#cerrar" aria-label="Cerrar menú" tabindex="-1"></a>
+        <nav aria-label="Principal (teléfono)">
+          <a class="cerrar" href="#cerrar" aria-label="Cerrar menú">Cerrar ✕</a>
+          <a href="#dispositivos">Windows y Android</a>
+          <a href="#la-app">La app</a>
+          <a href="#panel">Panel de administración</a>
+          <a href="#funciones">Funciones</a>
+          <a href="#licencia">Licencia</a>
+          <a href="/documentacion">Documentación</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+          <a href="https://app.restia.download/portal/">Entrar al portal</a>
+          <a href="#contacto">Pide una demostración</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ── Portada ───────────────────────────────────────────────────── -->
+    <section class="heroe">
+      <div class="contenedor">
+        <div class="heroe-texto">
+          <span class="pildora"><i></i> Punto de venta para restaurantes</span>
+          <h1>Todo tu restaurante, en la pantalla que ya tienes. <em>Y en tu bolsillo.</em></h1>
+          <p class="entrada">Mesas, pedidos, cocina, caja e inventario en tu computadora con Windows o en tablets y teléfonos Android. Funciona aunque se caiga el internet, trae un panel de administración completo y te deja ver tu negocio en vivo desde el celular.</p>
+          <div class="acciones">
+            <a class="boton principal grande" href="#contacto">Pide una demostración</a>
+            <a class="boton fantasma grande" href="#la-app">Ver la app</a>
+          </div>
+          <ul class="sellos" aria-label="Lo esencial">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M3 3l18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Funciona sin internet</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 18h6" stroke="currentColor" stroke-width="2"/><rect x="17" y="8" width="5" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/></svg>Windows y Android</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" fill="none" stroke="currentColor" stroke-width="2"/></svg>Datos seguros y tuyos</li>
+          </ul>
+        </div>
+        <div class="heroe-figura">
+          <div class="brillo" aria-hidden="true"></div>
+          <div class="tableta">
+            <img src="/img/app-mesas.webp" width="1280" height="764" alt="La app en la tablet: mesas del salón, ocupadas en rojo y libres en verde, con sus comandas">
+          </div>
+          <div class="telefono">
+            <img src="/img/portal-movil.webp" width="390" height="844" alt="Las ventas del día en el celular del dueño" loading="lazy">
+          </div>
+          <div class="telefono-solo">
+            <img src="/img/cel-mesas.webp" width="412" height="915" alt="La app en un teléfono Android: mesas del salón, ocupadas en rojo y libres en verde">
+          </div>
+          <div class="ficha ficha-a" aria-hidden="true"><b>$1,865</b><span>vendido hoy</span></div>
+          <div class="ficha ficha-b" aria-hidden="true"><b>Comanda #14</b><span>enviada a cocina</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Dispositivos ──────────────────────────────────────────────── -->
+    <section id="dispositivos" class="alterna">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Multidispositivo</span>
+          <h2>Funciona en lo que ya tienes</h2>
+          <p class="subtitulo">Una sola app para la computadora de la caja, las tablets y los teléfonos de tu equipo. Todos ven lo mismo al instante.</p>
+        </div>
+        <div class="dispositivos">
+          <article class="dispositivo">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8M12 16v5"/></svg></div>
+            <h3>Computadora con Windows</h3>
+            <p>Para la caja o la oficina, con pantalla grande. Puede ser el servidor del restaurante: ahí se guarda todo y las demás pantallas se conectan a ella.</p>
+          </article>
+          <article class="dispositivo">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="2" width="18" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+            <h3>Tablet Android</h3>
+            <p>¿No tienes computadora? Una tablet hace de servidor y de caja a la vez. Ideal para el mostrador, la cocina o el salón.</p>
+          </article>
+          <article class="dispositivo">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+            <h3>Teléfonos Android</h3>
+            <p>Tus meseros toman el pedido en la mesa con su teléfono y llega a cocina al momento. Nada de ir y venir con la libreta.</p>
+          </article>
+        </div>
+        <div class="carrusel" aria-label="La app en un teléfono Android">
+          <figure class="cel"><img src="/img/cel-mesas.webp" width="412" height="915" alt="Teléfono: mesas del salón con su estado" loading="lazy"><figcaption>Mesas</figcaption></figure>
+          <figure class="cel"><img src="/img/cel-comanda.webp" width="412" height="915" alt="Teléfono: tomar el pedido de la mesa 3" loading="lazy"><figcaption>Tomar pedido</figcaption></figure>
+          <figure class="cel"><img src="/img/cel-cocina.webp" width="412" height="915" alt="Teléfono: comandas en cocina con su tiempo" loading="lazy"><figcaption>Cocina</figcaption></figure>
+          <figure class="cel"><img src="/img/cel-dashboard.webp" width="412" height="915" alt="Teléfono: ventas del día, pedidos y ticket promedio" loading="lazy"><figcaption>Dashboard</figcaption></figure>
+        </div>
+        <p class="nota-ios"><strong>¿iPhone o iPad?</strong> La app es para Windows y Android. Desde un iPhone o cualquier navegador sí puedes entrar al <a href="https://app.restia.download/portal/">portal del dueño</a> y ver tu negocio en vivo.</p>
+      </div>
+    </section>
+
+    <!-- ── La app ────────────────────────────────────────────────────── -->
+    <section id="la-app">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">La app</span>
+          <h2>Así se ve en tu restaurante</h2>
+          <p class="subtitulo">Pantallas reales de la app: hecha para tocarse rápido, con letra grande y colores que se leen de lejos, en la computadora, la tablet o el teléfono.</p>
+        </div>
+
+        <div class="app-detalle">
+          <figure class="tableta"><picture><source media="(max-width: 600px)" srcset="/img/cel-mesas.webp" width="412" height="915"><img src="/img/app-mesas.webp" width="1280" height="764" alt="Mesas del salón: libres en verde, ocupadas en rojo, con sus comandas" loading="lazy"></picture></figure>
+          <div>
+            <span class="numero">01</span>
+            <h3>Todas tus mesas de un vistazo</h3>
+            <ul class="lista-check">
+              <li>Libre, ocupada, lista, reservada o fusionada, con colores.</li>
+              <li>Cuántas comandas tiene cada mesa y cuánto llevan esperando.</li>
+              <li>Junta mesas, divide cuentas y cobra desde la misma pantalla.</li>
+              <li>Los pedidos del menú digital (QR) llegan aparte.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="app-detalle invertida">
+          <figure class="tableta"><picture><source media="(max-width: 600px)" srcset="/img/cel-comanda.webp" width="412" height="915"><img src="/img/app-comanda.webp" width="1280" height="764" alt="Tomar un pedido: carta por categorías a la izquierda, la comanda a la derecha" loading="lazy"></picture></figure>
+          <div>
+            <span class="numero">02</span>
+            <h3>Tomar un pedido en segundos</h3>
+            <ul class="lista-check">
+              <li>La carta por categorías, con buscador; un toque y se agrega.</li>
+              <li>Extras y notas por platillo: tamaño, leche, "sin cebolla".</li>
+              <li>Varias comandas por mesa, y se manda a cocina al momento.</li>
+              <li>Funciona aunque se caiga el internet.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="app-detalle">
+          <figure class="tableta"><picture><source media="(max-width: 600px)" srcset="/img/cel-cocina.webp" width="412" height="915"><img src="/img/app-cocina.webp" width="1280" height="764" alt="Cocina: comandas por mesa, cada platillo con su estado y el tiempo de espera" loading="lazy"></picture></figure>
+          <div>
+            <span class="numero">03</span>
+            <h3>La cocina sabe qué sigue</h3>
+            <ul class="lista-check">
+              <li>Cada comanda con su cronómetro; las que se atrasan se marcan en rojo.</li>
+              <li>Platillo por platillo: pendiente, en preparación, listo.</li>
+              <li>Las notas del cliente, a la vista.</li>
+              <li>Cuando todo está listo, el mesero lo ve en su pantalla.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="app-detalle invertida">
+          <figure class="tableta"><img src="/img/app-caja.webp" width="1280" height="764" alt="Caja: efectivo en caja, ventas con tarjeta y transferencia, y las cuentas por cobrar" loading="lazy"></figure>
+          <div>
+            <span class="numero">04</span>
+            <h3>Caja clara al centavo</h3>
+            <ul class="lista-check">
+              <li>Efectivo, tarjeta y transferencia en tiempo real.</li>
+              <li>Las cuentas pendientes de cobro, con búsqueda y orden.</li>
+              <li>Entradas, salidas y corte con arqueo: te dice si cuadró.</li>
+              <li>Ticket impreso en tu impresora térmica.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Panel de administración ───────────────────────────────────── -->
+    <section id="panel" class="oscura">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Panel de administración</span>
+          <h2>Tú tienes el control de todo</h2>
+          <p class="subtitulo">Quien administra —dueño o gerente— tiene en la misma app un panel completo para ver cómo va el negocio y decidir: ventas, inventario, carta, personal y más.</p>
+        </div>
+
+        <div class="panel-principal">
+          <figure class="tableta"><picture><source media="(max-width: 600px)" srcset="/img/cel-dashboard.webp" width="412" height="915"><img src="/img/admin-dashboard.webp" width="1280" height="764" alt="Dashboard: ventas de hoy, pedidos, ticket promedio, mesas ocupadas y comandas en cocina" loading="lazy"></picture></figure>
+          <div>
+            <h3>Dashboard en vivo</h3>
+            <p>Lo que vendiste hoy, cuántos pedidos y tu ticket promedio, comparados contra el periodo anterior. Y lo que pasa en este momento: mesas ocupadas, libres y comandas en cocina.</p>
+            <ul class="lista-check">
+              <li>Hoy, 7 días o 30 días.</li>
+              <li>Se actualiza solo con cada venta.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rejilla-panel">
+          <article class="tarjeta-panel">
+            <figure><img src="/img/admin-reportes.webp" width="1280" height="764" alt="Reportes: resumen del periodo con ventas, pedidos, productos vendidos y ticket promedio" loading="lazy"></figure>
+            <div><h3>Reportes</h3><p>Ventas por categoría, hora, producto, cocina y tiempos, con estado de resultados. Hoy, ayer, la semana, el mes o el año.</p></div>
+          </article>
+          <article class="tarjeta-panel">
+            <figure><img src="/img/admin-inventario.webp" width="1280" height="764" alt="Inventario: valor del almacén, insumos con su existencia, precio y valor" loading="lazy"></figure>
+            <div><h3>Inventario</h3><p>El valor de tu almacén, cada insumo con su existencia y su costo, y alertas de lo crítico o bajo.</p></div>
+          </article>
+          <article class="tarjeta-panel">
+            <figure><img src="/img/admin-catalogo.webp" width="1280" height="764" alt="Catálogo: platillos con su precio y disponibilidad, categorías y modificadores" loading="lazy"></figure>
+            <div><h3>Carta y extras</h3><p>Platillos, precios, categorías y modificadores (tamaños, leches, toppings). Los cambios llegan a todos los equipos.</p></div>
+          </article>
+          <article class="tarjeta-panel">
+            <figure><img src="/img/admin-empleados.webp" width="1280" height="764" alt="Empleados: cada uno con su puesto, si está activo y su último acceso" loading="lazy"></figure>
+            <div><h3>Empleados</h3><p>Da de alta a tu equipo, cada quien con su PIN y su puesto. Si alguien se va, lo das de baja y deja de entrar al momento.</p></div>
+          </article>
+          <article class="tarjeta-panel">
+            <figure><img src="/img/admin-roles.webp" width="1280" height="764" alt="Roles y permisos: qué puede hacer cada puesto, por ejemplo juntar mesas o dividir cuentas" loading="lazy"></figure>
+            <div><h3>Roles y permisos</h3><p>Decide qué puede hacer cada puesto: tomar pedidos, cobrar, juntar mesas, dividir cuentas, ver reportes…</p></div>
+          </article>
+          <article class="tarjeta-panel">
+            <figure><img src="/img/admin-ia.webp" width="1280" height="764" alt="IA predictiva: copiloto con predicciones de ventas, compras sugeridas y recomendaciones" loading="lazy"></figure>
+            <div><h3>IA predictiva</h3><p>Un copiloto al que le preguntas por ventas, compras, personal o clientes. Pronósticos, restock sugerido y recomendaciones.</p></div>
+          </article>
+          <article class="tarjeta-panel">
+            <figure><img src="/img/admin-reloj.webp" width="1280" height="764" alt="Reloj checador: cada empleado registra su entrada y salida con su PIN" loading="lazy"></figure>
+            <div><h3>Reloj checador</h3><p>Tu equipo registra entrada y salida con su PIN en la misma app, y ves las asistencias del día.</p></div>
+          </article>
+          <article class="tarjeta-panel resumen">
+            <div>
+              <h3>Y además</h3>
+              <ul class="lista-check">
+                <li>Proveedores y compras</li>
+                <li>Recetas y costo por platillo</li>
+                <li>Promociones por día y horario</li>
+                <li>Reservaciones y clientes</li>
+                <li>Impresoras, mesas y WhatsApp</li>
+                <li>Bitácora de auditoría</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Roles ─────────────────────────────────────────────────────── -->
+    <section>
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Tu equipo</span>
+          <h2>Cada quien ve solo lo suyo</h2>
+          <p class="subtitulo">Cada empleado entra con su PIN y la app le muestra lo que su puesto necesita. Menos botones, menos errores.</p>
+        </div>
+        <div class="roles">
+          <div class="rol"><span class="rol-icono" aria-hidden="true">🍽️</span><h3>Mesero</h3><p>Mesas, pedidos con extras y notas, y aviso cuando la comida está lista.</p></div>
+          <div class="rol"><span class="rol-icono" aria-hidden="true">👩‍🍳</span><h3>Cocina</h3><p>Las comandas en orden, con su tiempo, y marcar cada platillo como listo.</p></div>
+          <div class="rol"><span class="rol-icono" aria-hidden="true">💵</span><h3>Caja</h3><p>Cobrar con efectivo, tarjeta o transferencia, propinas y corte del turno.</p></div>
+          <div class="rol destacado"><span class="rol-icono" aria-hidden="true">📊</span><h3>Dueño y gerente</h3><p>Todo lo anterior y el panel de administración: reportes, inventario, personal y más.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Funciones ─────────────────────────────────────────────────── -->
+    <section id="funciones" class="alterna">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Funciones</span>
+          <h2>Todo lo que tu restaurante necesita, en un solo sistema</h2>
+          <p class="subtitulo">Con computadora o sin ella: en una PC con Windows o en una tablet Android, y el portal te lo muestra donde estés.</p>
+        </div>
+        <div class="rejilla">
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M7 9h4M7 13h10"/></svg></div>
+            <h3>Punto de venta y caja</h3>
+            <p>Mesas, para llevar y a domicilio. Efectivo, tarjeta y transferencia, propinas, promociones y corte de caja con arqueo.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16M6 11V7a6 6 0 0 1 12 0v4M5 11l1 9h12l1-9"/></svg></div>
+            <h3>Cocina en pantalla</h3>
+            <p>Las comandas llegan a cocina al momento, con sus extras y notas, y el mesero sabe cuándo está listo.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></div>
+            <h3>Carta con fotos, extras y costos</h3>
+            <p>Platillos, categorías, tamaños, leches y toppings. Con la receta, sabes cuánto te cuesta cada platillo y cuánto ganas.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10"/></svg></div>
+            <h3>Inventario y proveedores</h3>
+            <p>Lo que vendes se descuenta solo. Alertas de mínimos, mermas y pedidos a proveedores por WhatsApp, sugeridos por la IA o a mano.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+            <h3>Reportes y utilidad real</h3>
+            <p>Ventas por producto, categoría, empleado y hora; IVA incluido; gastos fijos y utilidad del mes. En Excel o PDF.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-3.3-6.5L21 4l-1 4.5A8 8 0 0 1 20 12z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5"/></svg></div>
+            <h3>Pedidos y avisos por WhatsApp</h3>
+            <p>Tus clientes piden por WhatsApp y el pedido llega a la caja. A ti te llega el resumen del día y si una caja no cuadró.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+            <h3>Reservas y clientes</h3>
+            <p>Reservaciones del día, historial de cada cliente, puntos y quién dejó de venir, para invitarlo a regresar.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M17 11l2 2 4-4"/></svg></div>
+            <h3>Tu equipo, con permisos</h3>
+            <p>Cada empleado entra con su PIN y ve solo lo que le toca. Si alguien se va, lo das de baja y su PIN deja de funcionar al momento.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+            <h3>Promociones automáticas</h3>
+            <p>2x1, happy hour, descuentos por día u horario. La caja solo ofrece las que están vigentes en ese momento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cómo funciona ─────────────────────────────────────────────── -->
+    <section id="como-funciona">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Cómo funciona</span>
+          <h2>Tu restaurante es tu servidor. La nube, tu ventana.</h2>
+          <p class="subtitulo">Toda la información vive en el restaurante —en tu computadora con Windows o, si no tienes, en una tablet Android— y sigue funcionando sin internet. La conexión cifrada a la nube sirve para que tú lo veas de lejos y para WhatsApp.</p>
+        </div>
+        <figure class="diagrama" aria-label="La PC o tablet del restaurante se conecta de forma cifrada a la nube; desde la nube el dueño ve su negocio en el celular y los clientes piden por WhatsApp">
+          <svg viewBox="0 0 900 230" aria-hidden="true">
+            <defs>
+              <linearGradient id="linea" gradientUnits="userSpaceOnUse" x1="230" y1="0" x2="670" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+            </defs>
+            <g class="nodo"><rect x="20" y="55" width="210" height="120" rx="18"/><text x="125" y="105">PC o tablet</text><text x="125" y="132" class="chico">mesas · cocina · caja</text><text x="125" y="152" class="chico">funciona sin internet</text></g>
+            <path d="M232 115 H 342" stroke="url(#linea)" stroke-width="4" stroke-dasharray="8 7" class="flujo"/>
+            <text x="287" y="100" class="chico">cifrado</text>
+            <g class="nodo nube"><rect x="345" y="55" width="210" height="120" rx="60"/><text x="450" y="108">Nube RestIA</text><text x="450" y="135" class="chico">respaldos · portal · bot</text></g>
+            <path d="M557 95 L 668 50" stroke="url(#linea)" stroke-width="4" stroke-dasharray="8 7" class="flujo"/>
+            <path d="M557 135 L 668 180" stroke="url(#linea)" stroke-width="4" stroke-dasharray="8 7" class="flujo"/>
+            <g class="nodo"><rect x="670" y="10" width="210" height="80" rx="16"/><text x="775" y="45">Tu celular</text><text x="775" y="70" class="chico">ventas en vivo</text></g>
+            <g class="nodo"><rect x="670" y="140" width="210" height="80" rx="16"/><text x="775" y="175">Tus clientes</text><text x="775" y="200" class="chico">piden por WhatsApp</text></g>
+          </svg>
+        </figure>
+        <div class="pasos">
+          <div class="paso"><h3>Instalamos la app en tus equipos</h3><p>En tu computadora con Windows o en una tablet Android de 10", más los teléfonos de tus meseros. Cargamos tu carta, tus mesas y tu equipo.</p></div>
+          <div class="paso"><h3>Operas en el local</h3><p>Pedidos, cocina, caja e impresión de tickets. Si se cae el internet, el restaurante no se detiene.</p></div>
+          <div class="paso"><h3>Se conecta de forma segura</h3><p>El restaurante se conecta solo a la nube por una conexión cifrada. No hay que abrir puertos ni tocar el módem.</p></div>
+          <div class="paso"><h3>Tú lo ves desde tu celular</h3><p>Entras al portal con tu contraseña y un código de tu app de autenticación, y ves tu negocio en vivo.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Portal ────────────────────────────────────────────────────── -->
+    <section class="alterna">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Portal del dueño</span>
+          <h2>Y tú, desde tu celular</h2>
+          <p class="subtitulo">Ventas en vivo, cortes, reportes, inventario y la carta, desde la computadora o el teléfono. Lo que cambies llega solo al restaurante.</p>
+        </div>
+        <div class="galeria">
+          <figure class="marco"><img src="/img/portal-reportes.webp" width="1280" height="800" alt="Reportes del portal: ventas, tickets, IVA incluido y ventas por forma de pago" loading="lazy"><figcaption>Reportes por día, producto, categoría y empleado, con IVA.</figcaption></figure>
+          <figure class="marco"><img src="/img/portal-carta.webp" width="1280" height="800" alt="Carta del portal: precios, costo por receta, margen y disponibilidad de cada platillo" loading="lazy"><figcaption>La carta con el costo y el margen de cada platillo.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Licencia ──────────────────────────────────────────────────── -->
+    <section id="licencia">
+      <div class="contenedor dos">
+        <div>
+          <span class="etiqueta">Licencia</span>
+          <h2>Una licencia simple, sin sorpresas</h2>
+          <p class="subtitulo">Pagas por tu restaurante y se renueva sola, sin tocar nada. En la app ves siempre su estado.</p>
+          <figure class="tableta"><img src="/img/app-licencia.webp" width="1280" height="764" alt="Pantalla de licencia de la app: estado, última verificación, código del equipo y cómo contactarnos" loading="lazy"></figure>
+        </div>
+        <ul class="lista-check">
+          <li>La licencia se instala y se renueva sola en tu equipo, a distancia, en cuanto registramos tu pago.</li>
+          <li>Ves su estado y cuándo vence en la app: Configuración → Licencia.</li>
+          <li>Te avisa con 15 días de anticipación, y todo tu equipo lo ve la última semana.</li>
+          <li>Si se vence, tienes 7 días de gracia: el restaurante nunca se detiene a media operación.</li>
+          <li>Desde la propia app nos escribes por WhatsApp o correo para renovar.</li>
+          <li>El equipo necesita conectarse a internet al menos una vez al mes para renovarla: así está protegida aunque se use sin conexión.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Seguridad ─────────────────────────────────────────────────── -->
+    <section class="alterna">
+      <div class="contenedor dos">
+        <div>
+          <span class="etiqueta">Seguridad</span>
+          <h2>Tus datos, seguros y tuyos</h2>
+          <p class="subtitulo">Pensado para que nadie más que tú decida sobre tu negocio.</p>
+        </div>
+        <ul class="lista-check">
+          <li>Tu información vive en tu restaurante y puedes descargar tus reportes en Excel cuando quieras.</li>
+          <li>Respaldos automáticos guardados fuera del local: si el equipo se pierde o se descompone, tu información se recupera en uno nuevo.</li>
+          <li>El portal pide contraseña y un código de tu app de autenticación (doble factor), y viaja por conexión cifrada.</li>
+          <li>Desde el portal no se puede cobrar, cancelar ventas ni borrar nada.</li>
+          <li>Si nos pides soporte, lo vemos en modo solo lectura, por 30 minutos, y queda registrado.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Contacto ──────────────────────────────────────────────────── -->
+    <section id="contacto">
+      <div class="contenedor">
+        <div class="llamado">
+          <h2>¿Quieres verlo funcionando en tu restaurante?</h2>
+          <p>Escríbenos y te mostramos RestIA con tu propia carta. Te decimos qué equipo e impresora te conviene y cuánto cuesta para tu negocio.</p>
+          <div class="acciones centro">
+            <a class="boton principal grande" href="mailto:restiasoft@gmail.com?subject=Quiero%20una%20demostraci%C3%B3n%20de%20RestIA">Escríbenos: restiasoft@gmail.com</a>
+            <a class="boton secundario grande" href="/preguntas">Preguntas frecuentes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <span>© 2026 RestIA · Punto de venta para restaurantes</span>
+      <nav aria-label="Pie de página">
+        <a href="/documentacion">Documentación</a>
+        <a href="/preguntas">Preguntas frecuentes</a>
+        <a href="https://app.restia.download/portal/">Portal del dueño</a>
+        <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
