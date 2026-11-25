@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recorrido por RestIA · capturas reales de la app</title>
+  <meta name="description" content="Recorrido por RestIA con capturas reales: mesas, comanda, cocina, cobro, panel de administración y portal del dueño. Sin registro y sin descargar nada.">
+  <link rel="canonical" href="https://restia.download/recorrido">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:title" content="Recorrido por RestIA">
+  <meta property="og:description" content="Así se ve un pedido completo: mesas, comanda, cocina, cobro y los reportes del dueño.">
+  <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/estilos.css?v=20261124">
+</head>
+<body>
+  <header class="barra" id="cerrar">
+    <div class="contenedor">
+      <a class="marca" href="/" aria-label="RestIA, inicio">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0891b2"/><path d="M10 23V9h6.2c3 0 5 1.8 5 4.4 0 2-1.1 3.4-2.9 4l3.4 5.6h-3.3l-3-5.2H13V23zm3-7.7h3c1.4 0 2.2-.7 2.2-1.9s-.8-1.9-2.2-1.9h-3z" fill="#fff"/></svg>
+        RestIA
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="/#la-app">La app</a>
+        <a href="/#panel">Administración</a>
+        <a href="/#funciones">Funciones</a>
+        <a href="/recorrido" aria-current="page">Recorrido</a>
+        <a href="/documentacion">Documentación</a>
+        <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
+        <a class="boton principal" href="/#contacto">Pide una demostración</a>
+      </nav>
+      <a class="boton-menu" href="#menu" aria-label="Abrir menú" aria-controls="menu">Menú</a>
+      <div class="menu-movil" id="menu">
+        <a class="velo" href="#cerrar" aria-label="Cerrar menú" tabindex="-1"></a>
+        <nav aria-label="Principal (teléfono)">
+          <a class="cerrar" href="#cerrar" aria-label="Cerrar menú">Cerrar ✕</a>
+          <a href="/">Inicio</a>
+          <a href="/#la-app">La app</a>
+          <a href="/#panel">Panel de administración</a>
+          <a href="/recorrido">Recorrido</a>
+          <a href="/documentacion">Documentación</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+          <a href="https://app.restia.download/portal/">Entrar al portal</a>
+          <a href="/#contacto">Pide una demostración</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pagina">
+    <div class="contenedor">
+      <p class="migaja"><a href="/">Inicio</a> <span aria-hidden="true">/</span> Recorrido</p>
+      <h1>Un pedido, de la mesa al reporte</h1>
+      <p class="subtitulo">Siete pasos con capturas de la app tal como la usas en el restaurante. Pulsa reproducir o ve a la pantalla que te interese: no hay registro, ni demo falsa, ni video que cargar.</p>
+
+      <div class="recorrido" data-tour aria-label="Recorrido guiado por las pantallas de RestIA">
+        <div class="tour-marco">
+          <div class="tour-pantalla">
+            <img src="/img/app-mesas.webp" width="1280" height="764" alt="Mesas del salón: libres en verde y ocupadas en rojo">
+          </div>
+          <div class="tour-pie">
+            <div>
+              <h3 class="tour-titulo">El salón, de un vistazo</h3>
+              <p class="tour-texto">Mesas libres y ocupadas, con el total y las comandas abiertas.</p>
+            </div>
+            <span class="tour-contador">1 / 7</span>
+          </div>
+        </div>
+        <div class="tour-controles">
+          <button type="button" class="principal" data-play aria-pressed="false">Reproducir</button>
+          <button type="button" data-antes>Anterior</button>
+          <button type="button" data-despues>Siguiente</button>
+          <div class="barra-progreso" aria-hidden="true"><i></i></div>
+        </div>
+        <div class="miniaturas" aria-label="Ir a un paso">
+          <button type="button" data-ir="0" aria-current="true"><img src="/img/app-mesas.webp" alt="Paso 1: mesas del salón" width="160" height="90" loading="lazy"></button>
+          <button type="button" data-ir="1"><img src="/img/app-comanda.webp" alt="Paso 2: tomar el pedido" width="160" height="90" loading="lazy"></button>
+          <button type="button" data-ir="2"><img src="/img/app-cocina.webp" alt="Paso 3: cocina" width="160" height="90" loading="lazy"></button>
+          <button type="button" data-ir="3"><img src="/img/app-caja.webp" alt="Paso 4: cobrar" width="160" height="90" loading="lazy"></button>
+          <button type="button" data-ir="4"><img src="/img/admin-dashboard.webp" alt="Paso 5: dashboard" width="160" height="90" loading="lazy"></button>
+          <button type="button" data-ir="5"><img src="/img/admin-reportes.webp" alt="Paso 6: reportes" width="160" height="90" loading="lazy"></button>
+          <button type="button" data-ir="6"><img src="/img/portal-movil.webp" alt="Paso 7: el portal en el celular" width="160" height="90" loading="lazy"></button>
+        </div>
+        <script type="application/json" id="tour-pasos">
+[
+  {"img":"/img/app-mesas.webp","titulo":"El salón, de un vistazo","texto":"Cada mesa con su estado y su total. Toca una mesa para abrir o continuar su pedido.","alt":"Mesas del salón: libres en verde y ocupadas en rojo"},
+  {"img":"/img/app-comanda.webp","titulo":"Tomar el pedido","texto":"La carta por categorías a la izquierda y la comanda a la derecha: cantidades, extras, notas y para llevar.","alt":"Tomar un pedido: carta por categorías a la izquierda y la comanda a la derecha"},
+  {"img":"/img/app-cocina.webp","titulo":"La cocina sabe qué sigue","texto":"Cada comanda con su cronómetro y cada platillo con su estado. Lo que se atrasa se marca en rojo.","alt":"Cocina: comandas por mesa, cada platillo con su estado y el tiempo de espera"},
+  {"img":"/img/app-caja.webp","titulo":"Cobrar y cerrar","texto":"Efectivo, tarjeta o transferencia, propina y división de cuenta. El turno de caja queda cuadrado al final.","alt":"Caja: efectivo en caja, ventas con tarjeta y transferencia, y las cuentas por cobrar"},
+  {"img":"/img/admin-dashboard.webp","titulo":"El día en números","texto":"Ventas de hoy, pedidos, ticket promedio, mesas ocupadas y comandas en cocina, en una sola pantalla.","alt":"Dashboard: ventas de hoy, pedidos, ticket promedio, mesas ocupadas y comandas en cocina"},
+  {"img":"/img/admin-reportes.webp","titulo":"Reportes del periodo","texto":"Ventas, productos más vendidos y ticket promedio por día, semana o mes; se exporta y se compara.","alt":"Reportes: resumen del periodo con ventas, pedidos, productos vendidos y ticket promedio"},
+  {"img":"/img/portal-movil.webp","titulo":"Tu negocio en el celular","texto":"El portal del dueño muestra lo mismo desde fuera del restaurante: ventas del día, carta, inventario y reportes.","alt":"Las ventas del día en el celular del dueño"}
+]
+        </script>
+      </div>
+
+      <section class="seccion" aria-labelledby="galeria-titulo">
+        <h2 id="galeria-titulo">Las pantallas, una por una</h2>
+        <p class="subtitulo">Toca cualquier captura para verla en grande. Son pantallas reales de la app, no maquetas.</p>
+
+        <h3>Operación en la tablet</h3>
+        <div class="capturas">
+          <figure class="captura" data-zoom>
+            <img src="/img/app-mesas.webp" width="1280" height="764" alt="Mesas del salón: libres en verde, ocupadas en rojo, con sus comandas" loading="lazy">
+            <figcaption><b>Mesas.</b> El salón completo con el estado de cada mesa y sus comandas abiertas.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/app-comanda.webp" width="1280" height="764" alt="Tomar un pedido: carta por categorías a la izquierda, la comanda a la derecha" loading="lazy">
+            <figcaption><b>Comanda.</b> Carta y pedido en la misma pantalla, con extras, notas y para llevar.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/app-cocina.webp" width="1280" height="764" alt="Cocina: comandas por mesa, cada platillo con su estado y el tiempo de espera" loading="lazy">
+            <figcaption><b>Cocina.</b> Comandas en orden, cronómetro por platillo y aviso cuando algo se atrasa.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/app-caja.webp" width="1280" height="764" alt="Caja: efectivo en caja, ventas con tarjeta y transferencia, y las cuentas por cobrar" loading="lazy">
+            <figcaption><b>Caja.</b> Efectivo, tarjeta y transferencia; propinas, cuentas por cobrar y corte del turno.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/app-licencia.webp" width="1280" height="764" alt="Pantalla de licencia de la app: estado, última verificación, código del equipo y cómo contactarnos" loading="lazy">
+            <figcaption><b>Licencia.</b> Estado, última verificación y el código del equipo, para resolver cualquier renovación.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Panel de administración</h3>
+        <div class="capturas">
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-dashboard.webp" width="1280" height="764" alt="Dashboard: ventas de hoy, pedidos, ticket promedio, mesas ocupadas y comandas en cocina" loading="lazy">
+            <figcaption><b>Dashboard.</b> El pulso del día: ventas, pedidos, ticket promedio, mesas y cocina.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-catalogo.webp" width="1280" height="764" alt="Catálogo: platillos con su precio y disponibilidad, categorías y modificadores" loading="lazy">
+            <figcaption><b>Catálogo.</b> Platillos, precios, categorías y modificadores; lo que se agota se oculta solo.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-inventario.webp" width="1280" height="764" alt="Inventario: valor del almacén, insumos con su existencia, precio y valor" loading="lazy">
+            <figcaption><b>Inventario.</b> Existencias, costo y valor del almacén, con recetas y mermas.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-reportes.webp" width="1280" height="764" alt="Reportes: resumen del periodo con ventas, pedidos, productos vendidos y ticket promedio" loading="lazy">
+            <figcaption><b>Reportes.</b> Ventas por periodo, productos vendidos y ticket promedio.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-empleados.webp" width="1280" height="764" alt="Empleados: cada uno con su puesto, si está activo y su último acceso" loading="lazy">
+            <figcaption><b>Empleados.</b> Puesto, estado y último acceso de cada persona del equipo.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-roles.webp" width="1280" height="764" alt="Roles y permisos: qué puede hacer cada puesto, por ejemplo juntar mesas o dividir cuentas" loading="lazy">
+            <figcaption><b>Roles y permisos.</b> Qué puede hacer cada puesto: cobrar, dividir cuentas, ver reportes.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-reloj.webp" width="1280" height="764" alt="Reloj checador: cada empleado registra su entrada y salida con su PIN" loading="lazy">
+            <figcaption><b>Reloj checador.</b> Entrada y salida con PIN, y las asistencias del día.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-ia.webp" width="1280" height="764" alt="IA predictiva: copiloto con predicciones de ventas, compras sugeridas y recomendaciones" loading="lazy">
+            <figcaption><b>IA predictiva.</b> Pronóstico de ventas, compras sugeridas y recomendaciones del copiloto.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Portal del dueño</h3>
+        <div class="capturas">
+          <figure class="captura" data-zoom>
+            <img src="/img/portal-resumen.webp" width="1280" height="800" alt="Resumen del portal del dueño en el navegador" loading="lazy">
+            <figcaption><b>Resumen.</b> El portal en el navegador, con los datos del local sin instalar nada.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/portal-carta.webp" width="1280" height="800" alt="Carta del portal: precios, costo por receta, margen y disponibilidad de cada platillo" loading="lazy">
+            <figcaption><b>Carta.</b> Precio, costo por receta, margen y disponibilidad de cada platillo.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/portal-inventario.webp" width="1280" height="800" alt="Inventario en el portal del dueño" loading="lazy">
+            <figcaption><b>Inventario.</b> Existencias y valor del almacén del local desde el portal.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/portal-reportes.webp" width="1280" height="800" alt="Reportes del portal: ventas, tickets, IVA incluido y ventas por forma de pago" loading="lazy">
+            <figcaption><b>Reportes.</b> Ventas, tickets con IVA incluido y desglose por forma de pago.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/portal-movil.webp" width="390" height="844" alt="Las ventas del día en el celular del dueño" loading="lazy">
+            <figcaption><b>En el celular.</b> Lo mismo desde el teléfono, sin abrir la caja ni la computadora.</figcaption>
+          </figure>
+        </div>
+
+        <h3>La app en un teléfono Android</h3>
+        <div class="capturas">
+          <figure class="captura" data-zoom>
+            <img src="/img/cel-mesas.webp" width="412" height="915" alt="La app en un teléfono Android: mesas del salón, ocupadas en rojo y libres en verde" loading="lazy">
+            <figcaption><b>Mesas.</b> El salón cabe en el teléfono; se toma el pedido desde el mismo equipo.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/cel-comanda.webp" width="412" height="915" alt="Teléfono: tomar el pedido de la mesa 3" loading="lazy">
+            <figcaption><b>Comanda.</b> Tomar el pedido de la mesa 3 con la carta a la mano.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/cel-cocina.webp" width="412" height="915" alt="Teléfono: comandas en cocina con su tiempo" loading="lazy">
+            <figcaption><b>Cocina.</b> Comandas con su tiempo, para cocinar sin la pantalla grande.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/cel-dashboard.webp" width="412" height="915" alt="Teléfono: ventas del día, pedidos y ticket promedio" loading="lazy">
+            <figcaption><b>Resumen.</b> Ventas del día, pedidos y ticket promedio en el bolsillo.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="seccion" aria-labelledby="siguiente">
+        <h2 id="siguiente">¿Y ahora qué sigue?</h2>
+        <div class="acciones centro">
+          <a class="boton principal grande" href="/documentacion">Leer la documentación</a>
+          <a class="boton secundario grande" href="/#contacto">Pedir una demostración</a>
+        </div>
+        <p class="nota">Las capturas son de la app con datos de ejemplo: cambian los montos y los nombres, no las pantallas.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <span>© 2026 RestIA · Punto de venta para restaurantes</span>
+      <nav aria-label="Pie de página">
+        <a href="/documentacion">Documentación</a>
+        <a href="/recorrido">Recorrido</a>
+        <a href="/preguntas">Preguntas frecuentes</a>
+        <a href="https://app.restia.download/portal/">Portal del dueño</a>
+        <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="/galeria.js?v=20261124" defer></script>
+  <script src="/recorrido.js?v=20261124" defer></script>
+</body>
+</html>
