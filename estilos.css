@@ -215,6 +215,10 @@ h3 { font-size: 20px; margin: 0 0 8px; }
   border-left: 4px solid var(--calido); background: var(--superficie); padding: 14px 18px;
   border-radius: 0 10px 10px 0; margin: 18px 0; color: var(--tenue);
 }
+.nota-demo {
+  max-width: 680px; margin: 14px auto 0; text-align: center;
+  font-size: 13px; color: var(--tenue);
+}
 code, kbd {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em;
   background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 6px; padding: 1px 6px;
