@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Demo interactiva de RestIA · prueba el punto de venta sin instalar nada</title>
-  <meta name="description" content="Demo interactiva de RestIA: abre una mesa, levanta el pedido, mándalo a cocina y cobra. Simulación con datos de ejemplo; la app real se ve en el recorrido con capturas.">
+  <meta name="description" content="Demo interactiva de RestIA: abre una mesa, levanta el pedido, mándalo a cocina y pásalo a caja para cobrar. Simulación con datos de ejemplo; la app real se ve en el recorrido con capturas.">
   <link rel="canonical" href="https://restia.download/demo">
   <meta name="theme-color" content="#0b1120">
   <meta property="og:title" content="Demo interactiva de RestIA">
@@ -12,8 +12,8 @@
   <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/estilos.css?v=20261129">
-  <script src="/demo.js?v=20261127" defer></script>
+  <link rel="stylesheet" href="/estilos.css?v=20261130">
+  <script src="/demo.js?v=20261130" defer></script>
 </head>
 <body>
   <a class="saltar" href="#contenido">Saltar al contenido</a>
@@ -56,7 +56,7 @@
     <div class="contenedor">
       <p class="migaja"><a href="/">Inicio</a> <span aria-hidden="true">/</span> Demo</p>
       <h1>Pruébala sin instalar nada</h1>
-      <p class="subtitulo">Una simulación del punto de venta para que toques el flujo completo: abre una mesa, levanta el pedido, mándalo a cocina y cobra. La app real, con sus capturas, está en el <a href="/recorrido">recorrido</a>.</p>
+      <p class="subtitulo">Una simulación del punto de venta para que toques el flujo completo: abre una mesa, levanta el pedido, mándalo a cocina y pásalo a caja para cobrar. La app real, con sus capturas, está en el <a href="/recorrido">recorrido</a>.</p>
       <div class="aviso info">
         <strong>Es una simulación con datos de ejemplo</strong>
         <p>No guarda nada ni se conecta con la app: los platillos, precios y ventas son inventados para que practiques. Si quieres ver la app de verdad, mira las <a href="/recorrido">capturas</a> o pide una demostración.</p>
@@ -128,7 +128,7 @@
                     <div class="demo-totales"><span>Total</span><strong id="demo-total">$0.00</strong></div>
                     <div class="demo-pie-botones">
                       <button type="button" class="demo-boton" id="demo-enviar" disabled>Enviar a cocina</button>
-                      <button type="button" class="demo-boton demo-principal" id="demo-cobrar" disabled>Cobrar</button>
+                      <button type="button" class="demo-boton demo-principal" id="demo-cobrar" disabled>Cobrar en caja</button>
                     </div>
                   </div>
                 </aside>
@@ -167,7 +167,14 @@
                 <div><dt>Efectivo</dt><dd id="demo-m-efectivo">$0.00</dd></div>
                 <div><dt>Tarjeta</dt><dd id="demo-m-tarjeta">$0.00</dd></div>
               </dl>
-              <p class="demo-pista">En la app, aquí cierras el turno y ves el arqueo. En la demo solo se acumulan las ventas que cobres.</p>
+              <div class="demo-mesas-cabeza demo-caja-cabeza">
+                <p class="demo-etiqueta-chica">Cuentas por cobrar</p>
+                <span class="demo-etiqueta-chica" id="demo-caja-cuentas">0</span>
+              </div>
+              <div class="demo-caja-lista" id="demo-caja-lista">
+                <p class="demo-vacio">Abre una mesa y manda el pedido a caja para cobrarlo aquí.</p>
+              </div>
+              <p class="demo-pista">Aquí cobras las cuentas abiertas: cada una se cobra una sola vez y la venta se suma al corte. En la app, también cierras el turno y ves el arqueo.</p>
             </div>
 
             <p class="demo-estado" id="demo-estado" role="status">Listo para empezar.</p>
@@ -208,7 +215,7 @@
       <ul>
         <li><strong>Mesas y para llevar:</strong> abre una cuenta, cambia de mesa y vuelve a ella sin perder el pedido.</li>
         <li><strong>Cantidades y notas:</strong> suma o resta con los botones; “Sin azúcar” o “Bien caliente” quedan en la comanda.</li>
-        <li><strong>Cocina y cobro:</strong> manda la comanda, márcala lista, cobra en efectivo o tarjeta y mira el cambio.</li>
+        <li><strong>Cocina y cobro:</strong> manda la comanda, márcala lista y pásala a caja; ahí cobras en efectivo o tarjeta y ves el cambio. La cuenta se cierra y no se puede cobrar dos veces.</li>
         <li><strong>WhatsApp y Delivery:</strong> el chat de ejemplo arma un pedido que llega al módulo Delivery, como en la app, y con el número de pruebas lo vives de verdad.</li>
       </ul>
       <p class="acciones centro"><a class="boton secundario" href="/recorrido">Ver las capturas reales de la app</a></p>

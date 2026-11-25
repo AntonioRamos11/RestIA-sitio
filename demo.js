@@ -24,6 +24,8 @@
     cocina: document.getElementById('demo-cocina'),
     cocinaCuenta: document.getElementById('demo-cocina-cuenta'),
     cocinaResumen: document.getElementById('demo-cocina-resumen'),
+    cajaLista: document.getElementById('demo-caja-lista'),
+    cajaCuentas: document.getElementById('demo-caja-cuentas'),
     estado: document.getElementById('demo-estado'),
     delivery: document.getElementById('demo-delivery'),
     deliveryCuenta: document.getElementById('demo-delivery-cuenta'),
@@ -85,6 +87,8 @@
     cocina: [],
     ventas: [],
     delivery: [],
+    cobroMesaId: null,
+    cobroSolicitadoId: null,
     folio: 1,
   };
 
@@ -115,6 +119,8 @@
     estado.propina = 0;
     estado.metodo = 'efectivo';
     estado.recibidoTocado = false;
+    estado.cobroMesaId = null;
+    estado.cobroSolicitadoId = null;
     estado.vista = 'mesas';
     render();
     chatInicio();
@@ -134,8 +140,13 @@
   }
   const subtotalActual = () => (mesaActual() ? subtotal(mesaActual()) : 0);
 
+  function mesaDeCobro() {
+    return estado.mesas.find((m) => m.id === estado.cobroMesaId) || null;
+  }
+
   function totalConPropina() {
-    const base = subtotalActual();
+    const m = mesaDeCobro();
+    const base = m ? subtotal(m) : 0;
     return Math.round((base + base * (estado.propina / 100)) * 100) / 100;
   }
 
@@ -172,6 +183,7 @@
 
   function abrirMesa(id) {
     estado.mesaId = id;
+    estado.cobroSolicitadoId = null;
     setVista('pedido');
     aviso(mesaActual().nombre + ' abierta. Toca un producto para agregarlo.');
   }
@@ -427,11 +439,46 @@
     el.m.propinas.textContent = dinero(propinas);
     el.m.efectivo.textContent = dinero(efectivo);
     el.m.tarjeta.textContent = dinero(tarjeta);
+
+    const pendientes = estado.mesas.filter((m) => m.lineas.length > 0);
+    el.cajaCuentas.textContent = String(pendientes.length);
+    el.cajaLista.replaceChildren();
+    if (!pendientes.length) {
+      const p = document.createElement('p');
+      p.className = 'demo-vacio';
+      p.textContent = 'No hay cuentas abiertas. Abre una mesa y pásala a caja.';
+      el.cajaLista.append(p);
+      return;
+    }
+    for (const m of pendientes) {
+      const fila = document.createElement('article');
+      fila.className = 'demo-cuenta';
+      if (m.id === estado.cobroSolicitadoId) fila.classList.add('demo-cuenta-destacada');
+
+      const info = document.createElement('div');
+      info.className = 'demo-cuenta-info';
+      const nombre = document.createElement('strong');
+      nombre.textContent = m.nombre;
+      const detalle = document.createElement('small');
+      detalle.textContent = articulos(m) + (articulos(m) === 1 ? ' artículo' : ' artículos') + ' · ' + dinero(subtotal(m));
+      info.append(nombre, detalle);
+
+      const boton = document.createElement('button');
+      boton.type = 'button';
+      boton.className = 'demo-boton demo-principal demo-boton-chico';
+      boton.textContent = 'Cobrar';
+      boton.setAttribute('aria-label', 'Cobrar ' + m.nombre + ', ' + dinero(subtotal(m)));
+      boton.addEventListener('click', () => abrirCobro(m.id));
+
+      fila.append(info, boton);
+      el.cajaLista.append(fila);
+    }
   }
 
   /* ── Cobro ───────────────────────────────────────────────────────────── */
   function pintarCobro() {
-    const base = subtotalActual();
+    const m = mesaDeCobro();
+    const base = m ? subtotal(m) : 0;
     const total = totalConPropina();
     el.cobroCuenta.textContent = dinero(base);
     el.cobroTotal.textContent = dinero(total);
@@ -445,9 +492,13 @@
     el.error.textContent = '';
   }
 
-  function abrirCobro() {
-    const m = mesaActual();
-    if (!m || !m.lineas.length) return;
+  function abrirCobro(mesaId) {
+    const m = estado.mesas.find((x) => x.id === mesaId);
+    if (!m || !m.lineas.length) {
+      aviso('Esa cuenta ya se cobró o está vacía.');
+      return;
+    }
+    estado.cobroMesaId = m.id;
     estado.propina = 0;
     estado.metodo = 'efectivo';
     estado.recibidoTocado = false;
@@ -460,11 +511,16 @@
 
   function cerrarCobro() {
     el.dialog.close();
+    estado.cobroMesaId = null;
   }
 
   function confirmarCobro() {
-    const m = mesaActual();
-    if (!m || !m.lineas.length) return;
+    const m = mesaDeCobro();
+    if (!m || !m.lineas.length) {
+      cerrarCobro();
+      aviso('Esa cuenta ya se cobró; no se cobra dos veces.');
+      return;
+    }
     const total = totalConPropina();
     if (estado.metodo === 'efectivo' && Number(el.recibido.value || 0) < total) {
       el.error.textContent = 'El efectivo recibido no alcanza. Faltan ' + dinero(total - Number(el.recibido.value || 0)) + '.';
@@ -474,16 +530,18 @@
     }
     const cambio = estado.metodo === 'efectivo' ? Math.round((Number(el.recibido.value) - total) * 100) / 100 : 0;
     const propina = Math.round(subtotal(m) * (estado.propina / 100) * 100) / 100;
-    estado.ventas.push({ total, propina, metodo: estado.metodo });
+    estado.ventas.push({ mesa: m.nombre, total, propina, metodo: estado.metodo });
     const nombre = m.nombre;
+    const eraActual = estado.mesaId === m.id;
     m.lineas = [];
     m.notas = [];
     m.enviado = 0;
-    estado.mesaId = null;
+    if (eraActual) estado.mesaId = null;
+    estado.cobroSolicitadoId = null;
     cerrarCobro();
-    setVista('mesas');
+    setVista('caja');
     renderMesas();
-    aviso(nombre + ' cobrada: ' + dinero(total) + ' en ' + (estado.metodo === 'efectivo' ? 'efectivo · cambio ' + dinero(cambio) : 'tarjeta') + '.');
+    aviso(nombre + ' cobrada: ' + dinero(total) + ' en ' + (estado.metodo === 'efectivo' ? 'efectivo · cambio ' + dinero(cambio) : 'tarjeta') + '. Cuenta cerrada: no se puede cobrar dos veces.');
   }
 
   function render() {
@@ -501,11 +559,16 @@
   el.rail.forEach((b) => b.addEventListener('click', () => setVista(b.dataset.vista)));
   el.volver.addEventListener('click', () => setVista('mesas', 'Elige otra mesa o vuelve a la que dejaste abierta.'));
   el.enviar.addEventListener('click', enviar);
-  el.cobrar.addEventListener('click', abrirCobro);
+  el.cobrar.addEventListener('click', () => {
+    const m = mesaActual();
+    if (!m || !m.lineas.length) return;
+    estado.cobroSolicitadoId = m.id;
+    setVista('caja', m.nombre + ' pasó a caja. Cobra la cuenta ahí.');
+  });
   el.reiniciar.addEventListener('click', reiniciar);
   el.cancelar.addEventListener('click', cerrarCobro);
   el.ok.addEventListener('click', confirmarCobro);
-  el.dialog.addEventListener('cancel', () => { el.error.hidden = true; });
+  el.dialog.addEventListener('cancel', () => { el.error.hidden = true; estado.cobroMesaId = null; });
   document.getElementById('demo-cobro-form').addEventListener('submit', (ev) => ev.preventDefault());
   el.recibido.addEventListener('input', () => {
     estado.recibidoTocado = true;
