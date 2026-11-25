@@ -491,3 +491,100 @@ section.oscura .tableta { border-color: #1e293b; box-shadow: 0 24px 60px rgba(0,
   .buscador-doc { grid-template-columns: 1fr; }
   .buscador-doc button { justify-self: start; }
 }
+/* ── Capturas, visor y recorrido ────────────────────────────────────── */
+.capturas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin: 26px 0 8px; }
+.captura { margin: 0; border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; background: var(--superficie); }
+.captura button { all: unset; display: block; cursor: zoom-in; position: relative; width: 100%; }
+.captura button:focus-visible { outline: 3px solid var(--calido); outline-offset: -3px; }
+.captura img { width: 100%; aspect-ratio: 1280 / 764; object-fit: cover; }
+.captura figcaption { padding: 12px 14px; font-size: 14.5px; color: var(--tenue); line-height: 1.45; }
+.captura .lupa { position: absolute; right: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(8, 12, 22, .78); color: #fff; font-size: 12.5px; font-weight: 700; opacity: 0; transition: opacity .18s ease; }
+.captura button:hover .lupa, .captura button:focus-visible .lupa { opacity: 1; }
+.visor { position: fixed; inset: 0; z-index: 60; display: grid; grid-template-rows: auto 1fr auto; gap: 12px; background: rgba(5, 8, 15, .94); color: #e8eefc; padding: 18px; }
+.visor[hidden] { display: none; }
+.visor-cabecera { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #cbd5e1; font-size: 14px; }
+.visor-cerrar { padding: 8px 14px; border-radius: 999px; border: 1px solid #3a4661; background: #131c2e; color: #e8eefc; font: inherit; font-weight: 700; cursor: pointer; }
+.visor-figura { margin: 0; min-height: 0; display: grid; place-items: center; gap: 12px; }
+.visor-figura img { max-height: min(72vh, 900px); width: auto; max-width: 100%; border-radius: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
+.visor-pie { margin: 0; text-align: center; color: #cbd5e1; font-size: 15px; max-width: 70ch; }
+.visor-nav { display: flex; justify-content: center; gap: 10px; padding-top: 10px; }
+.visor-nav button { padding: 9px 16px; border-radius: 999px; border: 1px solid #3a4661; background: #131c2e; color: #e8eefc; font: inherit; font-weight: 700; cursor: pointer; }
+.visor-nav button:hover, .visor-cerrar:hover { border-color: #22d3ee; }
+
+.recorrido { display: grid; gap: 16px; margin: 28px 0 10px; }
+.tour-marco { border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; background: var(--superficie); box-shadow: var(--sombra); }
+.tour-pantalla { position: relative; background: var(--superficie-2); }
+.tour-pantalla img { width: 100%; aspect-ratio: 1280 / 764; object-fit: cover; }
+.tour-transicion { animation: tourEntra .35s ease; }
+@keyframes tourEntra { from { opacity: .2; transform: scale(1.01); } to { opacity: 1; transform: none; } }
+.tour-pie { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 18px; border-top: 1px solid var(--borde); }
+.tour-pie h3 { margin: 0 0 4px; font-size: 17px; }
+.tour-pie p { margin: 0; color: var(--tenue); font-size: 15px; }
+.tour-contador { flex: none; font-variant-numeric: tabular-nums; color: var(--tenue); font-size: 14px; }
+.tour-controles { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.tour-controles button { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--borde); background: var(--superficie); color: var(--texto); font: inherit; font-weight: 700; cursor: pointer; }
+.tour-controles button:hover { border-color: var(--acento); }
+.tour-controles .principal { background: var(--acento); color: var(--acento-texto); border-color: transparent; }
+.barra-progreso { flex: 1 1 160px; height: 6px; border-radius: 999px; background: var(--superficie-2); overflow: hidden; }
+.barra-progreso i { display: block; height: 100%; width: 0; background: var(--acento); transition: width .25s linear; }
+.miniaturas { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(120px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.miniaturas button { all: unset; cursor: pointer; border-radius: 10px; border: 2px solid transparent; overflow: hidden; }
+.miniaturas button[aria-current='true'] { border-color: var(--acento); }
+.miniaturas img { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+.miniaturas button:focus-visible { outline: 3px solid var(--calido); outline-offset: 2px; }
+
+.novedades { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 14px; }
+.novedad { border: 1px solid var(--borde); border-left: 4px solid var(--acento); border-radius: 10px; padding: 14px 16px; background: var(--superficie); }
+.novedad h3 { margin: 0 0 6px; font-size: 16px; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.novedad .version { font: 700 12.5px/1 system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase; color: var(--acento); }
+.novedad ul { margin: 0; padding-left: 20px; }
+.novedad li { margin: 4px 0; color: var(--texto); font-size: 15px; }
+
+.aviso { border-radius: 10px; padding: 14px 16px; margin: 18px 0; border: 1px solid var(--borde); background: var(--superficie); }
+.aviso strong:first-child { display: block; margin-bottom: 4px; }
+.aviso.info { border-left: 4px solid var(--acento); }
+.aviso.ok { border-left: 4px solid var(--ok); }
+.aviso.ojo { border-left: 4px solid var(--calido); }
+.aviso p:last-child, .aviso ul:last-child { margin-bottom: 0; }
+
+.tabla-datos { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 15px; }
+.tabla-datos caption { text-align: left; color: var(--tenue); font-size: 14px; padding-bottom: 8px; }
+.tabla-datos th, .tabla-datos td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+.tabla-datos th { background: var(--superficie-2); font-size: 14px; }
+.tabla-datos code { overflow-wrap: anywhere; }
+
+.doc-encabezado { margin-bottom: 26px; }
+.doc-encabezado h1 { margin-bottom: 8px; }
+.buscador-doc { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 18px; }
+.doc-seccion { display: block; scroll-margin-top: 84px; }
+.doc-seccion + .doc-seccion { border-top: 1px solid var(--borde); margin-top: 44px; }
+.doc-seccion > h2 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.doc-seccion .volver { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--tenue); text-decoration: none; }
+.doc-seccion .volver:hover { color: var(--acento); }
+.doc-meta { color: var(--tenue); font-size: 14px; margin-top: 6px; }
+.indice a.activo { background: var(--acento-suave); color: var(--texto); }
+
+@media (max-width: 760px) {
+  .tour-pie { flex-direction: column; gap: 4px; }
+  .capturas { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tour-transicion { animation: none; }
+  .barra-progreso i { transition: none; }
+}
+.visualmente-oculto { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.migaja { font-size: 14px; color: var(--tenue); margin: 0 0 12px; }
+.migaja a { color: var(--tenue); text-decoration: none; }
+.migaja a:hover { color: var(--acento); }
+.migaja span { opacity: .6; padding: 0 4px; }
+.glosario { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 18px 0; }
+.glosario dt { font-weight: 700; }
+.glosario dd { margin: 0; color: var(--tenue); }
+pre { overflow-x: auto; background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 10px; padding: 14px 16px; }
+pre code { background: none; border: 0; padding: 0; }
+.seccion { margin-top: 56px; }
+[data-zoom] > button { all: unset; display: block; cursor: zoom-in; position: relative; width: 100%; }
+[data-zoom] > button:focus-visible { outline: 3px solid var(--calido); outline-offset: 3px; }
+.doc, .articulo, .doc-seccion { min-width: 0; }
+.tabla-datos td, .tabla-datos th { overflow-wrap: anywhere; }

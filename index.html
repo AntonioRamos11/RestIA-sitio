@@ -11,7 +11,8 @@
   <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/estilos.css?v=265f15f5ae">
+  <link rel="canonical" href="https://restia.download/">
+  <link rel="stylesheet" href="/estilos.css?v=20261124">
 </head>
 <body>
   <header class="barra" id="cerrar">
@@ -24,6 +25,7 @@
         <a href="#la-app">La app</a>
         <a href="#panel">Administración</a>
         <a href="#funciones">Funciones</a>
+        <a href="/recorrido">Recorrido</a>
         <a href="/documentacion">Documentación</a>
         <a href="/preguntas">Preguntas</a>
         <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
@@ -38,6 +40,7 @@
           <a href="#la-app">La app</a>
           <a href="#panel">Panel de administración</a>
           <a href="#funciones">Funciones</a>
+          <a href="/recorrido">Recorrido</a>
           <a href="#licencia">Licencia</a>
           <a href="/documentacion">Documentación</a>
           <a href="/preguntas">Preguntas frecuentes</a>
@@ -269,6 +272,32 @@
       </div>
     </section>
 
+    <!-- ── Capturas ───────────────────────────────────────────────────── -->
+    <section id="capturas">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Por dentro</span>
+          <h2>Así se ve, sin maquillaje</h2>
+          <p class="subtitulo">Tres pantallas reales de la app: la comanda, la cocina y el panel del dueño. Toca cualquiera para verla en grande, o mira el <a href="/recorrido">recorrido completo paso a paso</a>.</p>
+        </div>
+        <div class="capturas">
+          <figure class="captura" data-zoom>
+            <img src="/img/app-comanda.webp" width="1280" height="764" alt="Tomar un pedido: carta por categorías a la izquierda, la comanda a la derecha" loading="lazy">
+            <figcaption><b>La comanda.</b> Carta y pedido en la misma pantalla, con extras, notas y para llevar.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/app-cocina.webp" width="1280" height="764" alt="Cocina: comandas por mesa, cada platillo con su estado y el tiempo de espera" loading="lazy">
+            <figcaption><b>La cocina.</b> Cada comanda con su cronómetro y cada platillo con su estado.</figcaption>
+          </figure>
+          <figure class="captura" data-zoom>
+            <img src="/img/admin-dashboard.webp" width="1280" height="764" alt="Dashboard: ventas de hoy, pedidos, ticket promedio, mesas ocupadas y comandas en cocina" loading="lazy">
+            <figcaption><b>El panel.</b> Ventas, pedidos, ticket promedio y mesas en una sola pantalla.</figcaption>
+          </figure>
+        </div>
+        <p class="acciones centro"><a class="boton secundario grande" href="/recorrido">Ver el recorrido completo</a></p>
+      </div>
+    </section>
+
     <!-- ── Funciones ─────────────────────────────────────────────────── -->
     <section id="funciones" class="alterna">
       <div class="contenedor">
@@ -281,17 +310,17 @@
           <article class="tarjeta">
             <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M7 9h4M7 13h10"/></svg></div>
             <h3>Punto de venta y caja</h3>
-            <p>Mesas, para llevar y a domicilio. Efectivo, tarjeta y transferencia, propinas, promociones y corte de caja con arqueo.</p>
+            <p>Mesas, para llevar y a domicilio. Efectivo, tarjeta y transferencia, propinas separadas en el corte, promociones y arqueo de caja. En cafetería, agrega a una cuenta ya cobrada y cobra solo la diferencia.</p>
           </article>
           <article class="tarjeta">
             <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16M6 11V7a6 6 0 0 1 12 0v4M5 11l1 9h12l1-9"/></svg></div>
             <h3>Cocina en pantalla</h3>
-            <p>Las comandas llegan a cocina al momento, con sus extras y notas, y el mesero sabe cuándo está listo.</p>
+            <p>Las comandas llegan a cocina al momento, con sus extras y notas, en el orden de grupos que configures, y el mesero sabe cuándo está listo.</p>
           </article>
           <article class="tarjeta">
             <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></div>
             <h3>Carta con fotos, extras y costos</h3>
-            <p>Platillos, categorías, tamaños, leches y toppings. Con la receta, sabes cuánto te cuesta cada platillo y cuánto ganas.</p>
+            <p>Platillos, categorías, tamaños, leches y toppings. Extras por cantidad (“2× crema”) y notas rápidas con un toque. Las categorías se ordenan arrastrando. Con la receta, sabes cuánto te cuesta cada platillo y cuánto ganas.</p>
           </article>
           <article class="tarjeta">
             <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10"/></svg></div>
@@ -306,7 +335,7 @@
           <article class="tarjeta">
             <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-3.3-6.5L21 4l-1 4.5A8 8 0 0 1 20 12z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5"/></svg></div>
             <h3>Pedidos y avisos por WhatsApp</h3>
-            <p>Tus clientes piden por WhatsApp y el pedido llega a la caja. A ti te llega el resumen del día y si una caja no cuadró.</p>
+            <p>Tus clientes piden por WhatsApp y el pedido llega a la caja. Cada restaurante con su número, vinculado desde la app escaneando un QR. A ti te llega el resumen del día y si una caja no cuadró.</p>
           </article>
           <article class="tarjeta">
             <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
@@ -431,6 +460,7 @@
     <div class="contenedor">
       <span>© 2026 RestIA · Punto de venta para restaurantes</span>
       <nav aria-label="Pie de página">
+        <a href="/recorrido">Recorrido</a>
         <a href="/documentacion">Documentación</a>
         <a href="/preguntas">Preguntas frecuentes</a>
         <a href="https://app.restia.download/portal/">Portal del dueño</a>
@@ -438,5 +468,6 @@
       </nav>
     </div>
   </footer>
+  <script src="/galeria.js?v=20261124" defer></script>
 </body>
 </html>

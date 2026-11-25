@@ -4,10 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Documentación · RestIA</title>
-  <meta name="description" content="Guías de RestIA: primeros pasos, pedidos y cobro, carta, inventario, reportes, portal del dueño, WhatsApp, respaldos e impresoras.">
-  <meta name="theme-color" content="#0891b2">
+  <meta name="description" content="Manual de RestIA: primeros pasos, pedidos y cobro, cocina, impresoras, caja, carta, inventario, reportes, portal del dueño, WhatsApp, respaldos, licencia y solución de problemas.">
+  <link rel="canonical" href="https://restia.download/documentacion">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:title" content="Documentación de RestIA">
+  <meta property="og:description" content="El manual completo: de la primera mesa al corte del día, con capturas reales de la app.">
+  <meta property="og:image" content="https://restia.download/img/app-comanda.webp">
+  <meta property="og:type" content="article">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/estilos.css?v=265f15f5ae">
+  <link rel="stylesheet" href="/estilos.css?v=20261124">
 </head>
 <body>
   <header class="barra" id="cerrar">
@@ -17,9 +22,11 @@
         RestIA
       </a>
       <nav class="menu" aria-label="Principal">
+        <a href="/#la-app">La app</a>
+        <a href="/#panel">Administración</a>
         <a href="/#funciones">Funciones</a>
+        <a href="/recorrido">Recorrido</a>
         <a href="/documentacion" aria-current="page">Documentación</a>
-        <a href="/preguntas">Preguntas</a>
         <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
         <a class="boton principal" href="/#contacto">Pide una demostración</a>
       </nav>
@@ -29,6 +36,9 @@
         <nav aria-label="Principal (teléfono)">
           <a class="cerrar" href="#cerrar" aria-label="Cerrar menú">Cerrar ✕</a>
           <a href="/">Inicio</a>
+          <a href="/#la-app">La app</a>
+          <a href="/#panel">Panel de administración</a>
+          <a href="/recorrido">Recorrido</a>
           <a href="/documentacion">Documentación</a>
           <a href="/preguntas">Preguntas frecuentes</a>
           <a href="https://app.restia.download/portal/">Entrar al portal</a>
@@ -40,152 +50,648 @@
 
   <main class="pagina">
     <div class="contenedor">
-      <h1>Documentación</h1>
-      <p class="subtitulo">Cómo usar RestIA en el restaurante y desde el portal del dueño. ¿No encuentras algo? Revisa las <a href="/preguntas">preguntas frecuentes</a> o escríbenos a <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>.</p>
+      <p class="migaja"><a href="/">Inicio</a> <span aria-hidden="true">/</span> Documentación</p>
+      <header class="doc-encabezado">
+        <h1>Documentación</h1>
+        <p class="subtitulo">El manual de RestIA, de la primera mesa al corte del día. Busca un tema o baja por el índice: cada sección dice qué hace la app, qué necesitas y qué esperar del equipo.</p>
+        <div class="buscador-doc" role="search">
+          <label class="visualmente-oculto" for="buscador-documentacion">Buscar en la documentación</label>
+          <input id="buscador-documentacion" type="search" placeholder="Buscar: propinas, respaldos, impresora, licencia…" autocomplete="off">
+          <button type="button" id="limpiar-busqueda" class="boton secundario">Limpiar</button>
+          <p id="conteo-busqueda" role="status" aria-live="polite"></p>
+        </div>
+        <p class="doc-meta">Última revisión: noviembre de 2026 · ¿No encuentras algo? Revisa las <a href="/preguntas">preguntas frecuentes</a> o escríbenos a <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>.</p>
+      </header>
 
       <div class="doc">
-        <nav class="indice" aria-label="Contenido">
+        <nav class="indice" id="indice" aria-label="Contenido">
           <strong>Contenido</strong>
-          <a href="#primeros-pasos">Primeros pasos</a>
-          <a href="#pedidos">Pedidos y cobro</a>
-          <a href="#cocina">Cocina</a>
-          <a href="#carta">Carta, extras y recetas</a>
-          <a href="#inventario">Inventario y proveedores</a>
-          <a href="#caja">Caja y cortes</a>
-          <a href="#reportes">Reportes, gastos y utilidad</a>
-          <a href="#panel">Panel de administración</a>
-          <a href="#portal">Portal del dueño</a>
-          <a href="#whatsapp">WhatsApp</a>
-          <a href="#reservas">Reservas y clientes</a>
-          <a href="#equipo">Equipo y permisos</a>
-          <a href="#respaldos">Respaldos y seguridad</a>
-          <a href="#impresoras">Impresoras</a>
-          <a href="#licencia">Licencia</a>
-          <a href="#soporte">Soporte</a>
+          <a href="#primeros-pasos">1. Primeros pasos</a>
+          <a href="#pedidos">2. Mesas y pedidos</a>
+          <a href="#cocina">3. Cocina y tiempos</a>
+          <a href="#cobro">4. Cobro y propinas</a>
+          <a href="#cafeteria">5. Cafetería y mostrador</a>
+          <a href="#sin-internet">6. Sin internet</a>
+          <a href="#impresoras">7. Impresoras y tickets</a>
+          <a href="#caja">8. Caja y cortes</a>
+          <a href="#carta">9. Carta, recetas y extras</a>
+          <a href="#inventario">10. Inventario y compras</a>
+          <a href="#reportes">11. Reportes y finanzas</a>
+          <a href="#panel">12. Panel de administración</a>
+          <a href="#portal">13. Portal del dueño</a>
+          <a href="#whatsapp">14. WhatsApp y menú digital</a>
+          <a href="#pantallas">15. Pantallas públicas</a>
+          <a href="#respaldos">16. Respaldos y restauración</a>
+          <a href="#licencia">17. Licencia</a>
+          <a href="#equipo">18. Equipo y permisos</a>
+          <a href="#soporte">19. Soporte</a>
+          <a href="#problemas">20. Solución de problemas</a>
+          <a href="#novedades">21. Novedades</a>
+          <a href="#glosario">22. Glosario</a>
         </nav>
 
         <article class="articulo">
-          <h2 id="primeros-pasos">Primeros pasos</h2>
-          <h3>Qué necesitas</h3>
-          <ul>
-            <li><strong>Una computadora con Windows</strong> o, si no tienes, <strong>una tablet Android</strong> 7.0 o más reciente (recomendamos de 10 pulgadas). Siempre conectada a la corriente.</li>
-            <li><strong>Internet en el local</strong> para ver tu negocio desde el portal y para WhatsApp. Para vender, no hace falta.</li>
-            <li><strong>Opcional:</strong> una impresora térmica de tickets por red y más computadoras, tablets o teléfonos Android para meseros y cocina.</li>
-            <li><strong>iPhone o iPad:</strong> no hay app, pero puedes entrar al portal del dueño desde el navegador.</li>
-          </ul>
-          <h3>Cómo queda instalado</h3>
-          <p>Un equipo queda como <strong>servidor</strong>: tu computadora con Windows o, si no tienes, una tablet Android. Ahí se guarda toda la información del restaurante. Las demás computadoras, tablets o teléfonos del local se conectan a él como <strong>clientes</strong> por la misma red.</p>
-          <div class="nota">El equipo servidor debe quedarse encendido y conectado a la corriente durante el servicio (si es una tablet, con la app abierta). Si se apaga, los demás pierden la conexión con él hasta que vuelva.</div>
-          <p>Nosotros cargamos contigo tu carta, tus mesas y tu equipo, y conectamos el restaurante a la nube para que puedas usar el portal.</p>
 
-          <h2 id="pedidos">Pedidos y cobro</h2>
-          <ol>
-            <li>Elige la mesa, o "para llevar" o "a domicilio".</li>
-            <li>Agrega los platillos. Si un platillo tiene extras (tamaño, tipo de leche, toppings), la app te los pregunta.</li>
-            <li>Envía el pedido: llega a la cocina al momento.</li>
-            <li>Al cobrar, elige efectivo, tarjeta o transferencia (se pueden combinar), agrega la propina y, si aplica, una promoción.</li>
-          </ol>
-          <p><strong>Modo cafetería:</strong> para mostradores donde se cobra primero. La cocina ve el pedido en cuanto se paga y el ticket puede imprimirse solo.</p>
-          <p><strong>Promociones:</strong> en la caja solo aparecen las que están vigentes en ese momento (por día, horario y fechas).</p>
+          <section class="doc-seccion" data-doc-seccion id="primeros-pasos">
+            <h2>1. Primeros pasos <a class="volver" href="#indice">Índice ↑</a></h2>
+            <h3>Qué necesitas</h3>
+            <ul>
+              <li><strong>Una computadora con Windows</strong> o, si no tienes, <strong>una tablet Android 7.0 o más reciente</strong> (recomendamos 10 pulgadas). El equipo servidor debe quedar conectado a la corriente.</li>
+              <li><strong>Internet en el local</strong> para el portal del dueño, WhatsApp y la verificación de la licencia. Para vender, cobrar e imprimir no hace falta.</li>
+              <li><strong>Opcional:</strong> una impresora térmica de tickets (USB, serie o red) y más computadoras, tablets o teléfonos Android para meseros y cocina.</li>
+              <li><strong>iPhone o iPad:</strong> no hay app, pero puedes entrar al portal del dueño desde el navegador.</li>
+            </ul>
+            <h3>Cómo queda instalado</h3>
+            <p>Un equipo queda como <strong>servidor</strong>: la computadora con Windows o, si no tienes, la tablet Android. Ahí se guarda toda la información del restaurante. Las demás computadoras, tablets y teléfonos se conectan a él como <strong>clientes</strong> por la misma red del local.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/app-mesas.webp" width="1280" height="764" alt="La app en la tablet: mesas del salón, ocupadas en rojo y libres en verde, con sus comandas" loading="lazy">
+              <figcaption>La pantalla de mesas es el punto de partida del turno: cada mesa con su estado, su total y sus comandas abiertas.</figcaption>
+            </figure>
+            <div class="aviso info">
+              <strong>El servidor se queda encendido</strong>
+              <p>Si la computadora o la tablet servidor se apaga, se suspende o pierde la red, los demás equipos dejan de ver la información hasta que vuelva. Si es una tablet, deja la app abierta y conectada a la corriente durante el servicio.</p>
+            </div>
+            <h3>El primer arranque</h3>
+            <p>La primera vez, un <strong>asistente de configuración</strong> te lleva paso a paso: los datos del negocio, el acceso del dueño, las mesas y la impresora si tienes una. Puedes repetir la configuración de la impresora después desde <strong>Configuración → Impresoras</strong>.</p>
+            <h3>Conectar otro equipo</h3>
+            <ol>
+              <li>Instala la app en la otra computadora, tablet o teléfono Android.</li>
+              <li>Abre la app y pulsa <strong>Indicar IP del servidor</strong>.</li>
+              <li>Escribe la dirección que muestra el equipo servidor (por ejemplo, <code>192.168.1.50</code>) y conéctate.</li>
+              <li>Entra con tu PIN de empleado. Cada quien ve solo lo que su puesto permite.</li>
+            </ol>
+            <div class="aviso ojo">
+              <strong>La IP cambia si el router reinicia</strong>
+              <p>Si otro día aparece “Error de conexión con el servidor”, revisa primero la IP del servidor: casi siempre es eso. Fija la IP del equipo servidor en el router para que no vuelva a pasar.</p>
+            </div>
+            <h3>Tu primer día, en orden</h3>
+            <ol>
+              <li>Carga tu carta (platillos, precios y categorías) en <strong>Catálogo</strong>.</li>
+              <li>Revisa tus mesas y tu equipo en <strong>Configuración</strong>.</li>
+              <li>Haz un pedido de prueba, mándalo a cocina, cóbralo e imprime el ticket.</li>
+              <li>Abre el turno de caja antes de cobrar de verdad.</li>
+              <li>Confirma que el respaldo automático ya corrió (ver <a href="#respaldos">Respaldos</a>).</li>
+            </ol>
+          </section>
 
-          <h2 id="cocina">Cocina</h2>
-          <p>La pantalla de cocina muestra cada comanda con su tiempo, sus extras y notas. Al terminar todos los platillos, el pedido pasa a "Listo" y el mesero lo ve en su pantalla.</p>
+          <section class="doc-seccion" data-doc-seccion id="pedidos">
+            <h2>2. Mesas y pedidos <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>El flujo normal de un pedido es: elegir mesa (o para llevar / a domicilio), agregar platillos con sus extras y notas, enviarlo a cocina y cobrarlo al final. Todo esto funciona en la tablet, en la computadora y en un teléfono Android.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/app-comanda.webp" width="1280" height="764" alt="Tomar un pedido: carta por categorías a la izquierda, la comanda a la derecha" loading="lazy">
+              <figcaption>La carta por categorías a la izquierda y la comanda a la derecha. Los extras y las notas se agregan tocando el platillo.</figcaption>
+            </figure>
+            <h3>Estados por los que pasa un pedido</h3>
+            <table class="tabla-datos">
+              <caption>Estados del pedido y qué significan para el salón y la cocina.</caption>
+              <thead><tr><th>Estado</th><th>Qué significa</th><th>Quién lo cambia</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Pendiente</strong></td><td>El pedido ya existe pero todavía no se ha cobrado.</td><td>Mesero o caja</td></tr>
+                <tr><td><strong>Pagado</strong></td><td>La cuenta está cobrada; si es cafetería, la cocina arranca aquí.</td><td>Caja</td></tr>
+                <tr><td><strong>Listo</strong></td><td>Todos los platillos salieron de cocina y el mesero recibe el aviso.</td><td>Cocina</td></tr>
+                <tr><td><strong>Entregado</strong></td><td>El pedido llegó a la mesa o al cliente.</td><td>Mesero o caja</td></tr>
+                <tr><td><strong>Anulado</strong></td><td>Se canceló el pedido; queda registrado con su motivo.</td><td>Quien tenga el permiso</td></tr>
+              </tbody>
+            </table>
+            <p>En mostradores donde se cobra primero, el pedido puede quedar <strong>en espera de cobro</strong> o con <strong>cobro anticipado</strong>; la cocina lo ve en cuanto se paga. Ese es el flujo del <a href="#cafeteria">modo cafetería</a>.</p>
+            <h3>Extras, notas y complementos</h3>
+            <ul>
+              <li><strong>Extras o modificadores:</strong> grupos como “Tamaño” (elige uno) o “Toppings” (varios), cada opción con su precio y, si quieres, con su descuento de inventario.</li>
+              <li><strong>Extras por cantidad:</strong> en el platillo, cada extra tiene <strong>−</strong> y <strong>+</strong> hasta 9: “doble crema” se cobra por unidad, se ve como “2×” en la comanda, la cocina y el ticket, y descuenta el inventario por unidad (se repone si se anula).</li>
+              <li><strong>Notas rápidas:</strong> en Observaciones hay botones para lo que se pide a diario (Sin coco, Sin azúcar, Poca azúcar, Para llevar). Un toque pone la nota y otro la quita, y lo que escribas a mano se respeta. Se cambian en <a href="#panel">Configuración → General → “Notas rápidas del pedido”</a>, separadas por coma o salto de línea; vacío = sin botones. Funciona igual en la PC y en la tablet.</li>
+              <li><strong>Notas libres:</strong> “sin cebolla”, “término medio”, “para llevar”. Se imprimen en la comanda y las ve cocina.</li>
+              <li><strong>Complementos:</strong> un platillo puede llevar otro como acompañamiento; se cobra y se prepara junto.</li>
+              <li><strong>Juntar mesas:</strong> une dos o más mesas en una sola cuenta y sepáralas al final.</li>
+              <li><strong>Dividir cuenta:</strong> por personas, por partes iguales o por platillos; cada parte se puede cobrar con distinto método de pago.</li>
+            </ul>
+            <div class="aviso ok">
+              <strong>Nada se pierde si se cae la red</strong>
+              <p>El pedido se guarda primero en el equipo y luego se sincroniza. Si el internet falla a media comanda, la app sigue trabajando y reintenta sola; los reintentos no duplican pedidos ni cobros.</p>
+            </div>
+          </section>
 
-          <h2 id="carta">Carta, extras y recetas</h2>
-          <p>La carta se edita en la tablet o desde el portal (pestaña <strong>Carta</strong>). Los cambios llegan solos a todas las tablets, sin reiniciar la app.</p>
-          <ul>
-            <li><strong>Platillos:</strong> nombre, categoría, precio, descripción, foto, disponible o pausado (por ejemplo, si se acabó).</li>
-            <li><strong>Categorías:</strong> orden y si se muestran o no.</li>
-            <li><strong>Extras:</strong> grupos como "Tamaño" (elige uno) o "Toppings" (varios), cada opción con su precio extra. Una opción puede descontar un insumo del inventario.</li>
-            <li><strong>Recetas:</strong> lo que lleva una porción. Con la receta y el precio de cada insumo, RestIA calcula el costo del platillo y tu margen.</li>
-          </ul>
+          <section class="doc-seccion" data-doc-seccion id="cocina">
+            <h2>3. Cocina y tiempos <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>La pantalla de cocina (KDS) es la misma app en modo cocina, en una tablet o en un monitor. Muestra cada comanda con su hora, sus extras y sus notas, y cada platillo con su estado: pendiente, en preparación o listo.</p>
+            <div class="capturas">
+              <figure class="captura" data-zoom>
+                <img src="/img/app-cocina.webp" width="1280" height="764" alt="Cocina: comandas por mesa, cada platillo con su estado y el tiempo de espera" loading="lazy">
+                <figcaption>Comandas ordenadas por antigüedad. El tiempo de espera se resalta cuando se acerca el límite.</figcaption>
+              </figure>
+              <figure class="captura" data-zoom>
+                <img src="/img/cel-cocina.webp" width="412" height="915" alt="Teléfono: comandas en cocina con su tiempo" loading="lazy">
+                <figcaption>La misma cocina en un teléfono Android, para cocinas chicas o para el chef que se mueve.</figcaption>
+              </figure>
+            </div>
+            <ul>
+              <li><strong>Un platillo a la vez:</strong> cada platillo se marca como listo por separado, para que el mesero pueda llevarlo sin esperar el resto.</li>
+              <li><strong>Aviso al mesero:</strong> cuando el pedido queda listo, el mesero lo ve en su pantalla; no hay que gritar “¡orden!”.</li>
+              <li><strong>Comandas por estación:</strong> si tienes barra y cocina, cada estación recibe solo lo suyo.</li>
+              <li><strong>Orden de la comanda:</strong> el dueño define el orden de los grupos de modificadores (tamaño, leche, toppings…) en <strong>Configuración → General → “Orden de grupos en la comanda”</strong>, arrastrándolos. La comanda y la pantalla de cocina respetan ese orden.</li>
+              <li><strong>Reimprimir:</strong> si se rompe el papel o se pierde la comanda, se reimprime desde el pedido sin duplicar el cobro.</li>
+              <li><strong>Monitor público:</strong> una pantalla en el mostrador muestra los pedidos listos para recoger (ver <a href="#pantallas">pantallas públicas</a>).</li>
+            </ul>
+            <div class="aviso info">
+              <strong>Sin cocina</strong>
+              <p>Si tu negocio no tiene cocina (cafetería, barra de café, panadería), se activa el modo cafetería y la app deja de pedir el paso por cocina. El pedido se crea igual y se cobra al inicio o al final, según configures.</p>
+            </div>
+          </section>
 
-          <h2 id="inventario">Inventario y proveedores</h2>
-          <ul>
-            <li>Cada venta descuenta del inventario lo que dice la receta.</li>
-            <li><strong>Mínimos:</strong> cuando un insumo llega a su mínimo, se marca y, si lo activas, te llega un aviso por WhatsApp.</li>
-            <li><strong>Ajustes y mermas:</strong> corrige con un conteo físico o registra lo que se echó a perder.</li>
-            <li><strong>Proveedores:</strong> sus datos, su WhatsApp y los insumos que te surte.</li>
-            <li><strong>Restock:</strong> la IA sugiere qué pedir según lo que vendes, o lo armas a mano. Se manda al proveedor por WhatsApp o lo dictas por teléfono, y queda pendiente hasta que llega. Al recibirlo, se suma al inventario con el precio real.</li>
-          </ul>
+          <section class="doc-seccion" data-doc-seccion id="cobro">
+            <h2>4. Cobro y propinas <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>El cobro se hace desde la mesa o desde caja. Se pueden combinar métodos en la misma cuenta: por ejemplo, una parte en efectivo y el resto con tarjeta.</p>
+            <ul>
+              <li><strong>Efectivo:</strong> la app calcula el cambio y abre el cajón si tu impresora lo tiene conectado.</li>
+              <li><strong>Tarjeta y transferencia:</strong> se registran como forma de pago para el corte; la terminal bancaria es aparte.</li>
+              <li><strong>Propina:</strong> se agrega antes de cerrar la cuenta y queda separada en el corte, para repartirla.</li>
+              <li><strong>Promociones:</strong> en caja solo aparecen las vigentes por día, horario y fecha; el descuento se aplica al total.</li>
+              <li><strong>Descuentos:</strong> requieren el permiso correspondiente, y quedan en la bitácora con quién los autorizó.</li>
+              <li><strong>Cuentas por cobrar:</strong> si un cliente se va a pagar después, la cuenta queda pendiente y se ve en caja.</li>
+              <li><strong>RestIA Pay:</strong> terminal de pago en el navegador, con propinas sugeridas y conciliación automática en caja, cuando está contratada.</li>
+            </ul>
+            <figure class="captura" data-zoom>
+              <img src="/img/app-caja.webp" width="1280" height="764" alt="Caja: efectivo en caja, ventas con tarjeta y transferencia, y las cuentas por cobrar" loading="lazy">
+              <figcaption>Caja: efectivo disponible, ventas por tarjeta y transferencia, propinas y cuentas por cobrar del turno.</figcaption>
+            </figure>
+            <h3>Dividir la cuenta</h3>
+            <p>Desde el pedido, elige <strong>Dividir cuenta</strong> y reparte por persona, en partes iguales o por platillos. Cada parte se cobra por separado y el pedido se cierra cuando ya no queda saldo. Si el cliente pide factura, se genera al final con los datos fiscales.</p>
+            <div class="aviso ojo">
+              <strong>Antes de cobrar con tarjeta</strong>
+              <p>Verifica que el turno de caja esté abierto. Sin turno abierto, la app no permite cobrar: es lo que mantiene el corte cuadrado al final del día.</p>
+            </div>
+          </section>
 
-          <h2 id="caja">Caja y cortes</h2>
-          <p>Abre la caja con un fondo, registra entradas y salidas de efectivo y haz el corte al final del turno contando el efectivo. RestIA te dice lo que debería haber y la diferencia. En el portal (pestaña <strong>Cortes</strong>) ves cada turno con su detalle, y puedes recibir un aviso si un corte no cuadra.</p>
+          <section class="doc-seccion" data-doc-seccion id="cafeteria">
+            <h2>5. Cafetería y mostrador <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>El modo cafetería es para negocios donde el cliente pide y paga en el mostrador: cafeterías, panaderías, barras de jugos, food trucks. Cambia el orden del flujo, no la app: el pedido siempre se crea y se guarda.</p>
+            <ul>
+              <li><strong>Sin cocina:</strong> se ocultan los pasos de preparación y el aviso a cocina; el pedido pasa directo al cobro.</li>
+              <li><strong>Cobro al inicio:</strong> se cobra antes de preparar; la comanda sale al pagar, no al tomar el pedido.</li>
+              <li><strong>Mostrador:</strong> la pantalla de mostrador muestra el número de pedido y el estado para que el cliente lo recoja.</li>
+              <li><strong>Nombres en la comanda:</strong> puedes pedir el nombre del cliente para llamarlo cuando esté listo.</li>
+              <li><strong>Plantillas de giro:</strong> al configurar el negocio eliges taquería, restaurante formal, cafetería, dark kitchen o food truck; la app ajusta los módulos visibles.</li>
+            </ul>
+            <h3>Agregar algo a una cuenta ya cobrada</h3>
+            <p>En cafetería se cobra al ordenar. Si el cliente pide “otro café” después, no abras otra cuenta: entra a la misma mesa o comanda y agrega lo que pida.</p>
+            <ul>
+              <li>La app avisa <strong>“Comanda ya cobrada”</strong> y muestra cuánto falta; al cobrar, solo se cobra la diferencia.</li>
+              <li>La comanda sigue contando una sola vez en el turno y en el corte; en Caja el movimiento aparece como <strong>“Complemento mesa N”</strong>.</li>
+              <li>La diferencia se puede pagar con otra forma de pago: el desglose por método suma lo original y el complemento.</li>
+            </ul>
+            <p>No se puede quitar de una comanda cobrada por debajo de lo que ya se pagó (la devolución se hace en Caja), ni agregar a una cuenta fusionada o mezclada, con promociones, o si el turno de ese cobro ya cerró.</p>
+            <div class="aviso info">
+              <strong>Se puede cambiar después</strong>
+              <p>El modo se configura en <strong>Configuración</strong>. Al cambiarlo no se borra nada: los pedidos y las ventas anteriores se quedan como están.</p>
+            </div>
+          </section>
 
-          <h2 id="reportes">Reportes, gastos y utilidad</h2>
-          <ul>
-            <li><strong>Reportes:</strong> ventas por día, hora, producto, categoría, empleado y forma de pago, con el IVA incluido. Se descargan en Excel o PDF.</li>
-            <li><strong>Gastos:</strong> captura renta, servicios, sueldos y otros gastos fijos. Pon los sueldos en la categoría "Nómina".</li>
-            <li><strong>Utilidad:</strong> ventas, costo de lo vendido, mermas y gastos del mes, hasta la utilidad neta.</li>
-            <li><strong>Varias sucursales:</strong> compáralas lado a lado en el mismo periodo.</li>
-          </ul>
+          <section class="doc-seccion" data-doc-seccion id="sin-internet">
+            <h2>6. Sin internet <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>RestIA está hecho para seguir vendiendo cuando se cae el internet. Todo se guarda primero en el equipo servidor y se sincroniza cuando hay red.</p>
+            <h3>Qué sigue funcionando sin internet</h3>
+            <ul>
+              <li>Tomar pedidos, mandarlos a cocina y marcar platillos listos.</li>
+              <li>Cobrar en efectivo, tarjeta o transferencia, con propina y división de cuenta.</li>
+              <li>Imprimir tickets y comandas.</li>
+              <li>Abrir y cerrar el turno de caja, y hacer el corte.</li>
+              <li>Consultar la carta, el inventario y los reportes del día (con los datos del propio equipo).</li>
+            </ul>
+            <h3>Qué necesita internet</h3>
+            <ul>
+              <li>El <strong>portal del dueño</strong> desde fuera del local.</li>
+              <li><strong>WhatsApp</strong> y los mensajes a clientes.</li>
+              <li>La <strong>verificación de la licencia</strong> y las actualizaciones.</li>
+              <li>Ver en el portal las ventas de una tablet que está desconectada.</li>
+            </ul>
+            <h3>Qué pasa cuando vuelve la red</h3>
+            <p>La app reintenta lo pendiente y lo sube en orden. Cada pedido y cada cobro llevan una marca única, así que un reintento no duplica nada aunque el internet se haya caído justo en medio. Si dos equipos editaron lo mismo, gana el último cambio y queda en la bitácora.</p>
+            <div class="aviso ok">
+              <strong>El límite es la licencia, no la venta</strong>
+              <p>La licencia se verifica por internet de vez en cuando y guarda un margen de varios días para trabajar sin conexión. Si el equipo pasa mucho tiempo sin ver el puente, la app avisa antes de entrar en días de gracia (ver <a href="#licencia">Licencia</a>).</p>
+            </div>
+          </section>
 
-          <h2 id="panel">Panel de administración</h2>
-          <p>Quien administra (dueño o gerente) tiene en la misma app un panel completo. Cada módulo se ve según los permisos de su puesto.</p>
-          <ul>
-            <li><strong>Dashboard:</strong> ventas, pedidos y ticket promedio de hoy, 7 o 30 días contra el periodo anterior; mesas ocupadas, libres y comandas en cocina en este momento.</li>
-            <li><strong>Reportes:</strong> resumen del periodo, ventas por categoría, hora y producto, tiempos de cocina y estado de resultados. Hoy, ayer, la semana, el mes o el año.</li>
-            <li><strong>Inventario:</strong> valor del almacén, existencias y costo de cada insumo, filtros de crítico o bajo, mermas y ajustes.</li>
-            <li><strong>Catálogo:</strong> platillos, precios, categorías y modificadores (tamaños, leches, toppings).</li>
-            <li><strong>Recetas:</strong> lo que lleva cada platillo; con eso se descuenta del inventario y se calcula su costo.</li>
-            <li><strong>Proveedores:</strong> sus datos, los insumos que surten y las compras.</li>
-            <li><strong>Empleados:</strong> alta, PIN, puesto, activo o de baja, y su último acceso.</li>
-            <li><strong>Roles y permisos:</strong> qué puede hacer cada puesto (tomar pedidos, cobrar, juntar mesas, dividir cuentas, ver reportes…).</li>
-            <li><strong>Reloj checador:</strong> entradas y salidas con el PIN y las asistencias del día.</li>
-            <li><strong>IA predictiva:</strong> un copiloto para preguntar por ventas, compras, personal y clientes; pronósticos, restock sugerido y recomendaciones.</li>
-            <li><strong>Promociones, reservas y clientes.</strong></li>
-            <li><strong>Configuración:</strong> datos del negocio, impresoras, mesas, red, WhatsApp, mensajes a clientes, gastos fijos, estado del sistema, QR y la licencia.</li>
-            <li><strong>Auditoría:</strong> registro de los cambios importantes (configuración y permisos).</li>
-          </ul>
+          <section class="doc-seccion" data-doc-seccion id="impresoras">
+            <h2>7. Impresoras y tickets <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>RestIA imprime en impresoras térmicas de 58 mm u 80 mm, por USB, puerto serie o red. La configuración está en <strong>Configuración → Impresoras</strong>, y puedes imprimir una prueba sin cobrar nada.</p>
+            <table class="tabla-datos">
+              <caption>Conexiones compatibles y qué poner en cada caso.</caption>
+              <thead><tr><th>Conexión</th><th>Dato que pide la app</th><th>Cuándo usarla</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Red</strong></td><td>IP y puerto (normalmente <code>9100</code>), por ejemplo <code>192.168.1.100:9100</code></td><td>La más cómoda: la impresora va a la red del local y cualquier equipo imprime.</td></tr>
+                <tr><td><strong>USB</strong></td><td>El puerto donde está conectada</td><td>Impresora junto a la caja.</td></tr>
+                <tr><td><strong>Serie</strong></td><td>Puerto y velocidad</td><td>Equipos viejos o integrados al cajón.</td></tr>
+              </tbody>
+            </table>
+            <ul>
+              <li><strong>Ancho del papel:</strong> 58 mm (32 columnas) u 80 mm (48 columnas). Si el ticket sale cortado o con letras encimadas, casi siempre es este ajuste.</li>
+              <li><strong>Logo:</strong> solo aparece en el ticket de venta, nunca en la comanda de cocina.</li>
+              <li><strong>Copias:</strong> puedes imprimir varias copias del ticket (cliente y negocio).</li>
+              <li><strong>Comanda:</strong> sale sin precios, con extras, notas y la hora, para que cocina no vea el importe.</li>
+              <li><strong>Cajón de dinero:</strong> si la impresora lo tiene conectado, se abre al cobrar en efectivo.</li>
+              <li><strong>Ticket de corte:</strong> se imprime al cerrar el turno con el resumen del día.</li>
+            </ul>
+            <h3>Si no imprime</h3>
+            <ol>
+              <li>Revisa que la impresora esté encendida y con papel.</li>
+              <li>Pulsa <strong>Imprimir prueba</strong> en la configuración de la impresora.</li>
+              <li>Si es de red, comprueba que la IP siga siendo la misma (los routers cambian las IP al reiniciar).</li>
+              <li>Si es USB o serie, desconecta y vuelve a conectar el cable, y revisa el puerto elegido.</li>
+              <li>El ticket se puede reimprimir desde el historial de la venta; no hace falta volver a cobrar.</li>
+            </ol>
+          </section>
 
-          <h2 id="portal">Portal del dueño</h2>
-          <p>Entra en <a href="https://app.restia.download/portal/">app.restia.download/portal</a> desde la computadora o el celular.</p>
-          <h3>La primera vez</h3>
-          <ol>
-            <li>Te damos tu usuario, una contraseña temporal y un código QR.</li>
-            <li>Escanea el QR con una app de autenticación (Google Authenticator, Microsoft Authenticator o Authy).</li>
-            <li>Entra con tu usuario, la contraseña temporal y el código de 6 dígitos que muestra la app.</li>
-            <li>El portal te pide cambiar la contraseña antes de mostrarte tu negocio.</li>
-          </ol>
-          <div class="nota">El código de la app cambia cada 30 segundos. Si cambias de celular, escríbenos para darte un QR nuevo.</div>
-          <h3>Qué puedes hacer</h3>
-          <p>Ver ventas en vivo, caja, cortes y reportes; tomar un pedido a distancia; editar la carta, el inventario, los proveedores y las promociones; confirmar reservas; ver a tus clientes y a tu equipo; y fijar una meta de venta diaria. Si tienes varias sucursales, cambias entre ellas sin volver a entrar.</p>
-          <p>Por seguridad, desde el portal <strong>no</strong> se cobra, no se cancelan ventas y no se borra nada.</p>
+          <section class="doc-seccion" data-doc-seccion id="caja">
+            <h2>8. Caja y cortes <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>La caja se abre al empezar el turno y se cierra al terminar. Solo puede haber <strong>una caja abierta</strong> a la vez en el local: así el efectivo y las ventas no se mezclan entre turnos.</p>
+            <h3>Abrir el turno</h3>
+            <ol>
+              <li>Entra con un usuario que tenga permiso de caja.</li>
+              <li>Pulsa <strong>Abrir caja</strong> e indica el efectivo inicial.</li>
+              <li>Haz el corte cuando termines: la app te pide contar el efectivo.</li>
+            </ol>
+            <h3>Durante el turno</h3>
+            <ul>
+              <li><strong>Retiros:</strong> si sacas efectivo de la caja, queda registrado. Un retiro mayor al efectivo disponible pide autorización de un superior.</li>
+              <li><strong>Gastos:</strong> se registran en el turno y se descuentan del corte.</li>
+              <li><strong>Propinas:</strong> al cerrar el turno y en el corte se ven completas y separadas: lo que quedó en efectivo (en el cajón, para repartir) y lo cobrado con tarjeta o transferencia.</li>
+              <li><strong>Cuentas por cobrar:</strong> si un cliente paga después, se liquida desde caja y queda en el historial.</li>
+            </ul>
+            <h3>El corte</h3>
+            <p>Al cerrar, la app compara lo vendido por forma de pago contra lo contado y muestra la diferencia. El reporte del corte usa las mismas claves internas que el resto del sistema, así que lo que ves en pantalla coincide con lo que llega al portal y a los reportes.</p>
+            <div class="aviso ojo">
+              <strong>No cierres la caja a la fuerza</strong>
+              <p>Si el turno queda abierto de un día para otro, las ventas se acumulan en el mismo corte. Ciérralo al terminar el servicio y abre uno nuevo al día siguiente.</p>
+            </div>
+          </section>
 
-          <h2 id="whatsapp">WhatsApp</h2>
-          <ul>
-            <li><strong>Pedidos:</strong> tus clientes pueden pedir por WhatsApp; el pedido llega a la tablet como cualquier otro.</li>
-            <li><strong>Avisos para ti</strong> (portal → Cuenta): resumen del día a la hora que elijas, caja que no cuadró, insumos que se acaban y pedidos a proveedores atrasados.</li>
-          </ul>
+          <section class="doc-seccion" data-doc-seccion id="carta">
+            <h2>9. Carta, recetas y extras <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>La carta se edita en la app o desde el portal (pestaña <strong>Carta</strong>). Los cambios llegan solos a las demás tablets, sin reiniciar la app.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/admin-catalogo.webp" width="1280" height="764" alt="Catálogo: platillos con su precio y disponibilidad, categorías y modificadores" loading="lazy">
+              <figcaption>Catálogo: cada platillo con su precio, su categoría, sus modificadores y si está disponible.</figcaption>
+            </figure>
+            <ul>
+              <li><strong>Platillos:</strong> nombre, categoría, precio, descripción, foto y disponibilidad. Si se acaba algo, se pausa y desaparece de la venta sin borrarlo.</li>
+              <li><strong>Categorías:</strong> orden y visibilidad; sirven para que la carta se navegue rápido.</li>
+              <li><strong>Orden de categorías:</strong> en <strong>Catálogo → Categorías</strong> se reordena arrastrando; el sistema renumera 1…N y la toma de pedidos usa ese orden (las categorías sin posición quedan al final).</li>
+              <li><strong>Modificadores:</strong> grupos como “Tamaño” (elige uno) o “Toppings” (varios), con precio extra y, si aplica, descuento de insumo.</li>
+              <li><strong>Recetas:</strong> lo que lleva una porción. Con la receta y el costo de cada insumo, la app calcula el costo del platillo y tu margen.</li>
+              <li><strong>Precios con IVA:</strong> la carta se captura con el precio que paga el cliente; el desglose fiscal se hace al facturar.</li>
+            </ul>
+            <div class="aviso info">
+              <strong>Cambiar un precio no cambia el pasado</strong>
+              <p>Las ventas ya cobradas conservan el precio con el que se vendieron. El nuevo precio aplica a partir del siguiente pedido.</p>
+            </div>
+          </section>
 
-          <h2 id="reservas">Reservas y clientes</h2>
-          <p>Las reservas se toman en la tablet. En el portal ves las del día, las confirmas o cancelas y mandas la confirmación por WhatsApp. En <strong>Clientes</strong> ves cuánto ha gastado cada uno, sus puntos y quién dejó de venir. Solo invitas por WhatsApp a quien aceptó recibir mensajes.</p>
+          <section class="doc-seccion" data-doc-seccion id="inventario">
+            <h2>10. Inventario y compras <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>El inventario se lleva por insumos: harina, café, leche, carne, refrescos. Cada insumo tiene existencia, costo y unidad, y las recetas descuentan automáticamente lo que se vende.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/admin-inventario.webp" width="1280" height="764" alt="Inventario: valor del almacén, insumos con su existencia, precio y valor" loading="lazy">
+              <figcaption>Inventario: existencias, costo y valor del almacén, con el total invertido a la vista.</figcaption>
+            </figure>
+            <ul>
+              <li><strong>Entradas por compra:</strong> registra la compra a proveedores y actualiza existencias y costo.</li>
+              <li><strong>Mermas:</strong> lo que se rompe, se vence o se regala se registra aparte, para que el costo no se infle solo.</li>
+              <li><strong>Ajustes:</strong> cuando el conteo físico no coincide, se ajusta y queda en la bitácora.</li>
+              <li><strong>Alertas:</strong> los insumos por debajo del mínimo se marcan para comprar.</li>
+              <li><strong>Proveedores:</strong> directorio con datos de contacto e historial de compras.</li>
+              <li><strong>Costo por platillo:</strong> con receta y costo de insumos, ves el margen real de cada platillo.</li>
+            </ul>
+            <div class="aviso ojo">
+              <strong>Si no llevas recetas</strong>
+              <p>El inventario funciona igual, pero el descuento automático solo ocurre en los platillos que tienen receta. Sin receta, el insumo se descuenta con la merma o el ajuste manual.</p>
+            </div>
+          </section>
 
-          <h2 id="equipo">Equipo y permisos</h2>
-          <p>Cada empleado entra a la tablet con su PIN y ve solo lo que su puesto permite (mesero, cocina, caja…). Los PIN, puestos y permisos se manejan en la tablet. Si alguien deja de trabajar contigo, dale de baja (en la tablet o en el portal → Equipo): su PIN y su sesión dejan de funcionar al momento.</p>
+          <section class="doc-seccion" data-doc-seccion id="reportes">
+            <h2>11. Reportes y finanzas <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>Los reportes se ven en el panel de administración y en el portal. Se pueden filtrar por día, semana, mes o periodo, y comparar contra el periodo anterior.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/admin-reportes.webp" width="1280" height="764" alt="Reportes: resumen del periodo con ventas, pedidos, productos vendidos y ticket promedio" loading="lazy">
+              <figcaption>Reportes del periodo: ventas, pedidos, productos más vendidos y ticket promedio, con comparación.</figcaption>
+            </figure>
+            <table class="tabla-datos">
+              <caption>Qué responde cada reporte.</caption>
+              <thead><tr><th>Reporte</th><th>Para qué te sirve</th></tr></thead>
+              <tbody>
+                <tr><td>Ventas del día</td><td>Cuánto se vendió, cuántos pedidos y ticket promedio.</td></tr>
+                <tr><td>Productos vendidos</td><td>Qué se vende más y qué se queda; sirve para ajustar la carta.</td></tr>
+                <tr><td>Formas de pago</td><td>Cuánto entró en efectivo, tarjeta y transferencia, para cuadrar con el banco.</td></tr>
+                <tr><td>Propinas</td><td>Lo que dejaron los clientes, separado de las ventas.</td></tr>
+                <tr><td>Gastos y gastos fijos</td><td>Renta, servicios, nómina y compras del periodo.</td></tr>
+                <tr><td>Estado de resultados</td><td>Ventas menos costos y gastos: la utilidad real del periodo.</td></tr>
+                <tr><td>Inventario</td><td>Valor del almacén y costo de lo consumido.</td></tr>
+              </tbody>
+            </table>
+            <p>El estado de resultados usa la nómina real (sueldo por hora y horas trabajadas del reloj checador) y los gastos fijos capturados, no porcentajes fijos. Si un dato falta, el reporte lo dice en lugar de inventarlo.</p>
+            <div class="aviso info">
+              <strong>Las cifras del portal y de la tablet son las mismas</strong>
+              <p>El portal no guarda una copia: consulta al equipo del local. Por eso, si la tablet está apagada, el portal muestra lo último que recibió y lo indica.</p>
+            </div>
+          </section>
 
-          <h2 id="respaldos">Respaldos y seguridad</h2>
-          <ul>
-            <li>La tablet se respalda sola varias veces al día, y el respaldo se guarda fuera del local. Si la tablet se pierde o se descompone, tu información se recupera en una nueva.</li>
-            <li>El portal usa contraseña y doble factor, y toda la comunicación va cifrada.</li>
-            <li>La tablet no abre puertos en tu red: es ella la que se conecta a la nube.</li>
-          </ul>
+          <section class="doc-seccion" data-doc-seccion id="panel">
+            <h2>12. Panel de administración <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>El panel vive en la misma app pero solo lo ve el dueño o el gerente. Es donde se configura el negocio y se revisa el día.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/admin-dashboard.webp" width="1280" height="764" alt="Dashboard: ventas de hoy, pedidos, ticket promedio, mesas ocupadas y comandas en cocina" loading="lazy">
+              <figcaption>Dashboard: lo que está pasando hoy, sin buscar entre reportes.</figcaption>
+            </figure>
+            <ul>
+              <li><strong>Dashboard:</strong> ventas de hoy, pedidos, ticket promedio, mesas ocupadas y comandas en cocina.</li>
+              <li><strong>Catálogo:</strong> platillos, precios, categorías y modificadores.</li>
+              <li><strong>Inventario:</strong> insumos, compras, mermas y valor del almacén.</li>
+              <li><strong>Empleados:</strong> altas, puestos, PIN y estado; el historial de accesos.</li>
+              <li><strong>Roles y permisos:</strong> qué puede hacer cada puesto.</li>
+              <li><strong>Reloj checador:</strong> entradas y salidas del equipo.</li>
+              <li><strong>Notas rápidas y orden de la comanda:</strong> se editan en <strong>Configuración → General</strong>; los botones de Observaciones y el orden de los grupos en cocina cambian desde el siguiente pedido.</li>
+              <li><strong>IA predictiva:</strong> pronóstico de ventas, compras sugeridas y recomendaciones.</li>
+              <li><strong>Configuración:</strong> mesas, impresoras, ticket, plantilla de giro y datos del negocio.</li>
+              <li><strong>Bitácora:</strong> quién hizo qué y cuándo, incluidos descuentos y cambios de precio.</li>
+            </ul>
+            <div class="capturas">
+              <figure class="captura" data-zoom>
+                <img src="/img/admin-roles.webp" width="1280" height="764" alt="Roles y permisos: qué puede hacer cada puesto, por ejemplo juntar mesas o dividir cuentas" loading="lazy">
+                <figcaption>Roles y permisos: se activan por puesto, no por persona.</figcaption>
+              </figure>
+              <figure class="captura" data-zoom>
+                <img src="/img/admin-reloj.webp" width="1280" height="764" alt="Reloj checador: cada empleado registra su entrada y salida con su PIN" loading="lazy">
+                <figcaption>Reloj checador: entrada y salida con PIN de 4 dígitos, sin tarjetas ni reloj aparte.</figcaption>
+              </figure>
+            </div>
+            <h3>IA predictiva</h3>
+            <p>El copiloto analiza el historial del restaurante y responde preguntas sobre ventas, compras y personal. Da pronósticos y recomendaciones; no compra, no cobra y no cambia precios por su cuenta.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/admin-ia.webp" width="1280" height="764" alt="IA predictiva: copiloto con predicciones de ventas, compras sugeridas y recomendaciones" loading="lazy">
+              <figcaption>IA predictiva: pronóstico de ventas, compras sugeridas y recomendaciones a partir de tus datos.</figcaption>
+            </figure>
+            <div class="aviso info">
+              <strong>La IA necesita historial</strong>
+              <p>Cuanto más tiempo lleves vendiendo con RestIA, mejores son los pronósticos. Al principio puede decir que no hay suficientes datos: es normal y no bloquea nada.</p>
+            </div>
+          </section>
 
-          <h2 id="impresoras">Impresoras</h2>
-          <p>RestIA imprime en impresoras térmicas de tickets <strong>ESC/POS por red</strong> (Wi-Fi o cable), de 58 u 80 mm. Se configura en la tablet con la dirección IP de la impresora (puerto 9100). Recomendamos darle a la impresora una IP fija en tu módem.</p>
+          <section class="doc-seccion" data-doc-seccion id="portal">
+            <h2>13. Portal del dueño <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>El portal es la vista del negocio desde el navegador: <a href="https://app.restia.download/portal/">app.restia.download/portal</a>. Sirve para revisar ventas, carta, inventario y reportes desde fuera del restaurante, sin instalar nada.</p>
+            <h3>Cómo entrar</h3>
+            <ol>
+              <li>Abre el portal en cualquier navegador, también en iPhone o iPad.</li>
+              <li>Entra con tu usuario y contraseña de dueño; el portal pide un segundo código (2FA). Si haces varias acciones seguidas, la verificación correcta se recuerda unos minutos y no te la pide en cada una.</li>
+              <li>Elige el local si tienes más de una sucursal.</li>
+            </ol>
+            <div class="capturas">
+              <figure class="captura" data-zoom>
+                <img src="/img/portal-resumen.webp" width="1280" height="800" alt="Resumen del portal del dueño en el navegador" loading="lazy">
+                <figcaption>Resumen del portal en el navegador, con los datos que reporta el equipo del local.</figcaption>
+              </figure>
+              <figure class="captura" data-zoom>
+                <img src="/img/portal-movil.webp" width="390" height="844" alt="Las ventas del día en el celular del dueño" loading="lazy">
+                <figcaption>Lo mismo en el celular: ventas del día, pedidos y ticket promedio.</figcaption>
+              </figure>
+            </div>
+            <h3>Qué puedes hacer</h3>
+            <ul>
+              <li>Ver ventas, pedidos y ticket promedio del día y del periodo.</li>
+              <li>Editar la carta: precios, disponibilidad, fotos y modificadores.</li>
+              <li>Consultar y ajustar inventario, y ver el valor del almacén.</li>
+              <li>Ver reportes y el estado de resultados.</li>
+              <li>Dar de alta o de baja empleados y cambiar su estado.</li>
+              <li>Gestionar reservas y clientes.</li>
+            </ul>
+            <h3>Qué no puede hacer</h3>
+            <p>El portal no cobra, no cierra mesas, no entrega pedidos y no mueve el dinero de la caja. Esas operaciones se quedan en el local, en la app: el portal consulta y administra, pero el cobro siempre ocurre en el equipo del restaurante.</p>
+            <div class="aviso ojo">
+              <strong>Sin internet en el local, el portal se queda quieto</strong>
+              <p>El portal no tiene una copia de tu base: le pregunta al equipo del local. Si la tablet está apagada o sin red, verás lo último que alcanzó a reportar y el portal te lo indica.</p>
+            </div>
+          </section>
 
-          <h2 id="licencia">Licencia</h2>
-          <p>En la app, <strong>Configuración → Licencia</strong> muestra si está activa, la fecha en que vence, los días que le quedan y el código de tu equipo. Desde ahí mismo nos escribes por WhatsApp o correo para renovar.</p>
-          <ul>
-            <li><strong>Renovación:</strong> cuando registramos tu pago, la licencia nueva se instala sola en la tablet en unos minutos. No tienes que hacer nada.</li>
-            <li><strong>Avisos:</strong> 15 días antes del vencimiento lo ve quien administra; la última semana lo ve todo el equipo.</li>
-            <li><strong>Sin internet:</strong> la licencia que tiene la tablet se renueva sola cada vez que se conecta, y dura un mes. Si la tablet pasa más de un mes sin internet, la app te pide conectarla (aunque esté pagada) y después hay 7 días de gracia. En la pantalla de Licencia ves "Pagada hasta", "Funciona sin internet hasta" y la última verificación.</li>
-            <li><strong>Días de gracia:</strong> si se vence, el sistema sigue funcionando 7 días con un aviso en rojo. Después se pone en pausa hasta renovar.</li>
-            <li><strong>En pausa:</strong> la tablet muestra una pantalla con el motivo, el código del equipo y cómo contactarnos. Al renovar, toca "Ya pagué, revisar".</li>
-          </ul>
+          <section class="doc-seccion" data-doc-seccion id="whatsapp">
+            <h2>14. WhatsApp y menú digital <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>RestIA puede mandar mensajes a tus clientes por WhatsApp: confirmaciones, recordatorios de reserva, avisos de pedido y el bot que toma pedidos. <strong>Cada restaurante tiene su propio número y su propia sesión</strong>: lo que hagas en tu app no toca el WhatsApp de otro local.</p>
+            <h3>Conéctalo desde la app</h3>
+            <ol>
+              <li>Abre <strong>Configuración → WhatsApp</strong> en la tablet del restaurante.</li>
+              <li>Pulsa <strong>Mostrar QR</strong>.</li>
+              <li>En el celular del negocio: WhatsApp → ⋮ → Dispositivos vinculados → Vincular dispositivo, y escanea el código.</li>
+              <li>La pantalla cambia a <strong>Conectado</strong>; manda un mensaje de prueba para confirmar.</li>
+            </ol>
+            <p>Ahí mismo puedes <strong>iniciar sesión</strong>, <strong>reiniciar</strong>, <strong>desvincular el número</strong> o mandar un mensaje a un teléfono de prueba. La dirección y la llave del servicio las administra RestIA y no se muestran; tú ves el estado y el QR. Si prefieres que lo conectemos nosotros, la consola del proveedor también puede.</p>
+            <ul>
+              <li><strong>Alertas:</strong> activa “Avisarme si el bot falla” y deja tus teléfonos: te llega un WhatsApp si la sesión se cae o si los mensajes no salen, y también aparece un aviso en la app.</li>
+              <li><strong>Bot de pedidos:</strong> en la misma pantalla ajustas lo de tu negocio: horario (abre y cierra; vacío = a cualquier hora), pedido mínimo, formas de pago, bienvenida y el flujo de preguntas (cantidad, hora de recogida, complementos).</li>
+              <li><strong>Lo que no cambias tú:</strong> las llaves de IA, Meta y la seguridad del servicio siguen siendo del proveedor; la pantalla las oculta y lo explica.</li>
+            </ul>
+            <p>Si la sesión se cae, la app te avisa y te da el enlace <code>wa.me</code> para mandar el mensaje a mano mientras la reconectas. “WhatsApp conectado” y “tablet en línea” son estados distintos: puedes tener uno sin el otro.</p>
+            <h3>Menú digital</h3>
+            <p>El menú público se publica en <code>/menu-digital/</code> y se actualiza con tu carta. Sirve para pegar el enlace en redes o mandarlo por WhatsApp; el cliente ve precios y disponibilidad sin instalar nada. Las fotos de los platillos se guardan en el servidor del local y se sirven desde ahí.</p>
+            <div class="aviso info">
+              <strong>Los mensajes no son publicidad masiva</strong>
+              <p>Los envíos son de servicio: reservas, pedidos y avisos. Para promociones masivas, usa tu propio canal y respeta las reglas de WhatsApp.</p>
+            </div>
+          </section>
 
-          <h2 id="soporte">Soporte</h2>
-          <p>Escríbenos a <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>. Para ayudarte podemos ver tu portal en <strong>modo solo lectura</strong>: dura 30 minutos, no permite cambiar nada y queda registrado.</p>
+          <section class="doc-seccion" data-doc-seccion id="pantallas">
+            <h2>15. Pantallas públicas <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>Son pantallas que se abren en un navegador y no piden sesión: se usan en un monitor o en una tablet frente al cliente. Cada una necesita su dirección completa, con el local y su token; la consola del servidor imprime esas direcciones.</p>
+            <table class="tabla-datos">
+              <caption>Pantallas públicas y para qué sirve cada una.</caption>
+              <thead><tr><th>Pantalla</th><th>Qué muestra</th></tr></thead>
+              <tbody>
+                <tr><td><code>/pantalla-mostrador</code></td><td>La comanda en vivo del cliente y un carrusel de promociones, en la pantalla secundaria del mostrador.</td></tr>
+                <tr><td><code>/monitor-publico</code></td><td>Los pedidos listos para recoger, estilo monitor de cafetería.</td></tr>
+                <tr><td><code>/ticket</code></td><td>El ticket digital del pedido, con enlace para compartir por WhatsApp y solicitud de factura.</td></tr>
+                <tr><td><code>/menu-digital/</code></td><td>Tu carta pública, con precios y disponibilidad.</td></tr>
+              </tbody>
+            </table>
+            <div class="aviso ojo">
+              <strong>No abras estas direcciones sin el token</strong>
+              <p>La dirección incluye <code>empresa</code>, <code>sucursal</code> y un <code>token</code> firmado. Sin ellos, la pantalla se queda en un aviso en lugar de mostrar los pedidos de otro restaurante. Copia la dirección tal como la imprime la consola.</p>
+            </div>
+            <h3>Facturación (CFDI)</h3>
+            <p>Si tienes el módulo fiscal contratado, el cliente puede pedir su factura desde el ticket digital. La app valida RFC, régimen y uso de CFDI, y guarda el folio y el estado del timbrado. Si el servicio fiscal no responde, la solicitud queda pendiente y se reintenta; no se pierde.</p>
+          </section>
+
+          <section class="doc-seccion" data-doc-seccion id="respaldos">
+            <h2>16. Respaldos y restauración <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>El respaldo se hace solo, todos los días, y se guarda en el equipo servidor. No depende de que alguien se acuerde de pulsar un botón.</p>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><strong>Frecuencia:</strong> un respaldo diario; por defecto a las 3:00 de la madrugada.</li>
+              <li><strong>Si el equipo estaba apagado:</strong> al arrancar, si el último respaldo tiene más de 20 horas, se hace uno de inmediato.</li>
+              <li><strong>Retención:</strong> se conservan los 7 respaldos más recientes; los más viejos se van borrando solos.</li>
+              <li><strong>Verificación:</strong> cada respaldo lleva su huella <code>.sha256</code>. Al restaurar se comprueba, y si no coincide, la app se niega antes de tocar tus datos.</li>
+              <li><strong>Antes de una actualización:</strong> se hace un respaldo previo; si la migración falla, no se avanza a medias.</li>
+            </ul>
+            <h3>Restaurar un respaldo</h3>
+            <p>Desde la app, en <strong>Respaldos</strong>, eliges el archivo y confirmas. La app aplica el respaldo, reinicia su servidor interno y <strong>vuelve a validar tu sesión</strong>: es normal que te pida entrar de nuevo al terminar. Así nadie sigue trabajando con permisos de una sesión que ya no corresponde a los datos restaurados.</p>
+            <p>Si la app no arranca, se puede restaurar desde la línea de comandos, en el equipo servidor:</p>
+            <pre><code>python restaurar_backup.py --listar
+python restaurar_backup.py --archivo respaldo_2026-11-24.sql --recrear --si</code></pre>
+            <p>Sin <code>--archivo</code> toma el respaldo más reciente. <code>--recrear</code> vuelve a crear la base y <code>--si</code> evita la confirmación interactiva. No uses <code>--omitir-checksum</code> salvo que sepas por qué el archivo cambió.</p>
+            <h3>Restaurar una base de otro equipo</h3>
+            <p>Si la base que restauras ya trae un negocio (nombre y al menos un platillo), la app la marca como importada y el asistente de primeros pasos <strong>no vuelve a pedir el giro</strong>: entras a trabajar con tu carta y tus mesas. Para cambiar el giro, el IVA o la impresora, el asistente sigue disponible en Configuración. Una base vacía sí arranca el asistente como un alta nueva.</p>
+            <div class="aviso ojo">
+              <strong>El respaldo vive en el mismo equipo</strong>
+              <p>Un respaldo en el mismo disco no protege de un robo, un incendio o un disco dañado. Copia la carpeta de respaldos a un disco externo o a la nube de vez en cuando, y llévate una copia fuera del local.</p>
+            </div>
+          </section>
+
+          <section class="doc-seccion" data-doc-seccion id="licencia">
+            <h2>17. Licencia <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>La licencia se liga al equipo (a su HWID, un identificador del hardware) y se renueva por internet. No es un archivo que se pueda copiar a otra máquina.</p>
+            <figure class="captura" data-zoom>
+              <img src="/img/app-licencia.webp" width="1280" height="764" alt="Pantalla de licencia de la app: estado, última verificación, código del equipo y cómo contactarnos" loading="lazy">
+              <figcaption>Pantalla de licencia: estado, última verificación y el código del equipo que nos pasas para soporte.</figcaption>
+            </figure>
+            <h3>Qué significa cada estado</h3>
+            <ul>
+              <li><strong>Vigente:</strong> la app funciona con normalidad y se irá renovando sola mientras haya internet.</li>
+              <li><strong>Sin verificar:</strong> el equipo no ha visto el puente; sigue trabajando con el margen que le queda.</li>
+              <li><strong>Por vencer:</strong> quedan pocos días; conviene conectar el equipo a internet.</li>
+              <li><strong>Días de gracia:</strong> la licencia venció y tienes 7 días para renovar. Pasado ese plazo, la app deja de operar hasta regularizar.</li>
+              <li><strong>Vencida:</strong> no hay margen; hay que renovar o pedir una extensión.</li>
+            </ul>
+            <h3>Extensión sin internet (QR)</h3>
+            <p>Si el local se quedó sin internet y la licencia está por vencer, se genera una <strong>prórroga temporal firmada</strong> en QR: se escanea en la tablet y la app trabaja unos días más. Es una extensión, no una licencia nueva: cuando la tablet vuelva a ver el puente, la nube instala la licencia real y el aviso amarillo desaparece.</p>
+            <h3>Si la app dice “Clave de licencia no coincide con el hardware actual”</h3>
+            <ol>
+              <li>Copia el HWID completo que muestra la tablet (pantalla de licencia).</li>
+              <li>Compáralo con el que tiene la licencia en la consola del proveedor.</li>
+              <li>Usa <strong>Cambiar de tablet</strong> en la licencia correcta, con el código de verificación (TOTP).</li>
+              <li>No uses “Vincular equipo” para volver a pegar el HWID anterior: conecta la tablet al puente correcto y se liga sola.</li>
+            </ol>
+            <p>Si la tablet está recién instalada y nunca se ha conectado al puente, no hace falta esperar a que se ligue sola: se crea la licencia con su <strong>código de equipo</strong> o se usa <strong>Vincular equipo</strong> con ese código en la consola.</p>
+            <div class="aviso info">
+              <strong>Un HWID no puede estar en dos licencias vigentes</strong>
+              <p>Si necesitas mover la app a otro equipo, se libera con <strong>Cambiar de tablet</strong>; no se copia la licencia. Y renovar en la consola no cambia una tablet desconectada: el cambio queda pendiente hasta que esa tablet abra el puente del local.</p>
+            </div>
+          </section>
+
+          <section class="doc-seccion" data-doc-seccion id="equipo">
+            <h2>18. Equipo y permisos <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>Cada persona entra con su propio PIN. No se comparten usuarios: si alguien sale del restaurante, se desactiva su acceso y la bitácora sigue diciendo quién hizo qué.</p>
+            <table class="tabla-datos">
+              <caption>Permisos típicos por puesto; se ajustan en Roles y permisos.</caption>
+              <thead><tr><th>Puesto</th><th>Puede</th><th>No puede</th></tr></thead>
+              <tbody>
+                <tr><td>Mesero</td><td>Mesas, pedidos, extras, notas, ver avisos de cocina.</td><td>Cobrar, ver reportes, cambiar precios.</td></tr>
+                <tr><td>Cocina</td><td>Comandas, tiempos y marcar platillos listos.</td><td>Cobrar, editar la carta.</td></tr>
+                <tr><td>Caja</td><td>Cobrar, propinas, dividir cuentas, abrir y cerrar turno.</td><td>Editar la carta, ver nómina.</td></tr>
+                <tr><td>Dueño o gerente</td><td>Todo, incluido el panel, los reportes y la configuración.</td><td>—</td></tr>
+              </tbody>
+            </table>
+            <ul>
+              <li><strong>Reloj checador:</strong> con el mismo PIN, cada empleado registra entrada y salida; las horas alimentan la nómina del estado de resultados.</li>
+              <li><strong>Permisos finos:</strong> juntar mesas, dividir cuentas, aplicar descuentos, anular pedidos o ver reportes se activan por rol.</li>
+              <li><strong>Descuentos y anulaciones:</strong> piden autorización y quedan en la bitácora con el usuario que los aprobó.</li>
+              <li><strong>Altas y bajas:</strong> se hacen en Empleados; dar de baja no borra su historial de ventas.</li>
+            </ul>
+          </section>
+
+          <section class="doc-seccion" data-doc-seccion id="soporte">
+            <h2>19. Soporte <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>Escríbenos a <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>. Para resolver rápido, manda:</p>
+            <ul>
+              <li>El <strong>código de equipo</strong> que aparece en la pantalla de licencia.</li>
+              <li>Qué pasó, desde cuándo y en qué equipo (servidor, caja, cocina, portal).</li>
+              <li>Una captura de la pantalla o del mensaje de error, si se puede.</li>
+              <li>Si el problema es de impresión: marca y modelo de la impresora, y cómo está conectada.</li>
+            </ul>
+            <p>Para revisar un caso sin pedirte la contraseña, soporte puede abrir tu portal en <strong>solo lectura</strong> con un enlace de un solo uso que caduca en 2 minutos. Ese acceso no permite cobrar, cerrar mesas ni cambiar la caja, y queda registrado.</p>
+            <div class="aviso info">
+              <strong>Nunca compartas tu contraseña ni tu TOTP</strong>
+              <p>Nadie de soporte te los va a pedir. Si alguien lo hace, desconfía.</p>
+            </div>
+          </section>
+
+          <section class="doc-seccion" data-doc-seccion id="problemas">
+            <h2>20. Solución de problemas <a class="volver" href="#indice">Índice ↑</a></h2>
+            <table class="tabla-datos">
+              <caption>Los casos más comunes y qué hacer primero.</caption>
+              <thead><tr><th>Lo que ves</th><th>Qué suele ser</th><th>Qué hacer</th></tr></thead>
+              <tbody>
+                <tr><td>“Error de conexión con el servidor”</td><td>La IP del servidor cambió o el equipo está apagado.</td><td>Enciende el servidor y revisa la IP en <strong>Indicar IP del servidor</strong>.</td></tr>
+                <tr><td>“Clave de licencia no coincide con el hardware actual”</td><td>La licencia está ligada a otro HWID.</td><td>Compara el HWID y usa <strong>Cambiar de tablet</strong>; no revincules el anterior.</td></tr>
+                <tr><td>“No hay caja abierta”</td><td>No se abrió el turno.</td><td>Abre caja con el efectivo inicial y vuelve a cobrar.</td></tr>
+                <tr><td>La comanda no sale en cocina</td><td>Impresora apagada, sin papel o IP distinta.</td><td>Imprime una prueba, revisa papel y IP, y reimprime la comanda.</td></tr>
+                <tr><td>El ticket sale cortado o encimado</td><td>Ancho de papel mal configurado.</td><td>Elige 58 mm (32 columnas) u 80 mm (48 columnas) según tu rollo.</td></tr>
+                <tr><td>El portal no muestra las ventas de hoy</td><td>La tablet está apagada o sin internet.</td><td>Enciende la tablet, revisa su conexión y vuelve a abrir el portal.</td></tr>
+                <tr><td>WhatsApp aparece desconectado</td><td>La sesión del local se cerró.</td><td>Vuelve a escanear el QR en la consola; mientras, usa el enlace wa.me.</td></tr>
+                <tr><td>Un pedido aparece dos veces</td><td>Se capturó dos veces en equipos distintos.</td><td>Anula el duplicado con motivo; los reintentos de red no duplican solos.</td></tr>
+                <tr><td>No aparecen respaldos recientes</td><td>El equipo estaba apagado a la hora del respaldo.</td><td>Al arrancar se hace el catch-up; revisa la carpeta y el estado en Respaldos.</td></tr>
+                <tr><td>La tablet se queda sin espacio</td><td>Fotos, tickets o respaldos acumulados.</td><td>Borra fotos que no uses, descarga respaldos viejos a otro disco y conserva los recientes.</td></tr>
+              </tbody>
+            </table>
+            <p>Si nada de esto lo resuelve, escríbenos con el código de equipo y una captura: con eso se revisa el caso sin adivinar.</p>
+          </section>
+
+          <section class="doc-seccion" data-doc-seccion id="novedades">
+            <h2>21. Novedades <a class="volver" href="#indice">Índice ↑</a></h2>
+            <p>Lo más reciente que cambió en la app, tomado del historial de versiones.</p>
+            <ul class="novedades">
+              <li class="novedad">
+                <h3><span class="version">Nov 2026</span> mejoras de operación</h3>
+                <ul>
+                  <li>Notas rápidas en Observaciones y extras por cantidad, hasta 9.</li>
+                  <li>El corte y el cierre de caja muestran la propina completa, separada en efectivo y tarjeta.</li>
+                  <li>Orden de los grupos de la comanda configurable, arrastrando en Configuración.</li>
+                  <li>Cada restaurante vincula su propio WhatsApp escaneando el QR desde la app, con alertas y ajustes de su bot.</li>
+                  <li>La consola liga una tablet con su código de equipo aunque nunca se haya conectado.</li>
+                  <li>En cafetería, una cuenta ya cobrada admite complemento: se cobra solo la diferencia y el turno la cuenta una vez.</li>
+                  <li>Las categorías de la carta se reordenan arrastrando y el orden se respeta al tomar pedidos.</li>
+                  <li>Al restaurar una base con negocio real, el asistente ya no vuelve a pedir el giro.</li>
+                  <li>Notas rápidas y licencia funcionan igual en la PC que en la tablet.</li>
+                </ul>
+              </li>
+              <li class="novedad">
+                <h3><span class="version">1.1.1</span> septiembre de 2026</h3>
+                <ul>
+                  <li>Se verifica la huella del respaldo antes de restaurar, y se respalda antes de cualquier migración.</li>
+                  <li>Comandas por estación con impresoras duales y stock atómico en inventario.</li>
+                  <li>Caja con decimales exactos y topes en notas de crédito del CFDI.</li>
+                </ul>
+              </li>
+              <li class="novedad">
+                <h3><span class="version">1.1.0</span> julio de 2026</h3>
+                <ul>
+                  <li>Cinco plantillas de giro: taquería, restaurante formal, cafetería, dark kitchen y food truck.</li>
+                  <li>RestIA Pay, reloj checador con PIN y doble pantalla para mostrador.</li>
+                  <li>Ticket digital con WhatsApp y solicitud de factura, aviso al mesero y monitor público con tiempos por color.</li>
+                </ul>
+              </li>
+              <li class="novedad">
+                <h3><span class="version">1.0.7</span> septiembre de 2026</h3>
+                <ul>
+                  <li>Más seguridad: TLS, cierre de sesión real, PIN con bloqueo y verificación de respaldos.</li>
+                  <li>Correcciones en tickets, facturación y arranque del servidor.</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section class="doc-seccion" data-doc-seccion id="glosario">
+            <h2>22. Glosario <a class="volver" href="#indice">Índice ↑</a></h2>
+            <dl class="glosario">
+              <dt>Comanda</dt><dd>El pedido que va a cocina, sin precios, con platillos, extras y notas.</dd>
+              <dt>KDS</dt><dd>La pantalla de cocina: comandas, tiempos y estados de cada platillo.</dd>
+              <dt>Turno</dt><dd>El periodo entre abrir y cerrar la caja.</dd>
+              <dt>Corte</dt><dd>El resumen del turno: ventas por forma de pago, propinas, gastos y diferencia contra lo contado.</dd>
+              <dt>Arqueo</dt><dd>Contar el efectivo y compararlo con lo que el sistema espera.</dd>
+              <dt>Modificador</dt><dd>Un extra o variante de un platillo: tamaño, término, toppings.</dd>
+              <dt>HWID</dt><dd>El identificador del equipo al que se liga la licencia.</dd>
+              <dt>Puente</dt><dd>La conexión por internet entre el local y la nube del proveedor.</dd>
+              <dt>Extensión QR</dt><dd>Prórroga temporal firmada para seguir trabajando sin internet.</dd>
+              <dt>Outbox</dt><dd>La cola local de cambios pendientes de subir cuando vuelve la red.</dd>
+            </dl>
+          </section>
+
+          <p id="sin-resultados" hidden>No encontramos ese tema en la documentación. Prueba con otra palabra o <a href="mailto:restiasoft@gmail.com">escríbenos</a>.</p>
         </article>
       </div>
     </div>
@@ -195,12 +701,15 @@
     <div class="contenedor">
       <span>© 2026 RestIA · Punto de venta para restaurantes</span>
       <nav aria-label="Pie de página">
-        <a href="/">Inicio</a>
+        <a href="/documentacion">Documentación</a>
+        <a href="/recorrido">Recorrido</a>
         <a href="/preguntas">Preguntas frecuentes</a>
         <a href="https://app.restia.download/portal/">Portal del dueño</a>
         <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>
       </nav>
     </div>
   </footer>
+  <script src="/galeria.js?v=20261124" defer></script>
+  <script src="/documentacion.js?v=20261124" defer></script>
 </body>
 </html>
