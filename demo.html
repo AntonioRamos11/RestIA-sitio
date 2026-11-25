@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo interactiva de RestIA · prueba el punto de venta sin instalar nada</title>
+  <meta name="description" content="Demo interactiva de RestIA: abre una mesa, levanta el pedido, mándalo a cocina y cobra. Simulación con datos de ejemplo; la app real se ve en el recorrido con capturas.">
+  <link rel="canonical" href="https://restia.download/demo">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:title" content="Demo interactiva de RestIA">
+  <meta property="og:description" content="Toca el punto de venta: mesa, pedido, cocina y cobro. Sin registro y sin instalar nada.">
+  <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/estilos.css?v=20261125">
+  <script src="/demo.js?v=20261125" defer></script>
+</head>
+<body>
+  <header class="barra" id="cerrar">
+    <div class="contenedor">
+      <a class="marca" href="/" aria-label="RestIA, inicio">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0891b2"/><path d="M10 23V9h6.2c3 0 5 1.8 5 4.4 0 2-1.1 3.4-2.9 4l3.4 5.6h-3.3l-3-5.2H13V23zm3-7.7h3c1.4 0 2.2-.7 2.2-1.9s-.8-1.9-2.2-1.9h-3z" fill="#fff"/></svg>
+        RestIA
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="/#la-app">La app</a>
+        <a href="/#panel">Administración</a>
+        <a href="/#funciones">Funciones</a>
+        <a href="/recorrido">Recorrido</a>
+        <a href="/demo" aria-current="page">Demo</a>
+        <a href="/documentacion">Documentación</a>
+        <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
+        <a class="boton principal" href="/#contacto">Pide una demostración</a>
+      </nav>
+      <a class="boton-menu" href="#menu" aria-label="Abrir menú" aria-controls="menu">Menú</a>
+      <div class="menu-movil" id="menu">
+        <a class="velo" href="#cerrar" aria-label="Cerrar menú" tabindex="-1"></a>
+        <nav aria-label="Principal (teléfono)">
+          <a class="cerrar" href="#cerrar" aria-label="Cerrar menú">Cerrar ✕</a>
+          <a href="/">Inicio</a>
+          <a href="/#la-app">La app</a>
+          <a href="/#panel">Panel de administración</a>
+          <a href="/recorrido">Recorrido</a>
+          <a href="/demo">Demo interactiva</a>
+          <a href="/documentacion">Documentación</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+          <a href="https://app.restia.download/portal/">Entrar al portal</a>
+          <a href="/#contacto">Pide una demostración</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pagina">
+    <div class="contenedor">
+      <p class="migaja"><a href="/">Inicio</a> <span aria-hidden="true">/</span> Demo</p>
+      <h1>Pruébala sin instalar nada</h1>
+      <p class="subtitulo">Una simulación del punto de venta para que toques el flujo completo: abre una mesa, levanta el pedido, mándalo a cocina y cobra. La app real, con sus capturas, está en el <a href="/recorrido">recorrido</a>.</p>
+      <div class="aviso info">
+        <strong>Es una simulación con datos de ejemplo</strong>
+        <p>No guarda nada ni se conecta con la app: los platillos, precios y ventas son inventados para que practiques. Si quieres ver la app de verdad, mira las <a href="/recorrido">capturas</a> o pide una demostración.</p>
+      </div>
+
+      <section class="demo" aria-label="Demo interactiva del punto de venta">
+        <div class="demo-barra">
+          <p class="demo-marca"><span class="demo-logo">RestIA</span> Punto de venta</p>
+          <div class="demo-barra-acciones">
+            <span class="demo-pill">Datos de ejemplo</span>
+            <button type="button" class="demo-boton demo-boton-chico" id="demo-reiniciar">Reiniciar</button>
+          </div>
+        </div>
+
+        <div class="demo-cuerpo">
+          <section class="demo-panel" aria-labelledby="demo-salon-titulo">
+            <h2 id="demo-salon-titulo" class="demo-titulo">Salón</h2>
+            <div class="demo-mesas" id="demo-mesas"></div>
+            <p class="demo-leyenda"><i class="demo-punto" aria-hidden="true"></i>Libre <i class="demo-punto demo-punto-rojo" aria-hidden="true"></i>Ocupada</p>
+            <p class="demo-pista" id="demo-pista-salon">Toca una mesa para abrir su cuenta.</p>
+          </section>
+
+          <section class="demo-panel demo-panel-pedido" aria-labelledby="demo-pedido-titulo">
+            <div class="demo-pedido-cabeza">
+              <h2 id="demo-pedido-titulo" class="demo-titulo">Sin mesa</h2>
+              <span class="demo-total-mini" id="demo-total-mini">$0.00</span>
+            </div>
+            <div class="demo-categorias" id="demo-categorias" role="group" aria-label="Categorías de la carta"></div>
+            <div class="demo-productos" id="demo-productos"></div>
+            <div class="demo-lineas" id="demo-lineas">
+              <p class="demo-vacio">Elige una mesa y toca un producto para empezar.</p>
+            </div>
+            <div class="demo-notas">
+              <span class="demo-etiqueta-chica">Notas rápidas</span>
+              <div class="demo-chips" id="demo-chips"></div>
+            </div>
+            <div class="demo-pie">
+              <div class="demo-totales"><span>Total</span><strong id="demo-total">$0.00</strong></div>
+              <div class="demo-pie-botones">
+                <button type="button" class="demo-boton" id="demo-enviar" disabled>Enviar a cocina</button>
+                <button type="button" class="demo-boton demo-principal" id="demo-cobrar" disabled>Cobrar</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="demo-panel" aria-labelledby="demo-cocina-titulo">
+            <h2 id="demo-cocina-titulo" class="demo-titulo">Cocina <span class="demo-badge" id="demo-cocina-cuenta">0</span></h2>
+            <div id="demo-cocina"><p class="demo-vacio">Las comandas que mandes aparecen aquí.</p></div>
+          </section>
+        </div>
+
+        <div class="demo-corte">
+          <h2 class="demo-titulo">Corte del día <span class="demo-etiqueta-chica">ejemplo</span></h2>
+          <dl class="demo-metricas">
+            <div><dt>Ventas</dt><dd id="demo-m-ventas">0</dd></div>
+            <div><dt>Total</dt><dd id="demo-m-total">$0.00</dd></div>
+            <div><dt>Propinas</dt><dd id="demo-m-propinas">$0.00</dd></div>
+            <div><dt>Efectivo</dt><dd id="demo-m-efectivo">$0.00</dd></div>
+            <div><dt>Tarjeta</dt><dd id="demo-m-tarjeta">$0.00</dd></div>
+          </dl>
+          <p class="demo-estado" id="demo-estado" role="status">Listo para empezar.</p>
+        </div>
+      </section>
+
+      <h2>Qué puedes probar</h2>
+      <ul>
+        <li><strong>Mesas y para llevar:</strong> abre una cuenta, cambia de mesa y vuelve a ella sin perder el pedido.</li>
+        <li><strong>Cantidades:</strong> suma o resta con los botones; el total y el corte se actualizan solos.</li>
+        <li><strong>Notas rápidas:</strong> “Sin azúcar” o “Para llevar” quedan en la comanda, igual que en la app.</li>
+        <li><strong>Cocina y cobro:</strong> manda la comanda, márcala lista, cobra en efectivo o tarjeta y mira el cambio.</li>
+      </ul>
+      <p class="acciones centro"><a class="boton secundario" href="/recorrido">Ver las capturas reales de la app</a></p>
+    </div>
+  </main>
+
+  <dialog class="demo-dialogo" id="demo-cobro" aria-labelledby="demo-cobro-titulo">
+    <form method="dialog" id="demo-cobro-form">
+      <h2 id="demo-cobro-titulo">Cobrar</h2>
+      <p class="demo-dialogo-mesa" id="demo-cobro-mesa">Mesa 1</p>
+      <p class="demo-fila"><span>Cuenta</span><strong id="demo-cobro-cuenta">$0.00</strong></p>
+      <fieldset class="demo-opciones">
+        <legend>Propina</legend>
+        <div class="demo-botones-fila" id="demo-propinas">
+          <button type="button" class="demo-boton demo-boton-chico" data-propina="0" aria-pressed="true">Sin propina</button>
+          <button type="button" class="demo-boton demo-boton-chico" data-propina="10" aria-pressed="false">10 %</button>
+          <button type="button" class="demo-boton demo-boton-chico" data-propina="15" aria-pressed="false">15 %</button>
+        </div>
+      </fieldset>
+      <p class="demo-fila"><span>Total con propina</span><strong id="demo-cobro-total">$0.00</strong></p>
+      <fieldset class="demo-opciones">
+        <legend>Forma de pago</legend>
+        <div class="demo-botones-fila">
+          <label class="demo-radio"><input type="radio" name="demo-metodo" value="efectivo" checked> Efectivo</label>
+          <label class="demo-radio"><input type="radio" name="demo-metodo" value="tarjeta"> Tarjeta</label>
+        </div>
+      </fieldset>
+      <p class="demo-fila" id="demo-efectivo-fila"><label for="demo-recibido">Recibido</label><input id="demo-recibido" type="number" inputmode="decimal" min="0" step="0.5" value="0"></p>
+      <p class="demo-fila"><span>Cambio</span><strong id="demo-cambio">$0.00</strong></p>
+      <p class="demo-error" id="demo-cobro-error" role="alert" hidden></p>
+      <div class="demo-dialogo-botones">
+        <button type="button" class="demo-boton" id="demo-cobro-cancelar">Cancelar</button>
+        <button type="button" class="demo-boton demo-principal" id="demo-cobro-ok">Cobrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>RestIA</strong> · punto de venta para restaurantes y cafeterías.</p>
+      <nav aria-label="Pie">
+        <a href="/">Inicio</a>
+        <a href="/recorrido">Recorrido</a>
+        <a href="/demo">Demo</a>
+        <a href="/documentacion">Documentación</a>
+        <a href="/preguntas">Preguntas frecuentes</a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+      <p class="legal">© 2026 RestIA. Hecho en México.</p>
+    </div>
+  </footer>
+</body>
+</html>
