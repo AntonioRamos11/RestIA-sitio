@@ -911,3 +911,106 @@ pre code { background: none; border: 0; padding: 0; }
   .chat-telefono { width: 100%; max-width: 430px; }
   .chat-mensajes { max-height: 300px; }
 }
+
+/* ── Teléfono: remates de tamaño, tacto y desbordes ─────────────────── */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overflow-wrap: break-word; }
+
+/* Enlace para saltar el menú con el teclado. */
+.saltar {
+  position: absolute; left: 12px; top: -60px; z-index: 100;
+  padding: 10px 16px; border-radius: 0 0 12px 12px;
+  background: var(--acento); color: var(--acento-texto); font-weight: 700; text-decoration: none;
+}
+.saltar:focus { top: 0; }
+
+@media (max-width: 1080px) {
+  .marca { min-height: 42px; }
+  .boton-menu { display: inline-flex; align-items: center; min-height: 42px; padding: 10px 16px; }
+  .menu-movil nav {
+    top: 68px; left: 8px; right: 8px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+  .menu-movil nav a { min-height: 48px; }
+  .menu-movil nav a.cerrar { min-height: 40px; }
+}
+
+footer nav a { display: inline-flex; align-items: center; min-height: 32px; }
+
+@media (max-width: 900px) {
+  .doc { gap: 24px; }
+  .indice { max-height: 42vh; overflow-y: auto; overscroll-behavior: contain; }
+  .indice strong {
+    position: sticky; top: 0; z-index: 1; padding: 4px 0;
+    background: var(--superficie);
+  }
+}
+
+@media (max-width: 760px) {
+  .tour-controles button { min-height: 44px; }
+  .tour-pie { padding: 12px 14px; }
+}
+
+@media (max-width: 700px) {
+  .demo-stepper button { width: 34px; height: 34px; }
+  .demo-chip { min-height: 32px; padding: 7px 10px; font-size: 11.5px; }
+  .demo-volver { min-height: 40px; padding: 8px 10px; }
+  .demo-boton-chico { min-height: 38px; }
+  .chat-opcion { min-height: 38px; padding: 8px 12px; font-size: 12px; }
+}
+
+@media (max-width: 560px) {
+  h1 { font-size: clamp(30px, 8.6vw, 38px); }
+  .heroe h1 { font-size: clamp(32px, 9vw, 42px); }
+  .entrada { font-size: 17px; }
+  .subtitulo { font-size: 16.5px; }
+  .pagina { padding: 32px 0 56px; }
+  .indice { max-height: 36vh; }
+  .glosario { grid-template-columns: 1fr; gap: 2px 0; }
+  .glosario dt { margin-top: 10px; }
+  .tabla-datos { display: block; overflow-x: auto; }
+  .visor { padding: 10px; gap: 8px; }
+  .visor-figura img { max-height: 56vh; }
+  .visor-cerrar { min-height: 40px; }
+  .visor-nav button { flex: 1; min-height: 44px; }
+  .demo-dialogo { padding: 16px; }
+  .demo-dialogo-botones { flex-direction: column-reverse; }
+  .demo-dialogo-botones .demo-boton { width: 100%; }
+  .demo-fila input { width: 110px; }
+  .chat-telefono { min-height: 0; }
+  .chat-mensajes { max-height: 300px; }
+}
+
+@media (max-width: 420px) {
+  .contenedor { width: min(1120px, 100% - 28px); }
+  .boton { white-space: normal; text-align: center; }
+  .acciones { gap: 10px; }
+  .demo-vista { padding: 10px; }
+  .demo-barra { padding: 8px 10px; }
+  .demo-rail { padding: 4px; }
+  .demo-destino { font-size: 10px; }
+  .demo-producto { min-height: 84px; padding: 8px 10px; }
+  .demo-prod-nombre { font-size: 13px; }
+  .demo-carrito { padding: 10px; }
+}
+
+@media (max-width: 360px) {
+  .contenedor { width: min(1120px, 100% - 24px); }
+  .demo-mesas { gap: 6px; }
+  .whatsapp-grid { gap: 12px; }
+}
+
+/* Controles de la demo: cómodos al tacto también en tablet. */
+.demo-boton-chico { min-height: 34px; }
+.chat-opcion { min-height: 38px; padding: 8px 12px; font-size: 12px; }
+.doc-seccion .volver { padding: 6px 4px; }
+
+@media (max-width: 900px) {
+  /* En columna, la carta y la cuenta ocupan todo el ancho. */
+  .demo-pedido-cuerpo { align-items: stretch; }
+}
+
+@media (max-width: 480px) {
+  /* Dos columnas de productos: se ve más carta sin hacer scroll eterno. */
+  .demo-productos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
