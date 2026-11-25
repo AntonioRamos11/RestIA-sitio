@@ -12,8 +12,8 @@
   <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/estilos.css?v=20261125">
-  <script src="/demo.js?v=20261125" defer></script>
+  <link rel="stylesheet" href="/estilos.css?v=20261126">
+  <script src="/demo.js?v=20261126" defer></script>
 </head>
 <body>
   <header class="barra" id="cerrar">
@@ -62,61 +62,105 @@
       </div>
 
       <section class="demo" aria-label="Demo interactiva del punto de venta">
-        <div class="demo-barra">
-          <p class="demo-marca"><span class="demo-logo">RestIA</span> Punto de venta</p>
-          <div class="demo-barra-acciones">
-            <span class="demo-pill">Datos de ejemplo</span>
-            <button type="button" class="demo-boton demo-boton-chico" id="demo-reiniciar">Reiniciar</button>
-          </div>
-        </div>
+        <div class="demo-ventana">
+          <aside class="demo-rail" aria-label="Módulos de la demo">
+            <span class="demo-rail-marca" aria-hidden="true">R</span>
+            <button type="button" class="demo-destino" data-vista="mesas" aria-current="page">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+              Mesas
+            </button>
+            <button type="button" class="demo-destino" data-vista="pedido">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/></svg>
+              Pedido
+            </button>
+            <button type="button" class="demo-destino" data-vista="cocina">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c3.4 3.1 5.4 6.3 5.4 9.6a5.4 5.4 0 0 1-10.8 0C6.6 8.3 8.6 5.1 12 2z"/></svg>
+              Cocina <span class="demo-badge" id="demo-cocina-cuenta">0</span>
+            </button>
+            <button type="button" class="demo-destino" data-vista="caja">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3 7h18v13H3zM9 10h6v2H9zM10.6 13.6h2.8a2 2 0 0 1 0 4h-2.8a2 2 0 0 1 0-4z"/></svg>
+              Caja
+            </button>
+            <span class="demo-rail-pie" title="Sin conexión: todo es local">● En línea</span>
+          </aside>
 
-        <div class="demo-cuerpo">
-          <section class="demo-panel" aria-labelledby="demo-salon-titulo">
-            <h2 id="demo-salon-titulo" class="demo-titulo">Salón</h2>
-            <div class="demo-mesas" id="demo-mesas"></div>
-            <p class="demo-leyenda"><i class="demo-punto" aria-hidden="true"></i>Libre <i class="demo-punto demo-punto-rojo" aria-hidden="true"></i>Ocupada</p>
-            <p class="demo-pista" id="demo-pista-salon">Toca una mesa para abrir su cuenta.</p>
-          </section>
+          <div class="demo-main">
+            <header class="demo-barra">
+              <h2 class="demo-titulo-app" id="demo-titulo-app">Mesas del Salón</h2>
+              <div class="demo-barra-acciones">
+                <span class="demo-pill">Datos de ejemplo</span>
+                <button type="button" class="demo-boton demo-boton-chico" id="demo-reiniciar">Reiniciar</button>
+              </div>
+            </header>
 
-          <section class="demo-panel demo-panel-pedido" aria-labelledby="demo-pedido-titulo">
-            <div class="demo-pedido-cabeza">
-              <h2 id="demo-pedido-titulo" class="demo-titulo">Sin mesa</h2>
-              <span class="demo-total-mini" id="demo-total-mini">$0.00</span>
+            <div class="demo-vista" data-panel="mesas">
+              <div class="demo-mesas-cabeza">
+                <p class="demo-leyenda"><i class="demo-punto" aria-hidden="true"></i>Libre <i class="demo-punto demo-punto-rojo" aria-hidden="true"></i>Ocupada</p>
+                <span class="demo-etiqueta-chica">Salón principal · 7 mesas</span>
+              </div>
+              <div class="demo-mesas" id="demo-mesas"></div>
+              <p class="demo-pista" id="demo-pista-salon">Toca una mesa para abrir su cuenta.</p>
             </div>
-            <div class="demo-categorias" id="demo-categorias" role="group" aria-label="Categorías de la carta"></div>
-            <div class="demo-productos" id="demo-productos"></div>
-            <div class="demo-lineas" id="demo-lineas">
-              <p class="demo-vacio">Elige una mesa y toca un producto para empezar.</p>
-            </div>
-            <div class="demo-notas">
-              <span class="demo-etiqueta-chica">Notas rápidas</span>
-              <div class="demo-chips" id="demo-chips"></div>
-            </div>
-            <div class="demo-pie">
-              <div class="demo-totales"><span>Total</span><strong id="demo-total">$0.00</strong></div>
-              <div class="demo-pie-botones">
-                <button type="button" class="demo-boton" id="demo-enviar" disabled>Enviar a cocina</button>
-                <button type="button" class="demo-boton demo-principal" id="demo-cobrar" disabled>Cobrar</button>
+
+            <div class="demo-vista" data-panel="pedido" hidden>
+              <div class="demo-pedido-cabeza">
+                <button type="button" class="demo-volver" id="demo-volver">‹ Mesas</button>
+                <h3 class="demo-mesa-activa-nombre" id="demo-pedido-titulo">Sin mesa</h3>
+                <span class="demo-total-mini" id="demo-total-mini">$0.00</span>
+              </div>
+              <div class="demo-pedido-cuerpo">
+                <nav class="demo-categorias" id="demo-categorias" aria-label="Categorías de la carta"></nav>
+                <div class="demo-productos-panel">
+                  <p class="demo-etiqueta-chica" id="demo-categoria-actual">Bebidas</p>
+                  <div class="demo-productos" id="demo-productos"></div>
+                </div>
+                <aside class="demo-carrito" aria-labelledby="demo-carrito-titulo">
+                  <h4 id="demo-carrito-titulo" class="demo-etiqueta-chica">Pedido</h4>
+                  <div class="demo-lineas" id="demo-lineas">
+                    <p class="demo-vacio">Toca un producto para agregarlo.</p>
+                  </div>
+                  <div class="demo-notas">
+                    <span class="demo-etiqueta-chica">Notas rápidas</span>
+                    <div class="demo-chips" id="demo-chips"></div>
+                  </div>
+                  <div class="demo-pie">
+                    <div class="demo-totales"><span>Total</span><strong id="demo-total">$0.00</strong></div>
+                    <div class="demo-pie-botones">
+                      <button type="button" class="demo-boton" id="demo-enviar" disabled>Enviar a cocina</button>
+                      <button type="button" class="demo-boton demo-principal" id="demo-cobrar" disabled>Cobrar</button>
+                    </div>
+                  </div>
+                </aside>
               </div>
             </div>
-          </section>
 
-          <section class="demo-panel" aria-labelledby="demo-cocina-titulo">
-            <h2 id="demo-cocina-titulo" class="demo-titulo">Cocina <span class="demo-badge" id="demo-cocina-cuenta">0</span></h2>
-            <div id="demo-cocina"><p class="demo-vacio">Las comandas que mandes aparecen aquí.</p></div>
-          </section>
-        </div>
+            <div class="demo-vista" data-panel="cocina" hidden>
+              <div class="demo-mesas-cabeza">
+                <p class="demo-etiqueta-chica">Comandas activas</p>
+                <span class="demo-etiqueta-chica" id="demo-cocina-resumen">0 pendientes</span>
+              </div>
+              <div class="demo-comandas" id="demo-cocina">
+                <p class="demo-vacio">Las comandas que mandes aparecen aquí.</p>
+              </div>
+            </div>
 
-        <div class="demo-corte">
-          <h2 class="demo-titulo">Corte del día <span class="demo-etiqueta-chica">ejemplo</span></h2>
-          <dl class="demo-metricas">
-            <div><dt>Ventas</dt><dd id="demo-m-ventas">0</dd></div>
-            <div><dt>Total</dt><dd id="demo-m-total">$0.00</dd></div>
-            <div><dt>Propinas</dt><dd id="demo-m-propinas">$0.00</dd></div>
-            <div><dt>Efectivo</dt><dd id="demo-m-efectivo">$0.00</dd></div>
-            <div><dt>Tarjeta</dt><dd id="demo-m-tarjeta">$0.00</dd></div>
-          </dl>
-          <p class="demo-estado" id="demo-estado" role="status">Listo para empezar.</p>
+            <div class="demo-vista" data-panel="caja" hidden>
+              <div class="demo-mesas-cabeza">
+                <p class="demo-etiqueta-chica">Corte del día <span class="demo-etiqueta-chica">(ejemplo)</span></p>
+                <span class="demo-etiqueta-chica" id="demo-caja-turno">Turno abierto</span>
+              </div>
+              <dl class="demo-metricas">
+                <div><dt>Ventas</dt><dd id="demo-m-ventas">0</dd></div>
+                <div><dt>Total</dt><dd id="demo-m-total">$0.00</dd></div>
+                <div><dt>Propinas</dt><dd id="demo-m-propinas">$0.00</dd></div>
+                <div><dt>Efectivo</dt><dd id="demo-m-efectivo">$0.00</dd></div>
+                <div><dt>Tarjeta</dt><dd id="demo-m-tarjeta">$0.00</dd></div>
+              </dl>
+              <p class="demo-pista">En la app, aquí cierras el turno y ves el arqueo. En la demo solo se acumulan las ventas que cobres.</p>
+            </div>
+
+            <p class="demo-estado" id="demo-estado" role="status">Listo para empezar.</p>
+          </div>
         </div>
       </section>
 

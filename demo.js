@@ -1,96 +1,179 @@
-/* RestIA · demo interactiva del punto de venta.
-   Simulación local con datos de ejemplo: no guarda nada ni habla con la app. */
+/* Demo interactiva de RestIA — simulación local, sin datos reales.
+   Imita el armazón de la app: barra de módulos, salón, pedido, cocina y caja. */
 (() => {
   'use strict';
 
-  const PRODUCTOS = [
-    { id: 'cafe', nombre: 'Café americano', precio: 35, cat: 'Bebidas' },
-    { id: 'capu', nombre: 'Capuchino', precio: 48, cat: 'Bebidas' },
-    { id: 'latte', nombre: 'Latte', precio: 52, cat: 'Bebidas' },
-    { id: 'chai', nombre: 'Té chai', precio: 50, cat: 'Bebidas' },
-    { id: 'croissant', nombre: 'Croissant', precio: 38, cat: 'Panadería' },
-    { id: 'concha', nombre: 'Concha', precio: 22, cat: 'Panadería' },
-    { id: 'masa', nombre: 'Pan de masa madre', precio: 45, cat: 'Panadería' },
-    { id: 'sandwich', nombre: 'Sándwich de pavo', precio: 78, cat: 'Comida' },
-    { id: 'cesar', nombre: 'Ensalada César', precio: 95, cat: 'Comida' },
-    { id: 'bowl', nombre: 'Bowl de fruta', precio: 65, cat: 'Comida' },
-  ];
-  const CATEGORIAS = ['Bebidas', 'Panadería', 'Comida'];
-  const NOTAS = ['Sin azúcar', 'Sin crema', 'Para llevar', 'Bien caliente'];
-  const MESAS = [
-    { id: 'm1', nombre: 'Mesa 1' },
-    { id: 'm2', nombre: 'Mesa 2' },
-    { id: 'm3', nombre: 'Mesa 3' },
-    { id: 'm4', nombre: 'Mesa 4' },
-    { id: 'm5', nombre: 'Mesa 5' },
-    { id: 'm6', nombre: 'Mesa 6' },
-    { id: 'llevar', nombre: 'Para llevar' },
+  const el = {
+    tituloApp: document.getElementById('demo-titulo-app'),
+    rail: [...document.querySelectorAll('.demo-destino')],
+    paneles: [...document.querySelectorAll('.demo-vista')],
+    mesas: document.getElementById('demo-mesas'),
+    pistaSalon: document.getElementById('demo-pista-salon'),
+    categorias: document.getElementById('demo-categorias'),
+    categoriaActual: document.getElementById('demo-categoria-actual'),
+    productos: document.getElementById('demo-productos'),
+    lineas: document.getElementById('demo-lineas'),
+    chips: document.getElementById('demo-chips'),
+    total: document.getElementById('demo-total'),
+    totalMini: document.getElementById('demo-total-mini'),
+    enviar: document.getElementById('demo-enviar'),
+    cobrar: document.getElementById('demo-cobrar'),
+    reiniciar: document.getElementById('demo-reiniciar'),
+    volver: document.getElementById('demo-volver'),
+    pedidoTitulo: document.getElementById('demo-pedido-titulo'),
+    cocina: document.getElementById('demo-cocina'),
+    cocinaCuenta: document.getElementById('demo-cocina-cuenta'),
+    cocinaResumen: document.getElementById('demo-cocina-resumen'),
+    estado: document.getElementById('demo-estado'),
+    m: {
+      ventas: document.getElementById('demo-m-ventas'),
+      total: document.getElementById('demo-m-total'),
+      propinas: document.getElementById('demo-m-propinas'),
+      efectivo: document.getElementById('demo-m-efectivo'),
+      tarjeta: document.getElementById('demo-m-tarjeta'),
+    },
+    dialog: document.getElementById('demo-cobro'),
+    cobroMesa: document.getElementById('demo-cobro-mesa'),
+    cobroCuenta: document.getElementById('demo-cobro-cuenta'),
+    cobroTotal: document.getElementById('demo-cobro-total'),
+    recibido: document.getElementById('demo-recibido'),
+    cambio: document.getElementById('demo-cambio'),
+    efectivoFila: document.getElementById('demo-efectivo-fila'),
+    propinas: [...document.querySelectorAll('[data-propina]')],
+    metodos: [...document.querySelectorAll('input[name="demo-metodo"]')],
+    error: document.getElementById('demo-cobro-error'),
+    cancelar: document.getElementById('demo-cobro-cancelar'),
+    ok: document.getElementById('demo-cobro-ok'),
+  };
+
+  const CATEGORIAS = [
+    { id: 'bebidas', nombre: 'Bebidas' },
+    { id: 'comida', nombre: 'Comida' },
+    { id: 'postres', nombre: 'Postres' },
   ];
 
-  const mxn = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
-  const dinero = (n) => mxn.format(Math.round(n * 100) / 100);
+  const PRODUCTOS = [
+    { id: 'cafe', nombre: 'Café americano', precio: 35, categoria: 'bebidas' },
+    { id: 'capu', nombre: 'Capuchino', precio: 48, categoria: 'bebidas' },
+    { id: 'latte', nombre: 'Latte', precio: 52, categoria: 'bebidas' },
+    { id: 'limonada', nombre: 'Limonada', precio: 38, categoria: 'bebidas' },
+    { id: 'chilaquiles', nombre: 'Chilaquiles verdes', precio: 95, categoria: 'comida' },
+    { id: 'molletes', nombre: 'Molletes', precio: 68, categoria: 'comida' },
+    { id: 'sandwich', nombre: 'Sándwich de pollo', precio: 85, categoria: 'comida' },
+    { id: 'pastel', nombre: 'Pastel de chocolate', precio: 55, categoria: 'postres' },
+    { id: 'flan', nombre: 'Flan napolitano', precio: 45, categoria: 'postres' },
+    { id: 'galletas', nombre: 'Galletas de avena', precio: 28, categoria: 'postres' },
+  ];
+
+  const NOTAS = ['Sin azúcar', 'Sin crema', 'Para llevar', 'Bien caliente'];
 
   const estado = {
-    mesas: MESAS.map((m) => ({ ...m, lineas: [], notas: new Set(), pendiente: false })),
-    cocina: [],
-    ventas: [],
-    activa: null,
-    categoria: 'Bebidas',
+    vista: 'mesas',
+    mesaId: null,
+    categoria: 'bebidas',
     propina: 0,
     metodo: 'efectivo',
     recibidoTocado: false,
+    mesas: [],
+    cocina: [],
+    ventas: [],
+    folio: 1,
   };
 
-  const $ = (id) => document.getElementById(id);
-  const el = {
-    mesas: $('demo-mesas'),
-    categorias: $('demo-categorias'),
-    productos: $('demo-productos'),
-    lineas: $('demo-lineas'),
-    chips: $('demo-chips'),
-    titulo: $('demo-pedido-titulo'),
-    total: $('demo-total'),
-    totalMini: $('demo-total-mini'),
-    enviar: $('demo-enviar'),
-    cobrar: $('demo-cobrar'),
-    cocina: $('demo-cocina'),
-    cocinaCuenta: $('demo-cocina-cuenta'),
-    estado: $('demo-estado'),
-    reiniciar: $('demo-reiniciar'),
-    dialogo: $('demo-cobro'),
-    cobroMesa: $('demo-cobro-mesa'),
-    cobroCuenta: $('demo-cobro-cuenta'),
-    cobroTotal: $('demo-cobro-total'),
-    propinas: $('demo-propinas'),
-    recibido: $('demo-recibido'),
-    efectivoFila: $('demo-efectivo-fila'),
-    cambio: $('demo-cambio'),
-    error: $('demo-cobro-error'),
-    cobroOk: $('demo-cobro-ok'),
-    cobroCancelar: $('demo-cobro-cancelar'),
-  };
+  const dinero = (n) => new Intl.NumberFormat('es-MX', {
+    style: 'currency', currency: 'MXN', minimumFractionDigits: 2,
+  }).format(n);
 
-  const mesa = () => estado.mesas.find((m) => m.id === estado.activa) || null;
+  const aviso = (texto) => { el.estado.textContent = texto; };
 
-  const subtotal = () => {
-    const m = mesa();
-    return m ? m.lineas.reduce((s, l) => s + l.precio * l.cant, 0) : 0;
-  };
-
-  function avisar(texto) {
-    el.estado.textContent = texto;
+  function reiniciar() {
+    estado.mesas = [
+      { id: 'm1', nombre: 'Mesa 1', lineas: [], notas: [], enviado: 0 },
+      { id: 'm2', nombre: 'Mesa 2', lineas: [], notas: [], enviado: 0 },
+      { id: 'm3', nombre: 'Mesa 3', lineas: [], notas: [], enviado: 0 },
+      { id: 'm4', nombre: 'Mesa 4', lineas: [], notas: [], enviado: 0 },
+      { id: 'm5', nombre: 'Mesa 5', lineas: [], notas: [], enviado: 0 },
+      { id: 'm6', nombre: 'Mesa 6', lineas: [], notas: [], enviado: 0 },
+      { id: 'llevar', nombre: 'Para llevar', lineas: [], notas: [], enviado: 0 },
+    ];
+    estado.cocina = [];
+    estado.ventas = [];
+    estado.folio = 1;
+    estado.mesaId = null;
+    estado.categoria = 'bebidas';
+    estado.propina = 0;
+    estado.metodo = 'efectivo';
+    estado.recibidoTocado = false;
+    estado.vista = 'mesas';
+    render();
+    aviso('Demo reiniciada. Elige una mesa para empezar.');
   }
 
+  function mesaActual() {
+    return estado.mesas.find((m) => m.id === estado.mesaId) || null;
+  }
+
+  function articulos(m) {
+    return m.lineas.reduce((s, l) => s + l.cant, 0);
+  }
+
+  function subtotal(m) {
+    return m.lineas.reduce((s, l) => s + l.precio * l.cant, 0);
+  }
+  const subtotalActual = () => (mesaActual() ? subtotal(mesaActual()) : 0);
+
+  function totalConPropina() {
+    const base = subtotalActual();
+    return Math.round((base + base * (estado.propina / 100)) * 100) / 100;
+  }
+
+  /* ── Navegación entre vistas ─────────────────────────────────────────── */
+  function setVista(vista, mensaje) {
+    if (vista === 'pedido' && !mesaActual()) {
+      vista = 'mesas';
+      mensaje = 'Elige una mesa (o “Para llevar”) para levantar el pedido.';
+    }
+    estado.vista = vista;
+    el.rail.forEach((b) => {
+      const activa = b.dataset.vista === vista;
+      if (activa) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    el.paneles.forEach((p) => { p.hidden = p.dataset.panel !== vista; });
+    el.tituloApp.textContent = {
+      mesas: 'Mesas del Salón',
+      pedido: mesaActual() ? 'Pedido · ' + mesaActual().nombre : 'Pedido',
+      cocina: 'Cocina',
+      caja: 'Caja',
+    }[vista];
+    if (mensaje) aviso(mensaje);
+    if (vista === 'pedido') {
+      renderCategorias();
+      renderProductos();
+      renderLineas();
+    }
+    if (vista === 'cocina') renderCocina();
+    if (vista === 'caja') renderCaja();
+  }
+
+  function abrirMesa(id) {
+    estado.mesaId = id;
+    setVista('pedido');
+    aviso(mesaActual().nombre + ' abierta. Toca un producto para agregarlo.');
+  }
+
+  /* ── Salón ───────────────────────────────────────────────────────────── */
   function renderMesas() {
-    el.mesas.textContent = '';
-    estado.mesas.forEach((m) => {
+    el.mesas.replaceChildren();
+    for (const m of estado.mesas) {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'demo-mesa';
       b.dataset.mesa = m.id;
-      b.setAttribute('aria-pressed', String(estado.activa === m.id));
-      if (m.lineas.length) b.classList.add('demo-mesa-ocupada');
-      if (estado.activa === m.id) b.classList.add('demo-mesa-activa');
+      const ocupada = m.lineas.length > 0;
+      if (ocupada) b.classList.add('demo-mesa-ocupada');
+      if (m.id === estado.mesaId) b.classList.add('demo-mesa-activa');
+      b.setAttribute('aria-label', m.nombre + (ocupada ? ': ' + dinero(subtotal(m)) + ', ' + articulos(m) + ' artículos' : ': libre'));
       const punto = document.createElement('i');
       punto.className = 'demo-punto';
       punto.setAttribute('aria-hidden', 'true');
@@ -98,137 +181,295 @@
       nombre.className = 'demo-mesa-nombre';
       nombre.textContent = m.nombre;
       const detalle = document.createElement('small');
-      if (m.lineas.length) {
-        const n = m.lineas.reduce((s, l) => s + l.cant, 0);
-        const importe = m.lineas.reduce((s, l) => s + l.precio * l.cant, 0);
-        detalle.textContent = dinero(importe) + ' · ' + n + (n === 1 ? ' artículo' : ' artículos');
-      } else {
-        detalle.textContent = 'Libre';
-      }
+      detalle.textContent = ocupada
+        ? dinero(subtotal(m)) + ' · ' + articulos(m) + (articulos(m) === 1 ? ' artículo' : ' artículos')
+        : 'Libre';
       b.append(punto, nombre, detalle);
+      b.addEventListener('click', () => abrirMesa(m.id));
       el.mesas.append(b);
-    });
-    const m = mesa();
-    el.titulo.textContent = m ? m.nombre : 'Sin mesa';
-    $('demo-pista-salon').textContent = m
-      ? 'La cuenta abierta está en ' + m.nombre + '.'
-      : 'Toca una mesa para abrir su cuenta.';
+    }
   }
 
+  /* ── Pedido ──────────────────────────────────────────────────────────── */
   function renderCategorias() {
-    el.categorias.textContent = '';
-    CATEGORIAS.forEach((cat) => {
+    el.categorias.replaceChildren();
+    for (const c of CATEGORIAS) {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'demo-categoria';
-      b.dataset.categoria = cat;
-      b.setAttribute('aria-pressed', String(estado.categoria === cat));
-      b.textContent = cat;
+      b.dataset.categoria = c.id;
+      b.textContent = c.nombre;
+      if (c.id === estado.categoria) b.setAttribute('aria-current', 'true');
+      b.addEventListener('click', () => {
+        estado.categoria = c.id;
+        renderCategorias();
+        renderProductos();
+      });
       el.categorias.append(b);
-    });
+    }
+    el.categoriaActual.textContent = CATEGORIAS.find((c) => c.id === estado.categoria).nombre;
   }
 
   function renderProductos() {
-    el.productos.textContent = '';
-    PRODUCTOS.filter((p) => p.cat === estado.categoria).forEach((p) => {
+    el.productos.replaceChildren();
+    for (const p of PRODUCTOS.filter((p) => p.categoria === estado.categoria)) {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'demo-producto';
       b.dataset.producto = p.id;
-      b.innerHTML = '<span class="demo-prod-nombre">' + p.nombre + '</span>' +
+      b.innerHTML = '<span class="demo-prod-nombre"></span>' +
         '<span class="demo-prod-pie"><strong>' + dinero(p.precio) + '</strong><i aria-hidden="true">+</i></span>';
+      b.querySelector('.demo-prod-nombre').textContent = p.nombre;
+      b.setAttribute('aria-label', 'Agregar ' + p.nombre + ', ' + dinero(p.precio));
+      b.addEventListener('click', () => agregar(p.id));
       el.productos.append(b);
-    });
+    }
   }
 
   function renderLineas() {
-    const m = mesa();
-    el.lineas.textContent = '';
+    const m = mesaActual();
+    el.lineas.replaceChildren();
     if (!m || !m.lineas.length) {
       const p = document.createElement('p');
       p.className = 'demo-vacio';
-      p.textContent = m
-        ? 'Toca un producto para agregarlo.'
-        : 'Elige una mesa y toca un producto para empezar.';
+      p.textContent = 'Toca un producto para agregarlo.';
       el.lineas.append(p);
     } else {
-      m.lineas.forEach((l) => {
+      for (const linea of m.lineas) {
         const fila = document.createElement('div');
         fila.className = 'demo-linea';
-        fila.innerHTML =
-          '<div class="demo-linea-nombre"><strong>' + (l.cant > 1 ? l.cant + '× ' : '') + l.nombre +
-          '</strong><small>' + dinero(l.precio) + ' c/u</small></div>' +
-          '<div class="demo-stepper">' +
-          '<button type="button" data-restar="' + l.id + '" aria-label="Quitar uno de ' + l.nombre + '">−</button>' +
-          '<span aria-label="Cantidad">' + l.cant + '</span>' +
-          '<button type="button" data-sumar="' + l.id + '" aria-label="Agregar uno de ' + l.nombre + '">+</button>' +
-          '</div>' +
-          '<strong class="demo-linea-importe">' + dinero(l.precio * l.cant) + '</strong>';
+        fila.dataset.linea = linea.id;
+
+        const nombre = document.createElement('span');
+        nombre.className = 'demo-linea-nombre';
+        nombre.textContent = linea.nombre;
+
+        const unitario = document.createElement('small');
+        unitario.textContent = dinero(linea.precio) + ' c/u';
+
+        const stepper = document.createElement('div');
+        stepper.className = 'demo-stepper';
+        const menos = document.createElement('button');
+        menos.type = 'button';
+        menos.textContent = '−';
+        menos.setAttribute('aria-label', 'Quitar uno de ' + linea.nombre);
+        menos.dataset.accion = 'menos';
+        const cant = document.createElement('span');
+        cant.textContent = linea.cant;
+        cant.setAttribute('aria-label', linea.cant + ' unidades');
+        const mas = document.createElement('button');
+        mas.type = 'button';
+        mas.textContent = '+';
+        mas.setAttribute('aria-label', 'Agregar uno de ' + linea.nombre);
+        mas.dataset.accion = 'mas';
+        stepper.append(menos, cant, mas);
+        stepper.addEventListener('click', (ev) => {
+          const b = ev.target.closest('button');
+          if (!b) return;
+          cambiar(linea.id, b.dataset.accion === 'mas' ? 1 : -1);
+        });
+
+        const importe = document.createElement('strong');
+        importe.textContent = dinero(linea.precio * linea.cant);
+
+        fila.append(nombre, unitario, stepper, importe);
         el.lineas.append(fila);
-      });
+      }
     }
-    const total = subtotal();
+
+    const total = subtotalActual();
     el.total.textContent = dinero(total);
     el.totalMini.textContent = dinero(total);
-    el.enviar.disabled = !m || !m.lineas.length || !m.pendiente;
+    el.enviar.disabled = !m || !m.lineas.length || m.enviado === articulos(m);
     el.cobrar.disabled = !m || !m.lineas.length;
+    el.pedidoTitulo.textContent = m ? m.nombre : 'Sin mesa';
+    renderChips();
   }
 
   function renderChips() {
-    const m = mesa();
-    el.chips.textContent = '';
-    NOTAS.forEach((nota) => {
+    const m = mesaActual();
+    el.chips.replaceChildren();
+    for (const nota of NOTAS) {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'demo-chip';
-      const activa = !!(m && m.notas.has(nota));
-      b.setAttribute('aria-pressed', String(activa));
       b.textContent = nota;
+      const activa = !!m && m.notas.includes(nota);
+      b.setAttribute('aria-pressed', String(activa));
+      b.disabled = !m;
+      b.addEventListener('click', () => {
+        if (!m) return;
+        const i = m.notas.indexOf(nota);
+        if (i >= 0) m.notas.splice(i, 1);
+        else m.notas.push(nota);
+        renderChips();
+        aviso(m.notas.length ? 'Notas: ' + m.notas.join(', ') : 'Sin notas en la comanda.');
+      });
       el.chips.append(b);
-    });
+    }
   }
 
+  function agregar(id) {
+    const m = mesaActual();
+    if (!m) { setVista('mesas', 'Primero elige una mesa.'); return; }
+    const p = PRODUCTOS.find((p) => p.id === id);
+    const existente = m.lineas.find((l) => l.producto === id);
+    if (existente) {
+      if (existente.cant >= 9) { aviso('Máximo 9 por producto en esta demo.'); return; }
+      existente.cant += 1;
+    } else {
+      m.lineas.push({ id: 'l' + (++estado.folio), producto: id, nombre: p.nombre, precio: p.precio, cant: 1 });
+    }
+    renderLineas();
+    renderMesas();
+    aviso(p.nombre + ' agregado a ' + m.nombre + '.');
+  }
+
+  function cambiar(lineaId, delta) {
+    const m = mesaActual();
+    if (!m) return;
+    const linea = m.lineas.find((l) => l.id === lineaId);
+    if (!linea) return;
+    linea.cant += delta;
+    if (linea.cant <= 0) m.lineas = m.lineas.filter((l) => l.id !== lineaId);
+    if (!m.lineas.length) m.notas = [];
+    if (m.enviado > articulos(m)) m.enviado = 0;
+    renderLineas();
+    renderMesas();
+  }
+
+  function enviar() {
+    const m = mesaActual();
+    if (!m || !m.lineas.length) return;
+    estado.cocina.push({
+      id: 'c' + (++estado.folio),
+      mesa: m.nombre,
+      notas: [...m.notas],
+      lineas: m.lineas.map((l) => ({ nombre: l.nombre, cant: l.cant })),
+      hora: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }),
+    });
+    m.enviado = articulos(m);
+    render();
+    aviso('Comanda de ' + m.nombre + ' enviada a cocina.');
+  }
+
+  /* ── Cocina ──────────────────────────────────────────────────────────── */
   function renderCocina() {
-    el.cocina.textContent = '';
+    el.cocina.replaceChildren();
     if (!estado.cocina.length) {
       const p = document.createElement('p');
       p.className = 'demo-vacio';
       p.textContent = 'Las comandas que mandes aparecen aquí.';
       el.cocina.append(p);
-    } else {
-      estado.cocina.forEach((t) => {
-        const caja = document.createElement('article');
-        caja.className = 'demo-comanda';
-        const ul = document.createElement('ul');
-        t.items.forEach((i) => {
-          const li = document.createElement('li');
-          li.textContent = i.cant + '× ' + i.nombre;
-          ul.append(li);
-        });
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'demo-boton demo-boton-chico';
-        b.dataset.listo = t.id;
-        b.textContent = 'Listo';
-        const h = document.createElement('h3');
-        h.textContent = t.mesa + (t.notas.length ? ' · ' + t.notas.join(', ') : '');
-        caja.append(h, ul, b);
-        el.cocina.append(caja);
-      });
     }
-    el.cocinaCuenta.textContent = String(estado.cocina.length);
+    for (const c of estado.cocina) {
+      const t = document.createElement('article');
+      t.className = 'demo-comanda';
+      const cab = document.createElement('header');
+      const mesa = document.createElement('strong');
+      mesa.textContent = c.mesa;
+      const hora = document.createElement('span');
+      hora.textContent = c.hora;
+      cab.append(mesa, hora);
+      const ul = document.createElement('ul');
+      for (const l of c.lineas) {
+        const li = document.createElement('li');
+        li.textContent = l.cant + '× ' + l.nombre;
+        ul.append(li);
+      }
+      t.append(cab);
+      if (c.notas.length) {
+        const notas = document.createElement('p');
+        notas.className = 'demo-comanda-notas';
+        notas.textContent = c.notas.join(' · ');
+        t.append(notas);
+      }
+      t.append(ul);
+      const listo = document.createElement('button');
+      listo.type = 'button';
+      listo.className = 'demo-boton demo-boton-chico';
+      listo.textContent = 'Listo';
+      listo.addEventListener('click', () => {
+        estado.cocina = estado.cocina.filter((x) => x.id !== c.id);
+        render();
+        aviso('Comanda de ' + c.mesa + ' marcada como lista.');
+      });
+      t.append(listo);
+      el.cocina.append(t);
+    }
+    el.cocinaCuenta.textContent = estado.cocina.length;
+    el.cocinaCuenta.dataset.cero = String(estado.cocina.length === 0);
+    el.cocinaResumen.textContent = estado.cocina.length === 1 ? '1 pendiente' : estado.cocina.length + ' pendientes';
   }
 
-  function renderCorte() {
+  /* ── Caja ────────────────────────────────────────────────────────────── */
+  function renderCaja() {
     const total = estado.ventas.reduce((s, v) => s + v.total, 0);
     const propinas = estado.ventas.reduce((s, v) => s + v.propina, 0);
-    const efectivo = estado.ventas.filter((v) => v.metodo === 'efectivo').reduce((s, v) => s + v.total + v.propina, 0);
-    const tarjeta = estado.ventas.filter((v) => v.metodo === 'tarjeta').reduce((s, v) => s + v.total + v.propina, 0);
-    $('demo-m-ventas').textContent = String(estado.ventas.length);
-    $('demo-m-total').textContent = dinero(total);
-    $('demo-m-propinas').textContent = dinero(propinas);
-    $('demo-m-efectivo').textContent = dinero(efectivo);
-    $('demo-m-tarjeta').textContent = dinero(tarjeta);
+    const efectivo = estado.ventas.filter((v) => v.metodo === 'efectivo').reduce((s, v) => s + v.total, 0);
+    const tarjeta = estado.ventas.filter((v) => v.metodo === 'tarjeta').reduce((s, v) => s + v.total, 0);
+    el.m.ventas.textContent = estado.ventas.length;
+    el.m.total.textContent = dinero(total);
+    el.m.propinas.textContent = dinero(propinas);
+    el.m.efectivo.textContent = dinero(efectivo);
+    el.m.tarjeta.textContent = dinero(tarjeta);
+  }
+
+  /* ── Cobro ───────────────────────────────────────────────────────────── */
+  function pintarCobro() {
+    const base = subtotalActual();
+    const total = totalConPropina();
+    el.cobroCuenta.textContent = dinero(base);
+    el.cobroTotal.textContent = dinero(total);
+    const recibido = Number(el.recibido.value || 0);
+    const esEfectivo = estado.metodo === 'efectivo';
+    el.efectivoFila.hidden = !esEfectivo;
+    el.cambio.textContent = dinero(Math.max(0, recibido - total));
+    el.propinas.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.propina) === estado.propina)));
+    el.metodos.forEach((r) => { r.checked = r.value === estado.metodo; });
+    el.error.hidden = true;
+    el.error.textContent = '';
+  }
+
+  function abrirCobro() {
+    const m = mesaActual();
+    if (!m || !m.lineas.length) return;
+    estado.propina = 0;
+    estado.metodo = 'efectivo';
+    estado.recibidoTocado = false;
+    const total = subtotal(m);
+    el.cobroMesa.textContent = m.nombre;
+    el.recibido.value = String(total);
+    pintarCobro();
+    el.dialog.showModal();
+  }
+
+  function cerrarCobro() {
+    el.dialog.close();
+  }
+
+  function confirmarCobro() {
+    const m = mesaActual();
+    if (!m || !m.lineas.length) return;
+    const total = totalConPropina();
+    if (estado.metodo === 'efectivo' && Number(el.recibido.value || 0) < total) {
+      el.error.textContent = 'El efectivo recibido no alcanza. Faltan ' + dinero(total - Number(el.recibido.value || 0)) + '.';
+      el.error.hidden = false;
+      el.recibido.focus();
+      return;
+    }
+    const cambio = estado.metodo === 'efectivo' ? Math.round((Number(el.recibido.value) - total) * 100) / 100 : 0;
+    const propina = Math.round(subtotal(m) * (estado.propina / 100) * 100) / 100;
+    estado.ventas.push({ total, propina, metodo: estado.metodo });
+    const nombre = m.nombre;
+    m.lineas = [];
+    m.notas = [];
+    m.enviado = 0;
+    estado.mesaId = null;
+    cerrarCobro();
+    setVista('mesas');
+    renderMesas();
+    aviso(nombre + ' cobrada: ' + dinero(total) + ' en ' + (estado.metodo === 'efectivo' ? 'efectivo · cambio ' + dinero(cambio) : 'tarjeta') + '.');
   }
 
   function render() {
@@ -236,204 +477,39 @@
     renderCategorias();
     renderProductos();
     renderLineas();
-    renderChips();
     renderCocina();
-    renderCorte();
+    renderCaja();
+    setVista(estado.vista);
   }
 
-  function abrirMesa(id) {
-    estado.activa = id;
-    renderMesas();
-    renderLineas();
-    renderChips();
-    avisar((mesa() ? mesa().nombre : 'Mesa') + ' abierta.');
-  }
-
-  function agregar(id) {
-    const m = mesa();
-    if (!m) {
-      avisar('Primero elige una mesa o “Para llevar”.');
-      return;
-    }
-    const p = PRODUCTOS.find((x) => x.id === id);
-    const linea = m.lineas.find((l) => l.id === id);
-    if (linea) linea.cant = Math.min(9, linea.cant + 1);
-    else m.lineas.push({ id, nombre: p.nombre, precio: p.precio, cant: 1 });
-    m.pendiente = true;
-    renderMesas();
-    renderLineas();
-  }
-
-  function cambiar(id, delta) {
-    const m = mesa();
-    if (!m) return;
-    const i = m.lineas.findIndex((l) => l.id === id);
-    if (i < 0) return;
-    m.lineas[i].cant += delta;
-    if (m.lineas[i].cant > 9) m.lineas[i].cant = 9;
-    if (m.lineas[i].cant < 1) m.lineas.splice(i, 1);
-    m.pendiente = true;
-    renderMesas();
-    renderLineas();
-  }
-
-  function alternarNota(nota) {
-    const m = mesa();
-    if (!m) {
-      avisar('Primero elige una mesa.');
-      return;
-    }
-    if (m.notas.has(nota)) m.notas.delete(nota);
-    else m.notas.add(nota);
-    m.pendiente = true;
-    renderChips();
-  }
-
-  function enviar() {
-    const m = mesa();
-    if (!m || !m.lineas.length) return;
-    estado.cocina.push({
-      id: 'c' + Date.now(),
-      mesa: m.nombre,
-      notas: [...m.notas],
-      items: m.lineas.map((l) => ({ nombre: l.nombre, cant: l.cant })),
-    });
-    m.pendiente = false;
-    renderCocina();
-    renderLineas();
-    avisar('Comanda de ' + m.nombre + ' enviada a cocina.');
-  }
-
-  function totalConPropina() {
-    const base = subtotal();
-    return base + Math.round(base * estado.propina) / 100;
-  }
-
-  function pintarCobro() {
-    const total = totalConPropina();
-    el.cobroCuenta.textContent = dinero(subtotal());
-    el.cobroTotal.textContent = dinero(total);
-    el.efectivoFila.hidden = estado.metodo !== 'efectivo';
-    const recibido = Number(el.recibido.value) || 0;
-    const cambio = recibido - total;
-    el.cambio.textContent = dinero(Math.max(0, cambio));
-    el.cambio.classList.toggle('demo-falta', cambio < 0);
-    el.propinas.querySelectorAll('button').forEach((b) => {
-      b.setAttribute('aria-pressed', String(Number(b.dataset.propina) === estado.propina));
-    });
-  }
-
-  function abrirCobro() {
-    const m = mesa();
-    if (!m || !m.lineas.length) return;
-    estado.propina = 0;
-    estado.metodo = 'efectivo';
-    estado.recibidoTocado = false;
-    const total = subtotal();
-    el.recibido.value = String(Math.ceil(total * 2) / 2);
-    el.dialogo.querySelectorAll('input[name="demo-metodo"]').forEach((r) => {
-      r.checked = r.value === 'efectivo';
-    });
-    el.error.hidden = true;
-    el.cobroMesa.textContent = m.nombre;
-    el.dialogo.returnValue = '';
-    pintarCobro();
-    el.dialogo.showModal();
-    el.recibido.focus();
-    el.recibido.select();
-  }
-
-  function confirmarCobro() {
-    const m = mesa();
-    if (!m || !m.lineas.length) return;
-    const total = totalConPropina();
-    const recibido = Number(el.recibido.value) || 0;
-    if (estado.metodo === 'efectivo' && recibido + 0.001 < total) {
-      el.error.textContent = 'El efectivo recibido no alcanza: faltan ' + dinero(total - recibido) + '.';
-      el.error.hidden = false;
-      el.recibido.focus();
-      return;
-    }
-    const cambio = estado.metodo === 'efectivo' ? recibido - total : 0;
-    estado.ventas.push({ total: subtotal(), propina: total - subtotal(), metodo: estado.metodo, cambio });
-    const nombre = m.nombre;
-    m.lineas = [];
-    m.notas.clear();
-    m.pendiente = false;
-    el.dialogo.close();
-    render();
-    avisar(nombre + ' cobrada: ' + dinero(total) + ' en ' + estado.metodo + (cambio > 0 ? ' · cambio ' + dinero(cambio) : '') + '.');
-  }
-
-  function reiniciar() {
-    estado.mesas.forEach((m) => { m.lineas = []; m.notas.clear(); m.pendiente = false; });
-    estado.cocina = [];
-    estado.ventas = [];
-    estado.activa = null;
-    estado.propina = 0;
-    estado.metodo = 'efectivo';
-    estado.recibidoTocado = false;
-    render();
-    avisar('Demo reiniciada. Elige una mesa para empezar.');
-  }
-
-  el.mesas.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-mesa]');
-    if (b) abrirMesa(b.dataset.mesa);
-  });
-  el.categorias.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-categoria]');
-    if (!b) return;
-    estado.categoria = b.dataset.categoria;
-    renderCategorias();
-    renderProductos();
-  });
-  el.productos.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-producto]');
-    if (b) agregar(b.dataset.producto);
-  });
-  el.lineas.addEventListener('click', (e) => {
-    const sumar = e.target.closest('[data-sumar]');
-    const restar = e.target.closest('[data-restar]');
-    if (sumar) cambiar(sumar.dataset.sumar, 1);
-    if (restar) cambiar(restar.dataset.restar, -1);
-  });
-  el.chips.addEventListener('click', (e) => {
-    const b = e.target.closest('.demo-chip');
-    if (b) alternarNota(b.textContent);
-  });
+  /* ── Eventos ─────────────────────────────────────────────────────────── */
+  el.rail.forEach((b) => b.addEventListener('click', () => setVista(b.dataset.vista)));
+  el.volver.addEventListener('click', () => setVista('mesas', 'Elige otra mesa o vuelve a la que dejaste abierta.'));
   el.enviar.addEventListener('click', enviar);
   el.cobrar.addEventListener('click', abrirCobro);
-  el.cocina.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-listo]');
-    if (!b) return;
-    estado.cocina = estado.cocina.filter((t) => t.id !== b.dataset.listo);
-    renderCocina();
-    avisar('Comanda marcada como lista.');
-  });
-  el.propinas.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-propina]');
-    if (!b) return;
-    estado.propina = Number(b.dataset.propina);
-    if (!estado.recibidoTocado) el.recibido.value = String(Math.ceil(totalConPropina() * 2) / 2);
-    pintarCobro();
-  });
-  el.dialogo.querySelectorAll('input[name="demo-metodo"]').forEach((r) => {
-    r.addEventListener('change', () => {
-      estado.metodo = r.value;
-      pintarCobro();
-    });
-  });
+  el.reiniciar.addEventListener('click', reiniciar);
+  el.cancelar.addEventListener('click', cerrarCobro);
+  el.ok.addEventListener('click', confirmarCobro);
+  el.dialog.addEventListener('cancel', () => { el.error.hidden = true; });
+  document.getElementById('demo-cobro-form').addEventListener('submit', (ev) => ev.preventDefault());
   el.recibido.addEventListener('input', () => {
     estado.recibidoTocado = true;
     pintarCobro();
   });
-  el.cobroCancelar.addEventListener('click', () => el.dialogo.close());
-  el.cobroOk.addEventListener('click', confirmarCobro);
-  el.reiniciar.addEventListener('click', reiniciar);
-  el.dialogo.addEventListener('click', (e) => {
-    if (e.target === el.dialogo) el.dialogo.close();
-  });
+  el.propinas.forEach((b) => b.addEventListener('click', () => {
+    estado.propina = Number(b.dataset.propina);
+    if (!estado.recibidoTocado) el.recibido.value = String(Math.ceil(totalConPropina() * 2) / 2);
+    pintarCobro();
+  }));
+  el.metodos.forEach((r) => r.addEventListener('change', () => {
+    if (!r.checked) return;
+    estado.metodo = r.value;
+    if (r.value === 'tarjeta') {
+      el.recibido.value = String(totalConPropina());
+      estado.recibidoTocado = false;
+    }
+    pintarCobro();
+  }));
 
-  render();
+  reiniciar();
 })();
