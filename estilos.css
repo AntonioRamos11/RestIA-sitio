@@ -99,11 +99,16 @@ a:hover { text-decoration-thickness: 2px; }
 .menu-movil nav a.cerrar { justify-self: end; font-size: 15px; color: var(--tenue); padding: 8px 12px; }
 @keyframes aparecer { from { opacity: 0; } }
 @keyframes bajar { from { opacity: 0; transform: translateY(-8px); } }
-@media (max-width: 820px) {
+@media (max-width: 1240px) {
+  .menu { gap: 14px; }
+  .menu a { font-size: 14px; }
+  .menu .boton { padding: 9px 14px; font-size: 14px; }
+}
+@media (max-width: 1080px) {
   .menu { display: none; }
   .boton-menu { display: inline-block; }
 }
-@media (min-width: 821px) { .menu-movil:target { display: none; } }
+@media (min-width: 1081px) { .menu-movil:target { display: none; } }
 
 /* ── Portada ────────────────────────────────────────────────────────── */
 .portada { padding: 72px 0 40px; }
@@ -209,6 +214,10 @@ h3 { font-size: 20px; margin: 0 0 8px; }
 .nota {
   border-left: 4px solid var(--calido); background: var(--superficie); padding: 14px 18px;
   border-radius: 0 10px 10px 0; margin: 18px 0; color: var(--tenue);
+}
+.nota-demo {
+  max-width: 680px; margin: 14px auto 0; text-align: center;
+  font-size: 13px; color: var(--tenue);
 }
 code, kbd {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em;
@@ -588,3 +597,439 @@ pre code { background: none; border: 0; padding: 0; }
 [data-zoom] > button:focus-visible { outline: 3px solid var(--calido); outline-offset: 3px; }
 .doc, .articulo, .doc-seccion { min-width: 0; }
 .tabla-datos td, .tabla-datos th { overflow-wrap: anywhere; }
+
+/* ── Demo interactiva (página /demo) ───────────────────────────────── */
+/* Reproduce el armazón de la app: rail de módulos, barra de título, salón,
+   pedido con carta y cuenta, cocina y caja. Paleta del tema POS de Flutter. */
+.demo { margin: 22px 0 36px; }
+.demo-ventana {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  min-height: 560px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, .45);
+  color: #f1f5f9;
+}
+
+/* Rail de módulos (NavigationRail) */
+.demo-rail {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 6px; background: #1e293b; border-right: 1px solid #334155;
+}
+.demo-rail-marca {
+  display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 10px;
+  border-radius: 9px; background: #0891b2; color: #fff; font-weight: 800; font-size: 16px;
+}
+.demo-destino {
+  position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 2px; border: 0; border-radius: 10px; background: transparent;
+  color: #94a3b8; font: inherit; font-size: 10.5px; font-weight: 600; cursor: pointer;
+}
+.demo-destino svg { width: 22px; height: 22px; fill: currentColor; }
+.demo-destino:hover { background: #334155; color: #f1f5f9; }
+.demo-destino[aria-current="page"] { background: #334155; color: #67e8f9; }
+.demo-badge {
+  position: absolute; top: 4px; right: 14px; min-width: 15px; padding: 0 4px;
+  border-radius: 999px; background: #ef4444; color: #fff; font-size: 9.5px; line-height: 15px;
+}
+.demo-badge:empty, .demo-badge[data-cero="true"] { display: none; }
+.demo-rail-pie { margin-top: auto; font-size: 9px; color: #10b981; letter-spacing: .02em; }
+
+/* Cuerpo */
+.demo-main { display: flex; flex-direction: column; min-width: 0; }
+.demo-barra {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 18px; border-bottom: 1px solid #334155;
+}
+.demo-titulo-app { margin: 0; font-size: 17px; font-weight: 700; color: #f1f5f9; }
+.demo-barra-acciones { display: flex; align-items: center; gap: 8px; }
+.demo-pill {
+  padding: 3px 9px; border-radius: 999px; font-size: 10.5px; font-weight: 650;
+  color: #fbbf24; background: rgba(245, 158, 11, .12); border: 1px solid rgba(245, 158, 11, .4);
+}
+.demo-vista { flex: 1; padding: 16px 18px; min-width: 0; }
+.demo-etiqueta-chica { margin: 0; font-size: 10.5px; font-weight: 650; letter-spacing: .05em; text-transform: uppercase; color: #94a3b8; }
+.demo-vacio { margin: 0; padding: 14px 10px; font-size: 12px; color: #94a3b8; text-align: center; }
+.demo-pista { margin: 10px 0 0; font-size: 11.5px; color: #94a3b8; }
+
+/* Botones */
+.demo-boton {
+  border: 1px solid #334155; background: #334155; color: #f1f5f9;
+  border-radius: 9px; padding: 9px 13px; min-height: 38px;
+  font: inherit; font-size: 12.5px; font-weight: 650; cursor: pointer;
+}
+.demo-boton:hover:not(:disabled) { background: #475569; }
+.demo-boton:disabled { opacity: .45; cursor: not-allowed; }
+.demo-boton-chico { min-height: 32px; padding: 6px 10px; font-size: 11.5px; }
+.demo-principal { background: #06b6d4; border-color: #06b6d4; color: #fff; }
+.demo-principal:hover:not(:disabled) { background: #0891b2; border-color: #0891b2; }
+
+/* Salón */
+.demo-mesas-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.demo-leyenda { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 10.5px; color: #94a3b8; }
+.demo-punto { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #388e3c; flex: none; }
+.demo-punto-rojo { background: #d32f2f; margin-left: 8px; }
+.demo-mesas { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 8px; }
+.demo-mesa {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
+  min-height: 72px; padding: 10px 10px 10px 26px; border-radius: 12px; cursor: pointer;
+  background: #1e293b; color: #f1f5f9; border: 1px solid #334155;
+  font: inherit; font-size: 14px; font-weight: 650; text-align: left;
+}
+.demo-mesa small { font-weight: 400; font-size: 11px; color: #94a3b8; font-variant-numeric: tabular-nums; }
+.demo-mesa > .demo-punto { position: absolute; left: 11px; top: 16px; }
+.demo-mesa:hover { border-color: #0891b2; }
+.demo-mesa-ocupada { border-color: rgba(211, 47, 47, .55); }
+.demo-mesa-ocupada > .demo-punto { background: #d32f2f; }
+.demo-mesa-ocupada small { color: #fca5a5; }
+.demo-mesa-activa { outline: 2px solid #06b6d4; outline-offset: 1px; background: #164e63; }
+.demo-mesa-activa small { color: #cffafe; }
+.demo-mesa[data-mesa="llevar"] { grid-column: 1 / -1; min-height: 54px; flex-direction: row; align-items: center; gap: 8px; padding-left: 26px; }
+.demo-mesa[data-mesa="llevar"] small { margin-left: auto; }
+
+/* Pedido */
+.demo-pedido-cabeza { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.demo-volver {
+  padding: 4px 6px; border: 0; border-radius: 7px; background: transparent;
+  color: #67e8f9; font: inherit; font-size: 12.5px; font-weight: 650; cursor: pointer;
+}
+.demo-volver:hover { background: #1e293b; }
+.demo-mesa-activa-nombre { margin: 0; font-size: 15px; color: #f1f5f9; }
+.demo-total-mini { margin-left: auto; color: #06b6d4; font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.demo-pedido-cuerpo { display: grid; grid-template-columns: 104px minmax(0, 1fr) 296px; gap: 12px; align-items: start; }
+.demo-categorias { display: flex; flex-direction: column; gap: 5px; }
+.demo-categoria {
+  padding: 9px 10px; border: 1px solid transparent; border-radius: 8px; text-align: left;
+  background: #1e293b; color: #cbd5e1; font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+.demo-categoria:hover { background: #334155; }
+.demo-categoria[aria-current="true"] { background: #334155; color: #67e8f9; border-color: #0891b2; }
+.demo-productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: 8px; margin-top: 8px; }
+.demo-producto {
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 6px;
+  min-height: 92px; padding: 10px 12px; border: 1px solid #334155; border-radius: 12px;
+  background: #1e293b; color: #f1f5f9; font: inherit; text-align: left; cursor: pointer;
+}
+.demo-producto:hover { border-color: #0891b2; background: #17233a; }
+.demo-prod-nombre { font-size: 14px; font-weight: 700; line-height: 1.25; }
+.demo-prod-pie { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 6px; }
+.demo-producto strong { color: #06b6d4; font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.demo-prod-pie i {
+  display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px;
+  background: #334155; color: #f1f5f9; font-size: 16px; font-style: normal; line-height: 1;
+}
+
+/* Cuenta / carrito */
+.demo-carrito {
+  display: flex; flex-direction: column; gap: 9px; padding: 12px;
+  background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+}
+.demo-lineas { display: flex; flex-direction: column; gap: 4px; max-height: 210px; overflow: auto; }
+.demo-linea {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px;
+  padding: 6px 0; border-bottom: 1px solid #334155;
+}
+.demo-linea-nombre { font-size: 12.5px; font-weight: 600; color: #f1f5f9; }
+.demo-linea small { font-size: 10.5px; color: #94a3b8; }
+.demo-linea strong { font-size: 12.5px; color: #67e8f9; font-variant-numeric: tabular-nums; text-align: right; }
+.demo-stepper { display: flex; align-items: center; gap: 6px; justify-self: start; }
+.demo-stepper span { min-width: 14px; text-align: center; font-size: 12.5px; font-weight: 700; }
+.demo-stepper button {
+  width: 26px; height: 26px; border: 0; border-radius: 7px; cursor: pointer;
+  background: #334155; color: #f1f5f9; font: inherit; font-size: 15px; line-height: 1;
+}
+.demo-stepper button:hover { background: #475569; }
+.demo-notas { display: flex; flex-direction: column; gap: 5px; }
+.demo-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.demo-chip {
+  padding: 5px 8px; border: 1px solid #334155; border-radius: 999px;
+  background: #0f172a; color: #cbd5e1; font: inherit; font-size: 10.5px; cursor: pointer;
+}
+.demo-chip:hover:not(:disabled) { border-color: #0891b2; }
+.demo-chip[aria-pressed="true"] { background: #164e63; border-color: #06b6d4; color: #cffafe; }
+.demo-chip:disabled { opacity: .45; cursor: not-allowed; }
+.demo-pie { margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding-top: 8px; border-top: 1px solid #334155; }
+.demo-totales { display: flex; align-items: baseline; justify-content: space-between; font-size: 12px; color: #cbd5e1; }
+.demo-totales strong { font-size: 20px; color: #06b6d4; font-variant-numeric: tabular-nums; }
+.demo-pie-botones { display: flex; flex-direction: column; gap: 6px; }
+.demo-pie-botones .demo-boton { width: 100%; }
+
+/* Cocina */
+.demo-comandas { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+.demo-comanda {
+  display: flex; flex-direction: column; gap: 6px; padding: 12px;
+  background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+}
+.demo-comanda header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.demo-comanda header strong { font-size: 13.5px; color: #f1f5f9; }
+.demo-comanda header span { font-size: 10.5px; color: #94a3b8; }
+.demo-comanda ul { margin: 0; padding-left: 16px; font-size: 12px; color: #e2e8f0; }
+.demo-comanda li { margin: 1px 0; }
+.demo-comanda-notas { margin: 0; font-size: 10.5px; color: #fbbf24; }
+
+/* Caja */
+.demo-metricas { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 8px; margin: 0; }
+.demo-metricas div { padding: 10px 12px; background: #1e293b; border: 1px solid #334155; border-radius: 10px; }
+.demo-metricas dt { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: #94a3b8; }
+.demo-metricas dd { margin: 2px 0 0; font-size: 19px; font-weight: 800; color: #f1f5f9; font-variant-numeric: tabular-nums; }
+
+/* Cuentas por cobrar en caja */
+.demo-caja-cabeza { margin-top: 14px; }
+.demo-caja-lista { display: grid; gap: 8px; margin-bottom: 12px; }
+.demo-cuenta {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 12px; background: #1e293b; border: 1px solid #334155; border-radius: 10px;
+}
+.demo-cuenta-destacada { border-color: #06b6d4; box-shadow: inset 0 0 0 1px #06b6d4; }
+.demo-cuenta-info { display: grid; gap: 2px; min-width: 0; }
+.demo-cuenta-info strong { font-size: 13px; color: #f1f5f9; }
+.demo-cuenta-info small { font-size: 11px; color: #94a3b8; }
+.demo-cuenta .demo-boton { min-height: 38px; }
+
+/* Barra de estado */
+.demo-estado {
+  margin: 0; padding: 8px 18px; border-top: 1px solid #334155;
+  font-size: 11.5px; color: #94a3b8; min-height: 34px;
+}
+
+/* Diálogo de cobro */
+.demo-dialogo {
+  width: min(430px, calc(100vw - 28px)); padding: 20px;
+  background: #1e293b; color: #f1f5f9;
+  border: 1px solid #334155; border-radius: 14px;
+}
+.demo-dialogo::backdrop { background: rgba(2, 6, 23, .72); }
+.demo-dialogo h2 { margin: 0; font-size: 18px; }
+.demo-dialogo form { display: flex; flex-direction: column; gap: 9px; margin-top: 8px; }
+.demo-dialogo-mesa { margin: 0; font-size: 12.5px; font-weight: 650; color: #67e8f9; }
+.demo-fila { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0; font-size: 12.5px; }
+.demo-fila strong { font-size: 15px; color: #67e8f9; font-variant-numeric: tabular-nums; }
+.demo-fila input {
+  width: 118px; padding: 8px 9px; border: 1px solid #334155; border-radius: 8px;
+  background: #0f172a; color: #f1f5f9; font: inherit;
+}
+.demo-opciones { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; border: 0; }
+.demo-opciones legend { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: #94a3b8; }
+.demo-botones-fila { display: flex; flex-wrap: wrap; gap: 6px; }
+.demo-botones-fila .demo-boton[aria-pressed="true"] { background: #06b6d4; border-color: #06b6d4; color: #fff; }
+.demo-radio {
+  display: flex; align-items: center; gap: 6px; padding: 6px 10px; cursor: pointer;
+  border: 1px solid #334155; border-radius: 8px; font-size: 12.5px; color: #e2e8f0;
+}
+.demo-error {
+  margin: 0; padding: 7px 9px; border-radius: 8px; font-size: 11.5px;
+  color: #fca5a5; background: rgba(239, 68, 68, .12); border: 1px solid rgba(239, 68, 68, .4);
+}
+.demo-dialogo-botones { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+
+/* Responsive: el rail pasa abajo, como la barra de navegación de la app */
+@media (max-width: 900px) {
+  .demo-ventana { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
+  .demo-main { grid-row: 1; }
+  .demo-rail { grid-row: 2; flex-direction: row; justify-content: space-around; padding: 6px; border-right: 0; border-top: 1px solid #334155; }
+  .demo-rail-marca, .demo-rail-pie { display: none; }
+  .demo-destino { width: auto; flex: 1; }
+  .demo-badge { right: calc(50% - 26px); }
+  .demo-vista { padding: 12px; }
+  .demo-barra { padding: 10px 12px; }
+  .demo-pedido-cuerpo { display: flex; flex-direction: column; gap: 10px; }
+  .demo-categorias { flex-direction: row; overflow-x: auto; padding-bottom: 2px; }
+  .demo-categoria { flex: none; }
+  .demo-carrito { width: 100%; }
+  .demo-lineas { max-height: none; }
+  .demo-estado { padding: 8px 12px; }
+}
+@media (max-width: 480px) {
+  .demo-barra { flex-wrap: wrap; }
+  .demo-mesas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .demo-titulo-app { font-size: 15.5px; }
+}
+
+/* Iconos de la app dentro del rail */
+.demo-destino img { width: 24px; height: 24px; display: block; border-radius: 5px; }
+.demo-destino[aria-current="page"] img { filter: brightness(1.15); }
+
+/* Pedidos de WhatsApp dentro de la demo */
+.demo-delivery { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
+.demo-pedido-wa {
+  display: flex; flex-direction: column; gap: 6px; padding: 12px;
+  background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+}
+.demo-pedido-wa header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.demo-pedido-wa header strong { font-size: 13.5px; color: #f1f5f9; }
+.demo-pedido-wa header span {
+  padding: 1px 7px; border-radius: 999px; font-size: 10px; color: #25d366;
+  border: 1px solid rgba(37, 211, 102, .4);
+}
+.demo-pedido-wa-cliente { margin: 0; font-size: 11px; color: #94a3b8; }
+.demo-pedido-wa ul { margin: 0; padding-left: 16px; font-size: 12px; color: #e2e8f0; }
+.demo-pedido-wa-pie { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: auto; padding-top: 8px; border-top: 1px solid #334155; }
+.demo-pedido-wa-pie strong { margin-right: auto; font-size: 15px; color: #06b6d4; font-variant-numeric: tabular-nums; }
+
+/* Sección de WhatsApp */
+.whatsapp-demo { margin: 34px 0 6px; }
+.whatsapp-demo .subtitulo { max-width: 780px; }
+.whatsapp-grid {
+  display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: 18px; align-items: start; margin-top: 16px;
+}
+.chat-telefono {
+  display: flex; flex-direction: column; min-height: 470px; overflow: hidden;
+  background: #0b141a; border: 1px solid #334155; border-radius: 20px;
+}
+.chat-cabecera { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #075e54; }
+.chat-avatar {
+  display: grid; place-items: center; width: 34px; height: 34px; flex: none;
+  border-radius: 50%; background: #25d366; color: #062e24; font-weight: 800;
+}
+.chat-cabecera strong { display: block; font-size: 13px; color: #fff; }
+.chat-cabecera small { display: block; font-size: 10px; color: #d1fae5; }
+.chat-demo { margin-left: 5px; padding: 1px 6px; border-radius: 999px; background: rgba(0, 0, 0, .25); font-size: 9px; font-weight: 600; }
+.chat-mensajes {
+  display: flex; flex-direction: column; gap: 6px; flex: 1;
+  padding: 12px; max-height: 330px; overflow: auto; background: #0b141a;
+}
+.chat-burbuja {
+  max-width: 86%; padding: 7px 9px; border-radius: 9px;
+  font-size: 12px; line-height: 1.45; white-space: pre-line; overflow-wrap: anywhere;
+}
+.chat-burbuja.bot { align-self: flex-start; background: #1e293b; color: #e2e8f0; border-top-left-radius: 2px; }
+.chat-burbuja.cliente { align-self: flex-end; background: #075e54; color: #e7f8f2; border-top-right-radius: 2px; }
+.chat-burbuja strong { color: #fff; }
+.chat-respuestas {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px;
+  background: #111b21; border-top: 1px solid #1f2c34;
+}
+.chat-opcion {
+  padding: 5px 10px; border: 1px solid #25d366; border-radius: 999px;
+  background: transparent; color: #25d366; font: inherit; font-size: 11px; cursor: pointer;
+}
+.chat-opcion:hover { background: rgba(37, 211, 102, .14); }
+.chat-pie { margin: 0; padding: 6px 10px; background: #111b21; color: #64748b; font-size: 9.5px; }
+.whatsapp-lado { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.pedido-wa-card { padding: 14px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; }
+.pedido-wa-card h3 { margin: 0 0 8px; font-size: 15px; color: #f1f5f9; }
+.pedido-wa-card ul { margin: 0 0 6px; padding-left: 16px; font-size: 12px; color: #e2e8f0; }
+.wa-cabecera { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 0 0 2px; font-size: 12px; color: #cbd5e1; }
+.wa-cabecera strong { font-size: 15px; color: #f1f5f9; }
+.wa-estado { padding: 1px 7px; border-radius: 999px; border: 1px solid rgba(245, 158, 11, .4); font-size: 10px; color: #fbbf24; }
+.wa-estado.wa-ok { border-color: rgba(52, 211, 153, .45); color: #34d399; }
+.wa-datos { margin: 0 0 6px; font-size: 11px; color: #94a3b8; }
+.wa-total { margin: 0; font-size: 13px; font-weight: 700; color: #06b6d4; }
+.wa-nota { margin: 8px 0 0; font-size: 10.5px; color: #34d399; }
+.whatsapp-aviso { margin: 0; }
+.whatsapp-aviso p:last-child { margin-top: 10px; }
+
+@media (max-width: 900px) {
+  .whatsapp-grid { grid-template-columns: 1fr; }
+  .chat-telefono { width: 100%; max-width: 430px; }
+  .chat-mensajes { max-height: 300px; }
+}
+
+/* ── Teléfono: remates de tamaño, tacto y desbordes ─────────────────── */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overflow-wrap: break-word; }
+
+/* Enlace para saltar el menú con el teclado. */
+.saltar {
+  position: absolute; left: 12px; top: -60px; z-index: 100;
+  padding: 10px 16px; border-radius: 0 0 12px 12px;
+  background: var(--acento); color: var(--acento-texto); font-weight: 700; text-decoration: none;
+}
+.saltar:focus { top: 0; }
+
+@media (max-width: 1080px) {
+  .marca { min-height: 42px; }
+  .boton-menu { display: inline-flex; align-items: center; min-height: 42px; padding: 10px 16px; }
+  .menu-movil nav {
+    top: 68px; left: 8px; right: 8px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+  .menu-movil nav a { min-height: 48px; }
+  .menu-movil nav a.cerrar { min-height: 40px; }
+}
+
+footer nav a { display: inline-flex; align-items: center; min-height: 32px; }
+
+@media (max-width: 900px) {
+  .doc { gap: 24px; }
+  .indice { max-height: 42vh; overflow-y: auto; overscroll-behavior: contain; }
+  .indice strong {
+    position: sticky; top: 0; z-index: 1; padding: 4px 0;
+    background: var(--superficie);
+  }
+}
+
+@media (max-width: 760px) {
+  .tour-controles button { min-height: 44px; }
+  .tour-pie { padding: 12px 14px; }
+}
+
+@media (max-width: 700px) {
+  .demo-stepper button { width: 34px; height: 34px; }
+  .demo-chip { min-height: 32px; padding: 7px 10px; font-size: 11.5px; }
+  .demo-volver { min-height: 40px; padding: 8px 10px; }
+  .demo-boton-chico { min-height: 38px; }
+  .chat-opcion { min-height: 38px; padding: 8px 12px; font-size: 12px; }
+}
+
+@media (max-width: 560px) {
+  h1 { font-size: clamp(30px, 8.6vw, 38px); }
+  .heroe h1 { font-size: clamp(32px, 9vw, 42px); }
+  .entrada { font-size: 17px; }
+  .subtitulo { font-size: 16.5px; }
+  .pagina { padding: 32px 0 56px; }
+  .indice { max-height: 36vh; }
+  .glosario { grid-template-columns: 1fr; gap: 2px 0; }
+  .glosario dt { margin-top: 10px; }
+  .tabla-datos { display: block; overflow-x: auto; }
+  .visor { padding: 10px; gap: 8px; }
+  .visor-figura img { max-height: 56vh; }
+  .visor-cerrar { min-height: 40px; }
+  .visor-nav button { flex: 1; min-height: 44px; }
+  .demo-dialogo { padding: 16px; }
+  .demo-dialogo-botones { flex-direction: column-reverse; }
+  .demo-dialogo-botones .demo-boton { width: 100%; }
+  .demo-fila input { width: 110px; }
+  .chat-telefono { min-height: 0; }
+  .chat-mensajes { max-height: 300px; }
+}
+
+@media (max-width: 420px) {
+  .contenedor { width: min(1120px, 100% - 28px); }
+  .boton { white-space: normal; text-align: center; }
+  .acciones { gap: 10px; }
+  .demo-vista { padding: 10px; }
+  .demo-barra { padding: 8px 10px; }
+  .demo-rail { padding: 4px; }
+  .demo-destino { font-size: 10px; }
+  .demo-producto { min-height: 84px; padding: 8px 10px; }
+  .demo-prod-nombre { font-size: 13px; }
+  .demo-carrito { padding: 10px; }
+}
+
+@media (max-width: 360px) {
+  .contenedor { width: min(1120px, 100% - 24px); }
+  .demo-mesas { gap: 6px; }
+  .whatsapp-grid { gap: 12px; }
+}
+
+/* Controles de la demo: cómodos al tacto también en tablet. */
+.demo-boton-chico { min-height: 34px; }
+.chat-opcion { min-height: 38px; padding: 8px 12px; font-size: 12px; }
+.doc-seccion .volver { padding: 6px 4px; }
+
+@media (max-width: 900px) {
+  /* En columna, la carta y la cuenta ocupan todo el ancho. */
+  .demo-pedido-cuerpo { align-items: stretch; }
+}
+
+@media (max-width: 480px) {
+  /* Dos columnas de productos: se ve más carta sin hacer scroll eterno. */
+  .demo-productos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .demo-cuenta { flex-wrap: wrap; }
+  .demo-cuenta .demo-boton { width: 100%; }
+}

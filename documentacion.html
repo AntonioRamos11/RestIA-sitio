@@ -12,9 +12,10 @@
   <meta property="og:image" content="https://restia.download/img/app-comanda.webp">
   <meta property="og:type" content="article">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/estilos.css?v=20261124">
+  <link rel="stylesheet" href="/estilos.css?v=20261131">
 </head>
 <body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
   <header class="barra" id="cerrar">
     <div class="contenedor">
       <a class="marca" href="/" aria-label="RestIA, inicio">
@@ -26,6 +27,7 @@
         <a href="/#panel">Administración</a>
         <a href="/#funciones">Funciones</a>
         <a href="/recorrido">Recorrido</a>
+        <a href="/demo">Demo</a>
         <a href="/documentacion" aria-current="page">Documentación</a>
         <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
         <a class="boton principal" href="/#contacto">Pide una demostración</a>
@@ -39,6 +41,7 @@
           <a href="/#la-app">La app</a>
           <a href="/#panel">Panel de administración</a>
           <a href="/recorrido">Recorrido</a>
+          <a href="/demo">Demo interactiva</a>
           <a href="/documentacion">Documentación</a>
           <a href="/preguntas">Preguntas frecuentes</a>
           <a href="https://app.restia.download/portal/">Entrar al portal</a>
@@ -48,7 +51,7 @@
     </div>
   </header>
 
-  <main class="pagina">
+  <main class="pagina" id="contenido">
     <div class="contenedor">
       <p class="migaja"><a href="/">Inicio</a> <span aria-hidden="true">/</span> Documentación</p>
       <header class="doc-encabezado">
@@ -60,7 +63,7 @@
           <button type="button" id="limpiar-busqueda" class="boton secundario">Limpiar</button>
           <p id="conteo-busqueda" role="status" aria-live="polite"></p>
         </div>
-        <p class="doc-meta">Última revisión: noviembre de 2026 · ¿No encuentras algo? Revisa las <a href="/preguntas">preguntas frecuentes</a> o escríbenos a <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>.</p>
+        <p class="doc-meta">Última revisión: noviembre de 2026 · ¿No encuentras algo? Revisa las <a href="/preguntas">preguntas frecuentes</a> o escríbenos a <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>. ¿Prefieres tocar la interfaz antes de leer? Prueba la <a href="/demo">demo interactiva</a> (una muestra del flujo de salón).</p>
       </header>
 
       <div class="doc">
@@ -703,6 +706,7 @@ python restaurar_backup.py --archivo respaldo_2026-11-24.sql --recrear --si</cod
       <nav aria-label="Pie de página">
         <a href="/documentacion">Documentación</a>
         <a href="/recorrido">Recorrido</a>
+        <a href="/demo">Demo</a>
         <a href="/preguntas">Preguntas frecuentes</a>
         <a href="https://app.restia.download/portal/">Portal del dueño</a>
         <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>

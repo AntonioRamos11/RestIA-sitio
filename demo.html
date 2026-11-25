@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo interactiva de RestIA · prueba el punto de venta sin instalar nada</title>
+  <meta name="description" content="Muestra interactiva de RestIA: prueba el flujo de salón (mesa, pedido, cocina y caja) y el chat de WhatsApp con datos de ejemplo. La app completa se ve en el recorrido.">
+  <link rel="canonical" href="https://restia.download/demo">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:title" content="Demo interactiva de RestIA">
+  <meta property="og:description" content="Muestra interactiva del flujo de salón de RestIA: mesa, pedido, cocina y caja. Sin registro y sin instalar nada.">
+  <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/estilos.css?v=20261131">
+  <script src="/demo.js?v=20261130" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+  <header class="barra" id="cerrar">
+    <div class="contenedor">
+      <a class="marca" href="/" aria-label="RestIA, inicio">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0891b2"/><path d="M10 23V9h6.2c3 0 5 1.8 5 4.4 0 2-1.1 3.4-2.9 4l3.4 5.6h-3.3l-3-5.2H13V23zm3-7.7h3c1.4 0 2.2-.7 2.2-1.9s-.8-1.9-2.2-1.9h-3z" fill="#fff"/></svg>
+        RestIA
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="/#la-app">La app</a>
+        <a href="/#panel">Administración</a>
+        <a href="/#funciones">Funciones</a>
+        <a href="/recorrido">Recorrido</a>
+        <a href="/demo" aria-current="page">Demo</a>
+        <a href="/documentacion">Documentación</a>
+        <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
+        <a class="boton principal" href="/#contacto">Pide una demostración</a>
+      </nav>
+      <a class="boton-menu" href="#menu" aria-label="Abrir menú" aria-controls="menu">Menú</a>
+      <div class="menu-movil" id="menu">
+        <a class="velo" href="#cerrar" aria-label="Cerrar menú" tabindex="-1"></a>
+        <nav aria-label="Principal (teléfono)">
+          <a class="cerrar" href="#cerrar" aria-label="Cerrar menú">Cerrar ✕</a>
+          <a href="/">Inicio</a>
+          <a href="/#la-app">La app</a>
+          <a href="/#panel">Panel de administración</a>
+          <a href="/recorrido">Recorrido</a>
+          <a href="/demo">Demo interactiva</a>
+          <a href="/documentacion">Documentación</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+          <a href="https://app.restia.download/portal/">Entrar al portal</a>
+          <a href="/#contacto">Pide una demostración</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pagina" id="contenido">
+    <div class="contenedor">
+      <p class="migaja"><a href="/">Inicio</a> <span aria-hidden="true">/</span> Demo</p>
+      <h1>Prueba una muestra sin instalar nada</h1>
+      <p class="subtitulo">Una muestra práctica del punto de venta para que toques el flujo de salón: abre una mesa, levanta el pedido, mándalo a cocina y pásalo a caja. La app completa, con todas sus funciones y capturas reales, está en el <a href="/recorrido">recorrido</a>.</p>
+      <div class="aviso info">
+        <strong>Esto es una muestra, no la app completa</strong>
+        <p>La demo reproduce a propósito solo el flujo de salón —mesa, pedido, cocina y caja— y el chat de WhatsApp. Usa datos inventados y no guarda nada ni se conecta con la app.</p>
+        <p>La app real incluye mucho más: panel de administración, carta y recetas con extras, inventario y compras, impresoras y tickets, cortes de caja y finanzas, reportes, usuarios y permisos, licencias, respaldos, pantallas públicas y portal del dueño. <a href="/recorrido">Mira el recorrido real</a> o <a href="/#contacto">pide una demostración</a>.</p>
+      </div>
+
+      <section class="demo" aria-label="Muestra interactiva del flujo de salón">
+        <div class="demo-ventana">
+          <aside class="demo-rail" aria-label="Módulos de la demo">
+            <span class="demo-rail-marca" aria-hidden="true">R</span>
+            <button type="button" class="demo-destino" data-vista="mesas" aria-current="page">
+              <img src="/img/app-mesas.png" alt="Mesas" width="24" height="24" aria-hidden="true">
+              Mesas
+            </button>
+            <button type="button" class="demo-destino" data-vista="cocina">
+              <img src="/img/app-cocina.png" alt="Cocina" width="24" height="24" aria-hidden="true">
+              Cocina <span class="demo-badge" id="demo-cocina-cuenta">0</span>
+            </button>
+            <button type="button" class="demo-destino" data-vista="caja">
+              <img src="/img/app-caja.png" alt="Caja" width="24" height="24" aria-hidden="true">
+              Caja
+            </button>
+            <button type="button" class="demo-destino" data-vista="delivery">
+              <img src="/img/app-delivery.png" alt="Delivery" width="24" height="24" aria-hidden="true">
+              Delivery <span class="demo-badge" id="demo-delivery-cuenta">0</span>
+            </button>
+            <span class="demo-rail-pie" title="Sin conexión: todo es local">● En línea</span>
+          </aside>
+
+          <div class="demo-main">
+            <header class="demo-barra">
+              <h2 class="demo-titulo-app" id="demo-titulo-app">Mesas del Salón</h2>
+              <div class="demo-barra-acciones">
+                <span class="demo-pill">Datos de ejemplo</span>
+                <button type="button" class="demo-boton demo-boton-chico" id="demo-reiniciar">Reiniciar</button>
+              </div>
+            </header>
+
+            <div class="demo-vista" data-panel="mesas">
+              <div class="demo-mesas-cabeza">
+                <p class="demo-leyenda"><i class="demo-punto" aria-hidden="true"></i>Libre <i class="demo-punto demo-punto-rojo" aria-hidden="true"></i>Ocupada</p>
+                <span class="demo-etiqueta-chica">Salón principal · 7 mesas</span>
+              </div>
+              <div class="demo-mesas" id="demo-mesas"></div>
+              <p class="demo-pista" id="demo-pista-salon">Toca una mesa para abrir su cuenta.</p>
+            </div>
+
+            <div class="demo-vista" data-panel="pedido" hidden>
+              <div class="demo-pedido-cabeza">
+                <button type="button" class="demo-volver" id="demo-volver">‹ Mesas</button>
+                <h3 class="demo-mesa-activa-nombre" id="demo-pedido-titulo">Sin mesa</h3>
+                <span class="demo-total-mini" id="demo-total-mini">$0.00</span>
+              </div>
+              <div class="demo-pedido-cuerpo">
+                <nav class="demo-categorias" id="demo-categorias" aria-label="Categorías de la carta"></nav>
+                <div class="demo-productos-panel">
+                  <p class="demo-etiqueta-chica" id="demo-categoria-actual">Bebidas</p>
+                  <div class="demo-productos" id="demo-productos"></div>
+                </div>
+                <aside class="demo-carrito" aria-labelledby="demo-carrito-titulo">
+                  <h4 id="demo-carrito-titulo" class="demo-etiqueta-chica">Pedido</h4>
+                  <div class="demo-lineas" id="demo-lineas">
+                    <p class="demo-vacio">Toca un producto para agregarlo.</p>
+                  </div>
+                  <div class="demo-notas">
+                    <span class="demo-etiqueta-chica">Notas rápidas</span>
+                    <div class="demo-chips" id="demo-chips"></div>
+                  </div>
+                  <div class="demo-pie">
+                    <div class="demo-totales"><span>Total</span><strong id="demo-total">$0.00</strong></div>
+                    <div class="demo-pie-botones">
+                      <button type="button" class="demo-boton" id="demo-enviar" disabled>Enviar a cocina</button>
+                      <button type="button" class="demo-boton demo-principal" id="demo-cobrar" disabled>Cobrar en caja</button>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+
+            <div class="demo-vista" data-panel="cocina" hidden>
+              <div class="demo-mesas-cabeza">
+                <p class="demo-etiqueta-chica">Comandas activas</p>
+                <span class="demo-etiqueta-chica" id="demo-cocina-resumen">0 pendientes</span>
+              </div>
+              <div class="demo-comandas" id="demo-cocina">
+                <p class="demo-vacio">Las comandas que mandes aparecen aquí.</p>
+              </div>
+            </div>
+
+            <div class="demo-vista" data-panel="delivery" hidden>
+              <div class="demo-mesas-cabeza">
+                <p class="demo-etiqueta-chica">Pedidos de WhatsApp</p>
+                <span class="demo-etiqueta-chica" id="demo-delivery-resumen">0 pedidos</span>
+              </div>
+              <div class="demo-delivery" id="demo-delivery">
+                <p class="demo-vacio">Los pedidos del chat de WhatsApp aparecen aquí, listos para aceptar y mandar a cocina.</p>
+              </div>
+            </div>
+
+            <div class="demo-vista" data-panel="caja" hidden>
+              <div class="demo-mesas-cabeza">
+                <p class="demo-etiqueta-chica">Corte del día <span class="demo-etiqueta-chica">(ejemplo)</span></p>
+                <span class="demo-etiqueta-chica" id="demo-caja-turno">Turno abierto</span>
+              </div>
+              <dl class="demo-metricas">
+                <div><dt>Ventas</dt><dd id="demo-m-ventas">0</dd></div>
+                <div><dt>Total</dt><dd id="demo-m-total">$0.00</dd></div>
+                <div><dt>Propinas</dt><dd id="demo-m-propinas">$0.00</dd></div>
+                <div><dt>Efectivo</dt><dd id="demo-m-efectivo">$0.00</dd></div>
+                <div><dt>Tarjeta</dt><dd id="demo-m-tarjeta">$0.00</dd></div>
+              </dl>
+              <div class="demo-mesas-cabeza demo-caja-cabeza">
+                <p class="demo-etiqueta-chica">Cuentas por cobrar</p>
+                <span class="demo-etiqueta-chica" id="demo-caja-cuentas">0</span>
+              </div>
+              <div class="demo-caja-lista" id="demo-caja-lista">
+                <p class="demo-vacio">Abre una mesa y manda el pedido a caja para cobrarlo aquí.</p>
+              </div>
+              <p class="demo-pista">Aquí cobras las cuentas abiertas: cada una se cobra una sola vez y la venta se suma al corte. En la app, también cierras el turno y ves el arqueo.</p>
+            </div>
+
+            <p class="demo-estado" id="demo-estado" role="status">Listo para empezar.</p>
+          </div>
+        </div>
+      <section class="whatsapp-demo" id="whatsapp" aria-labelledby="whatsapp-titulo">
+        <h2 id="whatsapp-titulo">Así se pide por WhatsApp</h2>
+        <p class="subtitulo">El cliente escribe al WhatsApp del restaurante y el bot arma el pedido sin que nadie conteste el teléfono. Abajo va una conversación de ejemplo; con el número de pruebas puedes hacerlo de verdad.</p>
+        <div class="whatsapp-grid">
+          <div class="chat-telefono" aria-label="Conversación de ejemplo con el bot">
+            <div class="chat-cabecera">
+              <span class="chat-avatar" aria-hidden="true">R</span>
+              <div>
+                <strong>Café Central <span class="chat-demo">demo</span></strong>
+                <small>bot de pedidos · en línea</small>
+              </div>
+            </div>
+            <div class="chat-mensajes" id="chat-mensajes" role="log" aria-live="polite" aria-label="Mensajes de la conversación de ejemplo"></div>
+            <div class="chat-respuestas" id="chat-respuestas"></div>
+            <p class="chat-pie">Respuestas guionizadas para la demo. El bot real contesta en WhatsApp.</p>
+          </div>
+          <div class="whatsapp-lado">
+            <div class="pedido-wa-card" aria-labelledby="pedido-wa-titulo">
+              <h3 id="pedido-wa-titulo">Así llega el pedido a la app</h3>
+              <div id="pedido-wa"></div>
+              <p class="visualmente-oculto" id="pedido-wa-estado" role="status"></p>
+            </div>
+            <div class="aviso info whatsapp-aviso">
+              <strong>Pruébalo con el número de pruebas</strong>
+              <p>Escribe al <a href="https://wa.me/5215644456060?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20prueba">+52 1 56 4445 6060</a> y sigue la conversación. Es el número de pruebas: lo que pidas no se cobra ni se entrega.</p>
+              <p><a class="boton principal" href="https://wa.me/5215644456060?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20prueba" target="_blank" rel="noopener noreferrer">Abrir WhatsApp y pedir de prueba</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Qué puedes probar en esta muestra</h2>
+      <ul>
+        <li><strong>Mesas y para llevar:</strong> abre una cuenta, cambia de mesa y vuelve a ella sin perder el pedido.</li>
+        <li><strong>Cantidades y notas:</strong> suma o resta con los botones; “Sin azúcar” o “Bien caliente” quedan en la comanda.</li>
+        <li><strong>Cocina y cobro:</strong> manda la comanda, márcala lista y pásala a caja; ahí cobras en efectivo o tarjeta y ves el cambio. La cuenta se cierra y no se puede cobrar dos veces.</li>
+        <li><strong>WhatsApp y Delivery:</strong> el chat de ejemplo arma un pedido que llega al módulo Delivery, como en la app, y con el número de pruebas lo vives de verdad.</li>
+      </ul>
+      <p class="nota-demo">Esta demo es solo un ejemplo práctico del flujo de salón: no incluye la administración, el inventario, los reportes, las impresoras, los respaldos ni el portal del dueño. Todo eso está en la app y se explica en la <a href="/documentacion">documentación</a>.</p>
+      <p class="acciones centro"><a class="boton secundario" href="/recorrido">Ver las capturas reales de la app</a></p>
+    </div>
+  </main>
+
+  <dialog class="demo-dialogo" id="demo-cobro" aria-labelledby="demo-cobro-titulo">
+    <form method="dialog" id="demo-cobro-form">
+      <h2 id="demo-cobro-titulo">Cobrar</h2>
+      <p class="demo-dialogo-mesa" id="demo-cobro-mesa">Mesa 1</p>
+      <p class="demo-fila"><span>Cuenta</span><strong id="demo-cobro-cuenta">$0.00</strong></p>
+      <fieldset class="demo-opciones">
+        <legend>Propina</legend>
+        <div class="demo-botones-fila" id="demo-propinas">
+          <button type="button" class="demo-boton demo-boton-chico" data-propina="0" aria-pressed="true">Sin propina</button>
+          <button type="button" class="demo-boton demo-boton-chico" data-propina="10" aria-pressed="false">10 %</button>
+          <button type="button" class="demo-boton demo-boton-chico" data-propina="15" aria-pressed="false">15 %</button>
+        </div>
+      </fieldset>
+      <p class="demo-fila"><span>Total con propina</span><strong id="demo-cobro-total">$0.00</strong></p>
+      <fieldset class="demo-opciones">
+        <legend>Forma de pago</legend>
+        <div class="demo-botones-fila">
+          <label class="demo-radio"><input type="radio" name="demo-metodo" value="efectivo" checked> Efectivo</label>
+          <label class="demo-radio"><input type="radio" name="demo-metodo" value="tarjeta"> Tarjeta</label>
+        </div>
+      </fieldset>
+      <p class="demo-fila" id="demo-efectivo-fila"><label for="demo-recibido">Recibido</label><input id="demo-recibido" type="number" inputmode="decimal" min="0" step="0.5" value="0"></p>
+      <p class="demo-fila"><span>Cambio</span><strong id="demo-cambio">$0.00</strong></p>
+      <p class="demo-error" id="demo-cobro-error" role="alert" hidden></p>
+      <div class="demo-dialogo-botones">
+        <button type="button" class="demo-boton" id="demo-cobro-cancelar">Cancelar</button>
+        <button type="button" class="demo-boton demo-principal" id="demo-cobro-ok">Cobrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>RestIA</strong> · punto de venta para restaurantes y cafeterías.</p>
+      <nav aria-label="Pie">
+        <a href="/">Inicio</a>
+        <a href="/recorrido">Recorrido</a>
+        <a href="/demo">Demo</a>
+        <a href="/documentacion">Documentación</a>
+        <a href="/preguntas">Preguntas frecuentes</a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+      <p class="legal">© 2026 RestIA. Hecho en México.</p>
+    </div>
+  </footer>
+</body>
+</html>

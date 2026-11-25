@@ -7,9 +7,10 @@
   <meta name="description" content="Respuestas sobre RestIA: equipos compatibles (Windows y Android), funcionamiento sin internet, seguridad de tus datos, portal del dueño, WhatsApp, impresoras y soporte.">
   <meta name="theme-color" content="#0891b2">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/estilos.css?v=20261124">
+  <link rel="stylesheet" href="/estilos.css?v=20261131">
 </head>
 <body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
   <header class="barra" id="cerrar">
     <div class="contenedor">
       <a class="marca" href="/" aria-label="RestIA, inicio">
@@ -19,6 +20,7 @@
       <nav class="menu" aria-label="Principal">
         <a href="/#funciones">Funciones</a>
         <a href="/recorrido">Recorrido</a>
+        <a href="/demo">Demo</a>
         <a href="/documentacion">Documentación</a>
         <a href="/preguntas" aria-current="page">Preguntas</a>
         <a class="boton secundario" href="https://app.restia.download/portal/">Entrar al portal</a>
@@ -31,6 +33,7 @@
           <a class="cerrar" href="#cerrar" aria-label="Cerrar menú">Cerrar ✕</a>
           <a href="/">Inicio</a>
           <a href="/recorrido">Recorrido</a>
+          <a href="/demo">Demo interactiva</a>
           <a href="/documentacion">Documentación</a>
           <a href="/preguntas">Preguntas frecuentes</a>
           <a href="https://app.restia.download/portal/">Entrar al portal</a>
@@ -40,7 +43,7 @@
     </div>
   </header>
 
-  <main class="pagina">
+  <main class="pagina" id="contenido">
     <div class="contenedor">
       <h1>Preguntas frecuentes</h1>
       <p class="subtitulo">Lo que más nos preguntan. Si tu duda no está aquí, escríbenos a <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>.</p>
@@ -106,6 +109,13 @@
           <div>
             <p>Tus clientes escriben a tu WhatsApp y el bot toma el pedido con tu carta y tus precios; el pedido llega a la tablet como cualquier otro.</p>
             <p>Cada restaurante usa su propio número y lo vincula desde la app: Configuración → WhatsApp → Mostrar QR, y lo escaneas con el celular del negocio como en WhatsApp Web. Ahí mismo ves si está conectado, lo reinicias o lo desvinculas, y ajustas el horario, el pedido mínimo, las formas de pago y la bienvenida del bot.</p>
+          </div>
+        </details>
+        <details>
+          <summary>¿Puedo probar el bot de WhatsApp antes de contratar?</summary>
+          <div>
+            <p>Sí. En la <a href="/demo#whatsapp">demo interactiva</a> hay una conversación de ejemplo y puedes escribir de verdad al número de pruebas <a href="https://wa.me/5215644456060?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20prueba" target="_blank" rel="noopener noreferrer">+52 1 56 4445 6060</a>: el bot te muestra la carta, arma el pedido y te lo confirma como a un cliente.</p>
+            <p>Es un número de pruebas: los pedidos no se cobran ni se entregan. El día que contratas, el bot usa el WhatsApp de tu restaurante y tu carta real.</p>
           </div>
         </details>
         <details>
@@ -186,6 +196,7 @@
       <nav aria-label="Pie de página">
         <a href="/">Inicio</a>
         <a href="/recorrido">Recorrido</a>
+        <a href="/demo">Demo</a>
         <a href="/documentacion">Documentación</a>
         <a href="https://app.restia.download/portal/">Portal del dueño</a>
         <a href="mailto:restiasoft@gmail.com">restiasoft@gmail.com</a>
