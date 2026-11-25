@@ -12,8 +12,8 @@
   <meta property="og:image" content="https://restia.download/img/app-mesas.webp">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/estilos.css?v=20261126">
-  <script src="/demo.js?v=20261126" defer></script>
+  <link rel="stylesheet" href="/estilos.css?v=20261127">
+  <script src="/demo.js?v=20261127" defer></script>
 </head>
 <body>
   <header class="barra" id="cerrar">
@@ -66,20 +66,20 @@
           <aside class="demo-rail" aria-label="Módulos de la demo">
             <span class="demo-rail-marca" aria-hidden="true">R</span>
             <button type="button" class="demo-destino" data-vista="mesas" aria-current="page">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+              <img src="/img/app-mesas.png" alt="Mesas" width="24" height="24" aria-hidden="true">
               Mesas
             </button>
-            <button type="button" class="demo-destino" data-vista="pedido">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/></svg>
-              Pedido
-            </button>
             <button type="button" class="demo-destino" data-vista="cocina">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c3.4 3.1 5.4 6.3 5.4 9.6a5.4 5.4 0 0 1-10.8 0C6.6 8.3 8.6 5.1 12 2z"/></svg>
+              <img src="/img/app-cocina.png" alt="Cocina" width="24" height="24" aria-hidden="true">
               Cocina <span class="demo-badge" id="demo-cocina-cuenta">0</span>
             </button>
             <button type="button" class="demo-destino" data-vista="caja">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3 7h18v13H3zM9 10h6v2H9zM10.6 13.6h2.8a2 2 0 0 1 0 4h-2.8a2 2 0 0 1 0-4z"/></svg>
+              <img src="/img/app-caja.png" alt="Caja" width="24" height="24" aria-hidden="true">
               Caja
+            </button>
+            <button type="button" class="demo-destino" data-vista="delivery">
+              <img src="/img/app-delivery.png" alt="Delivery" width="24" height="24" aria-hidden="true">
+              Delivery <span class="demo-badge" id="demo-delivery-cuenta">0</span>
             </button>
             <span class="demo-rail-pie" title="Sin conexión: todo es local">● En línea</span>
           </aside>
@@ -144,6 +144,16 @@
               </div>
             </div>
 
+            <div class="demo-vista" data-panel="delivery" hidden>
+              <div class="demo-mesas-cabeza">
+                <p class="demo-etiqueta-chica">Pedidos de WhatsApp</p>
+                <span class="demo-etiqueta-chica" id="demo-delivery-resumen">0 pedidos</span>
+              </div>
+              <div class="demo-delivery" id="demo-delivery">
+                <p class="demo-vacio">Los pedidos del chat de WhatsApp aparecen aquí, listos para aceptar y mandar a cocina.</p>
+              </div>
+            </div>
+
             <div class="demo-vista" data-panel="caja" hidden>
               <div class="demo-mesas-cabeza">
                 <p class="demo-etiqueta-chica">Corte del día <span class="demo-etiqueta-chica">(ejemplo)</span></p>
@@ -162,14 +172,43 @@
             <p class="demo-estado" id="demo-estado" role="status">Listo para empezar.</p>
           </div>
         </div>
+      <section class="whatsapp-demo" id="whatsapp" aria-labelledby="whatsapp-titulo">
+        <h2 id="whatsapp-titulo">Así se pide por WhatsApp</h2>
+        <p class="subtitulo">El cliente escribe al WhatsApp del restaurante y el bot arma el pedido sin que nadie conteste el teléfono. Abajo va una conversación de ejemplo; con el número de pruebas puedes hacerlo de verdad.</p>
+        <div class="whatsapp-grid">
+          <div class="chat-telefono" aria-label="Conversación de ejemplo con el bot">
+            <div class="chat-cabecera">
+              <span class="chat-avatar" aria-hidden="true">R</span>
+              <div>
+                <strong>Café Central <span class="chat-demo">demo</span></strong>
+                <small>bot de pedidos · en línea</small>
+              </div>
+            </div>
+            <div class="chat-mensajes" id="chat-mensajes" role="log" aria-live="polite" aria-label="Mensajes de la conversación de ejemplo"></div>
+            <div class="chat-respuestas" id="chat-respuestas"></div>
+            <p class="chat-pie">Respuestas guionizadas para la demo. El bot real contesta en WhatsApp.</p>
+          </div>
+          <div class="whatsapp-lado">
+            <div class="pedido-wa-card" aria-labelledby="pedido-wa-titulo">
+              <h3 id="pedido-wa-titulo">Así llega el pedido a la app</h3>
+              <div id="pedido-wa"></div>
+              <p class="visualmente-oculto" id="pedido-wa-estado" role="status"></p>
+            </div>
+            <div class="aviso info whatsapp-aviso">
+              <strong>Pruébalo con el número de pruebas</strong>
+              <p>Escribe al <a href="https://wa.me/5215644456060?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20prueba">+52 1 56 4445 6060</a> y sigue la conversación. Es el número de pruebas: lo que pidas no se cobra ni se entrega.</p>
+              <p><a class="boton principal" href="https://wa.me/5215644456060?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20prueba" target="_blank" rel="noopener noreferrer">Abrir WhatsApp y pedir de prueba</a></p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h2>Qué puedes probar</h2>
       <ul>
         <li><strong>Mesas y para llevar:</strong> abre una cuenta, cambia de mesa y vuelve a ella sin perder el pedido.</li>
-        <li><strong>Cantidades:</strong> suma o resta con los botones; el total y el corte se actualizan solos.</li>
-        <li><strong>Notas rápidas:</strong> “Sin azúcar” o “Para llevar” quedan en la comanda, igual que en la app.</li>
+        <li><strong>Cantidades y notas:</strong> suma o resta con los botones; “Sin azúcar” o “Bien caliente” quedan en la comanda.</li>
         <li><strong>Cocina y cobro:</strong> manda la comanda, márcala lista, cobra en efectivo o tarjeta y mira el cambio.</li>
+        <li><strong>WhatsApp y Delivery:</strong> el chat de ejemplo arma un pedido que llega al módulo Delivery, como en la app, y con el número de pruebas lo vives de verdad.</li>
       </ul>
       <p class="acciones centro"><a class="boton secundario" href="/recorrido">Ver las capturas reales de la app</a></p>
     </div>

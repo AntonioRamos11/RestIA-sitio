@@ -825,3 +825,84 @@ pre code { background: none; border: 0; padding: 0; }
   .demo-mesas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .demo-titulo-app { font-size: 15.5px; }
 }
+
+/* Iconos de la app dentro del rail */
+.demo-destino img { width: 24px; height: 24px; display: block; border-radius: 5px; }
+.demo-destino[aria-current="page"] img { filter: brightness(1.15); }
+
+/* Pedidos de WhatsApp dentro de la demo */
+.demo-delivery { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
+.demo-pedido-wa {
+  display: flex; flex-direction: column; gap: 6px; padding: 12px;
+  background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+}
+.demo-pedido-wa header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.demo-pedido-wa header strong { font-size: 13.5px; color: #f1f5f9; }
+.demo-pedido-wa header span {
+  padding: 1px 7px; border-radius: 999px; font-size: 10px; color: #25d366;
+  border: 1px solid rgba(37, 211, 102, .4);
+}
+.demo-pedido-wa-cliente { margin: 0; font-size: 11px; color: #94a3b8; }
+.demo-pedido-wa ul { margin: 0; padding-left: 16px; font-size: 12px; color: #e2e8f0; }
+.demo-pedido-wa-pie { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: auto; padding-top: 8px; border-top: 1px solid #334155; }
+.demo-pedido-wa-pie strong { margin-right: auto; font-size: 15px; color: #06b6d4; font-variant-numeric: tabular-nums; }
+
+/* Sección de WhatsApp */
+.whatsapp-demo { margin: 34px 0 6px; }
+.whatsapp-demo .subtitulo { max-width: 780px; }
+.whatsapp-grid {
+  display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: 18px; align-items: start; margin-top: 16px;
+}
+.chat-telefono {
+  display: flex; flex-direction: column; min-height: 470px; overflow: hidden;
+  background: #0b141a; border: 1px solid #334155; border-radius: 20px;
+}
+.chat-cabecera { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #075e54; }
+.chat-avatar {
+  display: grid; place-items: center; width: 34px; height: 34px; flex: none;
+  border-radius: 50%; background: #25d366; color: #062e24; font-weight: 800;
+}
+.chat-cabecera strong { display: block; font-size: 13px; color: #fff; }
+.chat-cabecera small { display: block; font-size: 10px; color: #d1fae5; }
+.chat-demo { margin-left: 5px; padding: 1px 6px; border-radius: 999px; background: rgba(0, 0, 0, .25); font-size: 9px; font-weight: 600; }
+.chat-mensajes {
+  display: flex; flex-direction: column; gap: 6px; flex: 1;
+  padding: 12px; max-height: 330px; overflow: auto; background: #0b141a;
+}
+.chat-burbuja {
+  max-width: 86%; padding: 7px 9px; border-radius: 9px;
+  font-size: 12px; line-height: 1.45; white-space: pre-line; overflow-wrap: anywhere;
+}
+.chat-burbuja.bot { align-self: flex-start; background: #1e293b; color: #e2e8f0; border-top-left-radius: 2px; }
+.chat-burbuja.cliente { align-self: flex-end; background: #075e54; color: #e7f8f2; border-top-right-radius: 2px; }
+.chat-burbuja strong { color: #fff; }
+.chat-respuestas {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px;
+  background: #111b21; border-top: 1px solid #1f2c34;
+}
+.chat-opcion {
+  padding: 5px 10px; border: 1px solid #25d366; border-radius: 999px;
+  background: transparent; color: #25d366; font: inherit; font-size: 11px; cursor: pointer;
+}
+.chat-opcion:hover { background: rgba(37, 211, 102, .14); }
+.chat-pie { margin: 0; padding: 6px 10px; background: #111b21; color: #64748b; font-size: 9.5px; }
+.whatsapp-lado { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.pedido-wa-card { padding: 14px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; }
+.pedido-wa-card h3 { margin: 0 0 8px; font-size: 15px; color: #f1f5f9; }
+.pedido-wa-card ul { margin: 0 0 6px; padding-left: 16px; font-size: 12px; color: #e2e8f0; }
+.wa-cabecera { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 0 0 2px; font-size: 12px; color: #cbd5e1; }
+.wa-cabecera strong { font-size: 15px; color: #f1f5f9; }
+.wa-estado { padding: 1px 7px; border-radius: 999px; border: 1px solid rgba(245, 158, 11, .4); font-size: 10px; color: #fbbf24; }
+.wa-estado.wa-ok { border-color: rgba(52, 211, 153, .45); color: #34d399; }
+.wa-datos { margin: 0 0 6px; font-size: 11px; color: #94a3b8; }
+.wa-total { margin: 0; font-size: 13px; font-weight: 700; color: #06b6d4; }
+.wa-nota { margin: 8px 0 0; font-size: 10.5px; color: #34d399; }
+.whatsapp-aviso { margin: 0; }
+.whatsapp-aviso p:last-child { margin-top: 10px; }
+
+@media (max-width: 900px) {
+  .whatsapp-grid { grid-template-columns: 1fr; }
+  .chat-telefono { width: 100%; max-width: 430px; }
+  .chat-mensajes { max-height: 300px; }
+}

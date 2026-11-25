@@ -25,6 +25,13 @@
     cocinaCuenta: document.getElementById('demo-cocina-cuenta'),
     cocinaResumen: document.getElementById('demo-cocina-resumen'),
     estado: document.getElementById('demo-estado'),
+    delivery: document.getElementById('demo-delivery'),
+    deliveryCuenta: document.getElementById('demo-delivery-cuenta'),
+    deliveryResumen: document.getElementById('demo-delivery-resumen'),
+    chatMensajes: document.getElementById('chat-mensajes'),
+    chatRespuestas: document.getElementById('chat-respuestas'),
+    pedidoWa: document.getElementById('pedido-wa'),
+    pedidoWaEstado: document.getElementById('pedido-wa-estado'),
     m: {
       ventas: document.getElementById('demo-m-ventas'),
       total: document.getElementById('demo-m-total'),
@@ -77,8 +84,11 @@
     mesas: [],
     cocina: [],
     ventas: [],
+    delivery: [],
     folio: 1,
   };
+
+  const chat = { paso: 0, tipo: '', lineas: [], pago: '', numero: 128, ultimo: 0 };
 
   const dinero = (n) => new Intl.NumberFormat('es-MX', {
     style: 'currency', currency: 'MXN', minimumFractionDigits: 2,
@@ -98,6 +108,7 @@
     ];
     estado.cocina = [];
     estado.ventas = [];
+    estado.delivery = [];
     estado.folio = 1;
     estado.mesaId = null;
     estado.categoria = 'bebidas';
@@ -106,6 +117,7 @@
     estado.recibidoTocado = false;
     estado.vista = 'mesas';
     render();
+    chatInicio();
     aviso('Demo reiniciada. Elige una mesa para empezar.');
   }
 
@@ -135,7 +147,7 @@
     }
     estado.vista = vista;
     el.rail.forEach((b) => {
-      const activa = b.dataset.vista === vista;
+      const activa = b.dataset.vista === vista || (vista === 'pedido' && b.dataset.vista === 'mesas');
       if (activa) b.setAttribute('aria-current', 'page');
       else b.removeAttribute('aria-current');
     });
@@ -145,6 +157,7 @@
       pedido: mesaActual() ? 'Pedido · ' + mesaActual().nombre : 'Pedido',
       cocina: 'Cocina',
       caja: 'Caja',
+      delivery: 'Pedidos de WhatsApp',
     }[vista];
     if (mensaje) aviso(mensaje);
     if (vista === 'pedido') {
@@ -154,6 +167,7 @@
     }
     if (vista === 'cocina') renderCocina();
     if (vista === 'caja') renderCaja();
+    if (vista === 'delivery') renderDelivery();
   }
 
   function abrirMesa(id) {
@@ -479,6 +493,7 @@
     renderLineas();
     renderCocina();
     renderCaja();
+    renderDelivery();
     setVista(estado.vista);
   }
 
@@ -510,6 +525,296 @@
     }
     pintarCobro();
   }));
+
+
+  /* ── Delivery: pedidos que llegan de WhatsApp ─────────────────────────── */
+  function renderDelivery() {
+    el.delivery.replaceChildren();
+    if (!estado.delivery.length) {
+      const p = document.createElement('p');
+      p.className = 'demo-vacio';
+      p.textContent = 'Los pedidos del chat de WhatsApp aparecen aquí, listos para aceptar y mandar a cocina.';
+      el.delivery.append(p);
+    }
+    for (const pedido of estado.delivery) {
+      const card = document.createElement('article');
+      card.className = 'demo-pedido-wa';
+
+      const cab = document.createElement('header');
+      const titulo = document.createElement('strong');
+      titulo.textContent = '#' + pedido.numero + ' · ' + pedido.tipo;
+      const canal = document.createElement('span');
+      canal.textContent = 'WhatsApp';
+      cab.append(titulo, canal);
+
+      const cliente = document.createElement('p');
+      cliente.className = 'demo-pedido-wa-cliente';
+      cliente.textContent = 'Cliente demo · paga en ' + pedido.pago.toLowerCase();
+
+      const ul = document.createElement('ul');
+      for (const l of pedido.lineas) {
+        const li = document.createElement('li');
+        li.textContent = l.cant + '× ' + l.nombre + ' — ' + dinero(l.precio * l.cant);
+        ul.append(li);
+      }
+
+      const pie = document.createElement('div');
+      pie.className = 'demo-pedido-wa-pie';
+      const total = document.createElement('strong');
+      total.textContent = dinero(pedido.total);
+      const aceptar = document.createElement('button');
+      aceptar.type = 'button';
+      aceptar.className = 'demo-boton demo-boton-chico demo-principal';
+      aceptar.textContent = 'Aceptar y mandar a cocina';
+      aceptar.addEventListener('click', () => aceptarPedidoWa(pedido));
+      const descartar = document.createElement('button');
+      descartar.type = 'button';
+      descartar.className = 'demo-boton demo-boton-chico';
+      descartar.textContent = 'Descartar';
+      descartar.addEventListener('click', () => {
+        estado.delivery = estado.delivery.filter((x) => x !== pedido);
+        renderDelivery();
+        aviso('Pedido #' + pedido.numero + ' descartado.');
+      });
+      pie.append(total, aceptar, descartar);
+
+      card.append(cab, cliente, ul, pie);
+      el.delivery.append(card);
+    }
+    el.deliveryCuenta.textContent = estado.delivery.length;
+    el.deliveryCuenta.dataset.cero = String(estado.delivery.length === 0);
+    el.deliveryResumen.textContent = estado.delivery.length === 1 ? '1 pedido sin aceptar' : estado.delivery.length + ' pedidos sin aceptar';
+  }
+
+  function aceptarPedidoWa(pedido) {
+    estado.cocina.push({
+      id: 'c' + (++estado.folio),
+      mesa: 'WhatsApp #' + pedido.numero,
+      notas: [pedido.tipo, 'Pagó en ' + pedido.pago.toLowerCase()],
+      lineas: pedido.lineas.map((l) => ({ nombre: l.nombre, cant: l.cant })),
+      hora: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }),
+    });
+    estado.delivery = estado.delivery.filter((x) => x !== pedido);
+    renderCocina();
+    renderDelivery();
+    aviso('Pedido #' + pedido.numero + ' aceptado. Ya está en cocina.');
+  }
+
+  /* ── Chat de WhatsApp (guionizado) ────────────────────────────────────── */
+  const CHAT_PRODUCTOS = {
+    cafe: { nombre: 'Café americano', cant: 2, precio: 35 },
+    chilaquiles: { nombre: 'Chilaquiles verdes', cant: 1, precio: 95 },
+    capuchino: { nombre: 'Capuchino', cant: 1, precio: 48 },
+  };
+
+  const chatTotal = () => chat.lineas.reduce((s, l) => s + l.precio * l.cant, 0);
+
+  function ponerTexto(nodo, texto) {
+    for (const parte of texto.split(/(\*[^*]+\*)/g)) {
+      if (!parte) continue;
+      if (parte.length > 2 && parte.startsWith('*') && parte.endsWith('*')) {
+        const fuerte = document.createElement('strong');
+        fuerte.textContent = parte.slice(1, -1);
+        nodo.append(fuerte);
+      } else {
+        nodo.append(document.createTextNode(parte));
+      }
+    }
+  }
+
+  function burbuja(texto, quien) {
+    const b = document.createElement('div');
+    b.className = 'chat-burbuja ' + quien;
+    ponerTexto(b, texto);
+    el.chatMensajes.append(b);
+    el.chatMensajes.scrollTop = el.chatMensajes.scrollHeight;
+  }
+  const botDice = (texto) => burbuja(texto, 'bot');
+  const clienteDice = (texto) => burbuja(texto, 'cliente');
+
+  function opciones(lista) {
+    el.chatRespuestas.replaceChildren();
+    for (const o of lista) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chat-opcion';
+      b.textContent = o.t;
+      b.addEventListener('click', () => {
+        el.chatRespuestas.replaceChildren();
+        manejarChat(o.a, o.t);
+      });
+      el.chatRespuestas.append(b);
+    }
+  }
+
+  function resumenChat() {
+    return chat.lineas
+      .map((l) => '· ' + l.cant + '× ' + l.nombre + ' — ' + dinero(l.precio * l.cant))
+      .join('\n');
+  }
+
+  function menuChat() {
+    botDice('📜 *Nuestro menú*\n\n· Café americano $35.00\n· Capuchino $48.00\n· Chilaquiles verdes $95.00\n\nToca o escribe lo que quieras pedir.');
+    opciones([
+      { t: '2 cafés americanos', a: 'cafe' },
+      { t: '1 chilaquiles verdes', a: 'chilaquiles' },
+      { t: '1 capuchino', a: 'capuchino' },
+    ]);
+  }
+
+  function manejarChat(accion, etiqueta) {
+    if (chat.paso === 0 && accion === 'hola') {
+      clienteDice('Hola');
+      botDice('¿Tu pedido es para recoger o a domicilio?');
+      opciones([{ t: 'Para recoger', a: 'recoger' }, { t: 'A domicilio', a: 'domicilio' }]);
+      chat.paso = 1;
+      return;
+    }
+    if (chat.paso === 1) {
+      clienteDice(etiqueta);
+      chat.tipo = accion === 'domicilio' ? 'Domicilio' : 'Para llevar';
+      if (accion === 'domicilio') {
+        botDice('Perfecto, a domicilio. 🛵\n\n¿A qué dirección lo enviamos? Escribe calle, número y colonia, o comparte tu ubicación.');
+        opciones([{ t: 'Calle 5 de Mayo 10, Centro', a: 'calle' }, { t: 'Usar mi ubicación', a: 'ubicacion' }]);
+        chat.paso = 2;
+      } else {
+        botDice('Perfecto, para recoger. 🥡');
+        menuChat();
+        chat.paso = 3;
+      }
+      return;
+    }
+    if (chat.paso === 2) {
+      clienteDice(etiqueta);
+      botDice(accion === 'ubicacion' ? 'Recibí tu ubicación 📍. Anotada para el reparto.' : 'Anotado: *' + etiqueta + '* para el reparto.');
+      menuChat();
+      chat.paso = 3;
+      return;
+    }
+    if (chat.paso === 3 && CHAT_PRODUCTOS[accion]) {
+      clienteDice(etiqueta);
+      const p = CHAT_PRODUCTOS[accion];
+      const existente = chat.lineas.find((l) => l.nombre === p.nombre);
+      if (existente) existente.cant += p.cant;
+      else chat.lineas.push({ ...p });
+      renderPedidoWa();
+      botDice('Agregué *' + p.cant + '× ' + p.nombre + '* (' + dinero(p.cant * p.precio) + ').\n\n¿Algo más?');
+      opciones([{ t: 'Eso es todo', a: 'cerrar' }, { t: 'Agregar otro igual', a: 'igual' }]);
+      chat.paso = 4;
+      return;
+    }
+    if (chat.paso === 4) {
+      if (accion === 'igual') {
+        clienteDice('Agregar otro igual');
+        const ultima = chat.lineas[chat.lineas.length - 1];
+        if (ultima) ultima.cant += 1;
+        renderPedidoWa();
+        botDice('Va otro igual. 🍽️\n\n¿Algo más?');
+        opciones([{ t: 'Eso es todo', a: 'cerrar' }, { t: 'Agregar otro igual', a: 'igual' }]);
+        return;
+      }
+      clienteDice('Eso es todo');
+      botDice('Tu pedido:\n\n' + resumenChat() + '\n\nTotal *' + dinero(chatTotal()) + '*\n\n¿Pagas en efectivo o por transferencia?');
+      opciones([{ t: 'Efectivo', a: 'efectivo' }, { t: 'Transferencia', a: 'transferencia' }]);
+      chat.paso = 5;
+      return;
+    }
+    if (chat.paso === 5) {
+      clienteDice(etiqueta);
+      chat.pago = accion === 'efectivo' ? 'Efectivo' : 'Transferencia';
+      botDice('Revisa y confirma:\n\n· ' + chat.tipo + '\n· Pago en ' + chat.pago.toLowerCase() + '\n· Total ' + dinero(chatTotal()) + '\n\nSi todo está bien, escribe *Confirmar*.');
+      opciones([{ t: 'Confirmar', a: 'confirmar' }, { t: 'Cancelar', a: 'cancelar' }]);
+      chat.paso = 6;
+      return;
+    }
+    if (chat.paso === 6) {
+      if (accion === 'confirmar') {
+        clienteDice('Confirmar');
+        const numero = chat.numero;
+        botDice('✅ Pedido #' + numero + ' recibido.\n\n' + chat.tipo + ' · ' + chat.pago + ' · ' + dinero(chatTotal()) + '\n\nTe avisamos por aquí cuando esté listo. ¡Gracias!');
+        estado.delivery.push({
+          numero,
+          tipo: chat.tipo,
+          pago: chat.pago,
+          total: chatTotal(),
+          lineas: chat.lineas.map((l) => ({ ...l })),
+        });
+        chat.confirmado = true;
+        chat.ultimo = numero;
+        chat.numero += 1;
+        chat.paso = 7;
+        renderDelivery();
+        renderPedidoWa();
+        aviso('Pedido de WhatsApp #' + numero + ' recibido. Míralo en el módulo Delivery.');
+        opciones([{ t: 'Pedir otra vez', a: 'reiniciar' }]);
+      } else {
+        clienteDice('Cancelar');
+        botDice('Sin problema, no generé ningún pedido. Si quieres empezar de nuevo, toca *Pedir otra vez*.');
+        chat.confirmado = true;
+        chat.paso = 7;
+        renderPedidoWa();
+        opciones([{ t: 'Pedir otra vez', a: 'reiniciar' }]);
+      }
+      return;
+    }
+    if (chat.paso === 7 || accion === 'reiniciar') {
+      chatInicio();
+    }
+  }
+
+  function renderPedidoWa() {
+    if (!chat.lineas.length) {
+      el.pedidoWa.replaceChildren();
+      const p = document.createElement('p');
+      p.className = 'demo-vacio';
+      p.textContent = 'Manda el primer mensaje del chat y aquí verás el pedido armarse igual que en Delivery.';
+      el.pedidoWa.append(p);
+      return;
+    }
+    el.pedidoWa.replaceChildren();
+    const cab = document.createElement('p');
+    cab.className = 'wa-cabecera';
+    cab.innerHTML = 'Pedido <strong>#' + (chat.confirmado ? chat.ultimo : chat.numero) + '</strong><span class="wa-estado"></span>';
+    cab.querySelector('.wa-estado').textContent = chat.confirmado ? 'Confirmado' : 'En captura';
+    if (chat.confirmado) cab.querySelector('.wa-estado').classList.add('wa-ok');
+
+    const datos = document.createElement('p');
+    datos.className = 'wa-datos';
+    datos.textContent = (chat.tipo || 'Para llevar') + ' · Cliente demo' + (chat.pago ? ' · ' + chat.pago : '');
+
+    const ul = document.createElement('ul');
+    for (const l of chat.lineas) {
+      const li = document.createElement('li');
+      li.textContent = l.cant + '× ' + l.nombre + ' — ' + dinero(l.precio * l.cant);
+      ul.append(li);
+    }
+    const total = document.createElement('p');
+    total.className = 'wa-total';
+    total.textContent = 'Total ' + dinero(chatTotal());
+
+    el.pedidoWa.append(cab, datos, ul, total);
+    if (chat.confirmado) {
+      const nota = document.createElement('p');
+      nota.className = 'wa-nota';
+      nota.textContent = 'Ya está en el módulo Delivery: acéptalo para mandarlo a cocina.';
+      el.pedidoWa.append(nota);
+      el.pedidoWaEstado.textContent = 'Pedido confirmado y enviado a Delivery.';
+    }
+  }
+
+  function chatInicio() {
+    chat.paso = 0;
+    chat.tipo = '';
+    chat.lineas = [];
+    chat.pago = '';
+    chat.confirmado = false;
+    chat.ultimo = 0;
+    el.chatMensajes.replaceChildren();
+    el.chatRespuestas.replaceChildren();
+    botDice('¡Hola! 👋 Bienvenido a *Café Central* (demo).\n\nAquí tomamos pedidos por WhatsApp sin que nadie conteste el teléfono. Toca *Hola* para empezar.');
+    opciones([{ t: 'Hola', a: 'hola' }]);
+    renderPedidoWa();
+  }
 
   reiniciar();
 })();
